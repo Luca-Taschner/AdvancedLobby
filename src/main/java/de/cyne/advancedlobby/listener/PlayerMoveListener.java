@@ -73,13 +73,14 @@ public class PlayerMoveListener implements Listener {
                     p.setVelocity(vector);
 
                     AdvancedLobby.playSound(p, p.getLocation(), "jumppads");
-                    p.playEffect(p.getLocation(), Effect.MOBSPAWNER_FLAMES, 1);
+                    p.playEffect(p.getLocation(), Effect.MOBSPAWNER_FLAMES, null);
 
                     for (Player players : Bukkit.getOnlinePlayers()) {
                         if (p != players) {
                             if (!AdvancedLobby.silentLobby.contains(p) && !AdvancedLobby.silentLobby.contains(players) && !AdvancedLobby.playerHider.containsKey(players)) {
                                 AdvancedLobby.playSound(players, p.getLocation(), "jumppads");
-                                players.playEffect(p.getLocation(), Effect.MOBSPAWNER_FLAMES, 1);
+                                //players.playEffect(p.getLocation(), Effect.MOBSPAWNER_FLAMES, 1);
+                                players.playEffect(p.getLocation(),Effect.MOBSPAWNER_FLAMES,null);
                             }
                         }
                     }
@@ -105,13 +106,13 @@ public class PlayerMoveListener implements Listener {
                                 Vector v = nPV.clone().subtract(pV).normalize().multiply(0.5D).setY(0.25D);
                                 nearbyPlayers.setVelocity(v);
 
-                                p.playEffect(p.getLocation(), Effect.ENDER_SIGNAL, 1);
+                                p.playEffect(p.getLocation(), Effect.ENDER_SIGNAL, null);
 
                                 for (Player players : Bukkit.getOnlinePlayers()) {
                                     if (p != players) {
                                         if (!AdvancedLobby.silentLobby.contains(p) && !AdvancedLobby.silentLobby.contains(players)) {
                                             if (!nearbyPlayers.hasPermission("advancedlobby.shield.bypass")) {
-                                                players.playEffect(p.getLocation(), Effect.ENDER_SIGNAL, 1);
+                                                players.playEffect(p.getLocation(), Effect.ENDER_SIGNAL, null);
                                             }
                                         }
                                     }
@@ -143,14 +144,14 @@ public class PlayerMoveListener implements Listener {
 
                                     p.setVelocity(v);
 
-                                    p.playEffect(players.getLocation(), Effect.ENDER_SIGNAL, 1);
-                                    players.playEffect(players.getLocation(), Effect.ENDER_SIGNAL, 1);
+                                    p.playEffect(players.getLocation(), Effect.ENDER_SIGNAL, null);
+                                    players.playEffect(players.getLocation(), Effect.ENDER_SIGNAL, null);
 
                                     for (Player players1 : Bukkit.getOnlinePlayers()) {
                                         if (p != players1) {
                                             if (!AdvancedLobby.silentLobby.contains(p) && !AdvancedLobby.silentLobby.contains(players)) {
                                                 if (!p.hasPermission("advancedlobby.shield.bypass")) {
-                                                    players1.playEffect(players.getLocation(), Effect.ENDER_SIGNAL, 1);
+                                                    players1.playEffect(players.getLocation(), Effect.ENDER_SIGNAL, null);
                                                 }
                                             }
                                         }
@@ -181,14 +182,14 @@ public class PlayerMoveListener implements Listener {
                             Vector v = lV.clone().subtract(pV).normalize().multiply(0.5D).setY(0.25D);
 
                             p.setVelocity(v);
-                            p.playEffect(p.getLocation(), Effect.SMOKE, 1);
+                            p.playEffect(p.getLocation(), Effect.SMOKE, null);
                             AdvancedLobby.playSound(p, p.getLocation(), "worldborder_push_back");
 
                             for (Player players : Bukkit.getOnlinePlayers()) {
                                 if (p != players) {
                                     if (!AdvancedLobby.silentLobby.contains(players) && !AdvancedLobby.silentLobby.contains(p)) {
                                         if (!AdvancedLobby.playerHider.containsKey(players)) {
-                                            players.playEffect(p.getLocation(), Effect.SMOKE, 1);
+                                            players.playEffect(p.getLocation(), Effect.SMOKE, null);
                                             AdvancedLobby.playSound(players, p.getLocation(), "worldborder_push_back");
                                         }
                                     }
@@ -230,10 +231,7 @@ public class PlayerMoveListener implements Listener {
 
     private boolean playerAtWorldBorder(Player player, Location location) {
         double radius = AdvancedLobby.cfg.getDouble("worldborder.radius");
-        if (player.getLocation().getX() > location.getX() + radius | player.getLocation().getX() < location.getX() - radius | player.getLocation().getZ() > location.getZ() + radius | player.getLocation().getZ() < location.getZ() - radius) {
-            return true;
-        }
-        return false;
+        return player.getLocation().getX() > location.getX() + radius | player.getLocation().getX() < location.getX() - radius | player.getLocation().getZ() > location.getZ() + radius | player.getLocation().getZ() < location.getZ() - radius;
     }
 
 }
