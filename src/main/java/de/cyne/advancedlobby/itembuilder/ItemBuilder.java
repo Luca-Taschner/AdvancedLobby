@@ -1,7 +1,6 @@
 package de.cyne.advancedlobby.itembuilder;
 
 import com.mojang.authlib.GameProfile;
-import com.mojang.authlib.properties.Property;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemFlag;
@@ -42,17 +41,17 @@ public class ItemBuilder extends ItemStack {
         return this.build();
     }
 
-    public ItemBuilder setLore(String... lore) {
+    public ItemBuilder setLobbyItemLore(String... lore) {
         this.meta.setLore(Arrays.asList(lore));
         return this.build();
     }
 
-    public ItemBuilder addItemFlags(ItemFlag... flag) {
+    public ItemBuilder addLobbyItemFlags(ItemFlag... flag) {
         this.meta.addItemFlags(flag);
         return this.build();
     }
 
-    public ItemBuilder setLore(List<String> lore) {
+    public ItemBuilder setLobbyItemLore(List<String> lore) {
         for (int i = 0; i < lore.size(); i++)
             lore.set(i, ChatColor.translateAlternateColorCodes('&', lore.get(i)));
         this.meta.setLore(lore);
@@ -63,7 +62,7 @@ public class ItemBuilder extends ItemStack {
         try {
             SkullMeta skullMeta = (SkullMeta) this.meta;
             GameProfile profile = new GameProfile(UUID.randomUUID(), null);
-            profile.getProperties().put("textures", new Property("textures", texture));
+            //profile.getProperties().put("textures", new Property("textures", texture));
             Field field = skullMeta.getClass().getDeclaredField("profile");
             field.setAccessible(true);
             field.set(skullMeta, profile);

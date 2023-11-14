@@ -1,7 +1,7 @@
 package de.cyne.advancedlobby.misc;
 
 import de.cyne.advancedlobby.AdvancedLobby;
-import de.cyne.advancedlobby.titleapi.TitleAPI;
+import gg.ninjagaming.advancedlobby.titleapi.TitleApi;
 import me.clip.placeholderapi.PlaceholderAPI;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -31,10 +31,12 @@ public class ActionbarScheduler {
                 if (players.getWorld() == AdvancedLobby.lobbyWorlds) {
                     taskId2 = Bukkit.getScheduler().scheduleSyncRepeatingTask(AdvancedLobby.getInstance(), () -> {
                         if (AdvancedLobby.placeholderApi) {
-                            TitleAPI.sendActionBar(players, PlaceholderAPI.setPlaceholders(players, messages.get(i)));
+                            //TitleAPI.sendActionBar(players, PlaceholderAPI.setPlaceholders(players, messages.get(i)));
+                            TitleApi.INSTANCE.sendActionBar(players,PlaceholderAPI.setPlaceholders(players, messages.get(i)));
                             return;
                         }
-                        TitleAPI.sendActionBar(players, ChatColor.translateAlternateColorCodes('&', messages.get(i)));
+                        //TitleAPI.sendActionBar(players, ChatColor.translateAlternateColorCodes('&', messages.get(i)));
+                        TitleApi.INSTANCE.sendActionBar(players, ChatColor.translateAlternateColorCodes('&', messages.get(i)));
                     }, 0L, 20L);
                 }
             }

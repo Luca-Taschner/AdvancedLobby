@@ -46,7 +46,7 @@ public class Inventories {
             int subid = AdvancedLobby.cfg.getInt("inventories.teleporter.items." + item + ".subid");
             int slot = AdvancedLobby.cfg.getInt("inventories.teleporter.items." + item + ".slot");
 
-            ItemStack itemStack = new ItemBuilder(material, 1, (short) subid).setDisplayName(displayName).setLore(AdvancedLobby.cfg.getStringList("inventories.teleporter.items." + item + ".lore"));
+            ItemStack itemStack = new ItemBuilder(material, 1, (short) subid).setDisplayName(displayName).setLobbyItemLore(AdvancedLobby.cfg.getStringList("inventories.teleporter.items." + item + ".lore"));
 
             inventory.setItem(slot, itemStack);
         }
@@ -62,19 +62,19 @@ public class Inventories {
 
         ItemStack hats = new ItemBuilder(Material.PUMPKIN)
                 .setDisplayName(AdvancedLobby.getString("inventories.cosmetics.hats.displayname"))
-                .setLore(AdvancedLobby.cfg.getStringList("inventories.cosmetics.hats.lore"));
+                .setLobbyItemLore(AdvancedLobby.cfg.getStringList("inventories.cosmetics.hats.lore"));
 
         ItemStack particles = new ItemBuilder(Material.BLAZE_POWDER)
                 .setDisplayName(AdvancedLobby.getString("inventories.cosmetics.particles.displayname"))
-                .setLore(AdvancedLobby.cfg.getStringList("inventories.cosmetics.particles.lore"));
+                .setLobbyItemLore(AdvancedLobby.cfg.getStringList("inventories.cosmetics.particles.lore"));
 
         ItemStack gadgets = new ItemBuilder(Material.FISHING_ROD)
                 .setDisplayName(AdvancedLobby.getString("inventories.cosmetics.gadgets.displayname"))
-                .setLore(AdvancedLobby.cfg.getStringList("inventories.cosmetics.gadgets.lore"));
+                .setLobbyItemLore(AdvancedLobby.cfg.getStringList("inventories.cosmetics.gadgets.lore"));
 
         ItemStack balloons = new ItemBuilder(VMaterial.LEAD.getType())
                 .setDisplayName(AdvancedLobby.getString("inventories.cosmetics.ballons.displayname"))
-                .setLore(AdvancedLobby.cfg.getStringList("inventories.cosmetics.ballons.lore"));
+                .setLobbyItemLore(AdvancedLobby.cfg.getStringList("inventories.cosmetics.ballons.lore"));
 
         /**ItemStack wardrobe = new ItemBuilder(Material.IRON_BOOTS)
          .setDisplayName(AdvancedLobby.getString("inventories.cosmetics.wardrobe.displayname"))
@@ -99,16 +99,16 @@ public class Inventories {
         Inventory inventory = Bukkit.createInventory(null, 45,
                 AdvancedLobby.getString("inventories.cosmetics_hats.title"));
 
-        ItemStack melon_block = new ItemBuilder(VMaterial.MELON.getType()).setDisplayName(AdvancedLobby.getString("inventories.cosmetics_hats.melon_hat.displayname")).setLore(AdvancedLobby.cfg.getStringList("inventories.cosmetics_hats.melon_hat.lore"));
-        ItemStack tnt = new ItemBuilder(Material.TNT).setDisplayName(AdvancedLobby.getString("inventories.cosmetics_hats.tnt_hat.displayname")).setLore(AdvancedLobby.cfg.getStringList("inventories.cosmetics_hats.tnt_hat.lore"));
-        ItemStack glass = new ItemBuilder(Material.GLASS).setDisplayName(AdvancedLobby.getString("inventories.cosmetics_hats.glass_hat.displayname")).setLore(AdvancedLobby.cfg.getStringList("inventories.cosmetics_hats.glass_hat.lore"));
-        ItemStack sponge = new ItemBuilder(Material.SPONGE).setDisplayName(AdvancedLobby.getString("inventories.cosmetics_hats.sponge_hat.displayname")).setLore(AdvancedLobby.cfg.getStringList("inventories.cosmetics_hats.sponge_hat.lore"));
-        ItemStack pumpkin = new ItemBuilder(Material.PUMPKIN).setDisplayName(AdvancedLobby.getString("inventories.cosmetics_hats.pumpkin_hat.displayname")).setLore(AdvancedLobby.cfg.getStringList("inventories.cosmetics_hats.pumpkin_hat.lore"));
-        ItemStack cactus = new ItemBuilder(Material.CACTUS).setDisplayName(AdvancedLobby.getString("inventories.cosmetics_hats.cactus_hat.displayname")).setLore(AdvancedLobby.cfg.getStringList("inventories.cosmetics_hats.cactus_hat.lore"));
+        ItemStack melon_block = new ItemBuilder(VMaterial.MELON.getType()).setDisplayName(AdvancedLobby.getString("inventories.cosmetics_hats.melon_hat.displayname")).setLobbyItemLore(AdvancedLobby.cfg.getStringList("inventories.cosmetics_hats.melon_hat.lore"));
+        ItemStack tnt = new ItemBuilder(Material.TNT).setDisplayName(AdvancedLobby.getString("inventories.cosmetics_hats.tnt_hat.displayname")).setLobbyItemLore(AdvancedLobby.cfg.getStringList("inventories.cosmetics_hats.tnt_hat.lore"));
+        ItemStack glass = new ItemBuilder(Material.GLASS).setDisplayName(AdvancedLobby.getString("inventories.cosmetics_hats.glass_hat.displayname")).setLobbyItemLore(AdvancedLobby.cfg.getStringList("inventories.cosmetics_hats.glass_hat.lore"));
+        ItemStack sponge = new ItemBuilder(Material.SPONGE).setDisplayName(AdvancedLobby.getString("inventories.cosmetics_hats.sponge_hat.displayname")).setLobbyItemLore(AdvancedLobby.cfg.getStringList("inventories.cosmetics_hats.sponge_hat.lore"));
+        ItemStack pumpkin = new ItemBuilder(Material.PUMPKIN).setDisplayName(AdvancedLobby.getString("inventories.cosmetics_hats.pumpkin_hat.displayname")).setLobbyItemLore(AdvancedLobby.cfg.getStringList("inventories.cosmetics_hats.pumpkin_hat.lore"));
+        ItemStack cactus = new ItemBuilder(Material.CACTUS).setDisplayName(AdvancedLobby.getString("inventories.cosmetics_hats.cactus_hat.displayname")).setLobbyItemLore(AdvancedLobby.cfg.getStringList("inventories.cosmetics_hats.cactus_hat.lore"));
 
-        ItemStack delete = new ItemBuilder(VMaterial.RED_DYE.toItemStack()).setDisplayName(AdvancedLobby.getString("inventories.cosmetics_hats.disable.displayname")).setLore(AdvancedLobby.cfg.getStringList("inventories.cosmetics_hats.disable.lore"));
+        ItemStack delete = new ItemBuilder(VMaterial.RED_DYE.toItemStack()).setDisplayName(AdvancedLobby.getString("inventories.cosmetics_hats.disable.displayname")).setLobbyItemLore(AdvancedLobby.cfg.getStringList("inventories.cosmetics_hats.disable.lore"));
         ItemStack back = new ItemBuilder(VMaterial.PLAYER_HEAD.toItemStack())
-                .setSkullOwner(AdvancedLobby.GO_BACK_SKULL_TEXTURE).setDisplayName(AdvancedLobby.getString("inventories.cosmetics_hats.go_back.displayname")).setLore(AdvancedLobby.cfg.getStringList("inventories.cosmetics_hats.go_back.lore"));
+                .setSkullOwner(AdvancedLobby.GO_BACK_SKULL_TEXTURE).setDisplayName(AdvancedLobby.getString("inventories.cosmetics_hats.go_back.displayname")).setLobbyItemLore(AdvancedLobby.cfg.getStringList("inventories.cosmetics_hats.go_back.lore"));
 
         inventory.setItem(11, melon_block);
         inventory.setItem(12, tnt);
@@ -130,15 +130,15 @@ public class Inventories {
         Inventory inventory = Bukkit.createInventory(null, 45,
                 AdvancedLobby.getString("inventories.cosmetics_particles.title"));
 
-        ItemStack redstone = new ItemBuilder(Material.REDSTONE).setDisplayName(AdvancedLobby.getString("inventories.cosmetics_particles.heart_particles.displayname")).setLore(AdvancedLobby.cfg.getStringList("inventories.cosmetics_particles.heart_particles.lore"));
-        ItemStack record_10 = new ItemBuilder(VMaterial.MUSIC_DISC_STRAD.getType()).addItemFlags(ItemFlag.HIDE_POTION_EFFECTS).setDisplayName(AdvancedLobby.getString("inventories.cosmetics_particles.music_particles.displayname")).setLore(AdvancedLobby.cfg.getStringList("inventories.cosmetics_particles.music_particles.lore"));
-        ItemStack fireball = new ItemBuilder(VMaterial.FIRE_CHARGE.getType()).setDisplayName(AdvancedLobby.getString("inventories.cosmetics_particles.flames_particles.displayname")).setLore(AdvancedLobby.cfg.getStringList("inventories.cosmetics_particles.flames_particles.lore"));
-        ItemStack emerald = new ItemBuilder(Material.EMERALD).setDisplayName(AdvancedLobby.getString("inventories.cosmetics_particles.villager_particles.displayname")).setLore(AdvancedLobby.cfg.getStringList("inventories.cosmetics__particles.villager_particles.lore"));
-        ItemStack nether_star = new ItemBuilder(Material.NETHER_STAR).setDisplayName(AdvancedLobby.getString("inventories.cosmetics_particles.rainbow_particles.displayname")).setLore(AdvancedLobby.cfg.getStringList("inventories.cosmetics_particles.rainbow_particles.lore"));
+        ItemStack redstone = new ItemBuilder(Material.REDSTONE).setDisplayName(AdvancedLobby.getString("inventories.cosmetics_particles.heart_particles.displayname")).setLobbyItemLore(AdvancedLobby.cfg.getStringList("inventories.cosmetics_particles.heart_particles.lore"));
+        ItemStack record_10 = new ItemBuilder(VMaterial.MUSIC_DISC_STRAD.getType()).addLobbyItemFlags(ItemFlag.HIDE_POTION_EFFECTS).setDisplayName(AdvancedLobby.getString("inventories.cosmetics_particles.music_particles.displayname")).setLobbyItemLore(AdvancedLobby.cfg.getStringList("inventories.cosmetics_particles.music_particles.lore"));
+        ItemStack fireball = new ItemBuilder(VMaterial.FIRE_CHARGE.getType()).setDisplayName(AdvancedLobby.getString("inventories.cosmetics_particles.flames_particles.displayname")).setLobbyItemLore(AdvancedLobby.cfg.getStringList("inventories.cosmetics_particles.flames_particles.lore"));
+        ItemStack emerald = new ItemBuilder(Material.EMERALD).setDisplayName(AdvancedLobby.getString("inventories.cosmetics_particles.villager_particles.displayname")).setLobbyItemLore(AdvancedLobby.cfg.getStringList("inventories.cosmetics__particles.villager_particles.lore"));
+        ItemStack nether_star = new ItemBuilder(Material.NETHER_STAR).setDisplayName(AdvancedLobby.getString("inventories.cosmetics_particles.rainbow_particles.displayname")).setLobbyItemLore(AdvancedLobby.cfg.getStringList("inventories.cosmetics_particles.rainbow_particles.lore"));
 
-        ItemStack delete = new ItemBuilder(VMaterial.RED_DYE.toItemStack()).setDisplayName(AdvancedLobby.getString("inventories.cosmetics_particles.disable.displayname")).setLore(AdvancedLobby.cfg.getStringList("inventories.cosmetics_particles.disable.lore"));
+        ItemStack delete = new ItemBuilder(VMaterial.RED_DYE.toItemStack()).setDisplayName(AdvancedLobby.getString("inventories.cosmetics_particles.disable.displayname")).setLobbyItemLore(AdvancedLobby.cfg.getStringList("inventories.cosmetics_particles.disable.lore"));
         ItemStack back = new ItemBuilder(VMaterial.PLAYER_HEAD.toItemStack())
-                .setSkullOwner(AdvancedLobby.GO_BACK_SKULL_TEXTURE).setDisplayName(AdvancedLobby.getString("inventories.cosmetics_particles.go_back.displayname")).setLore(AdvancedLobby.cfg.getStringList("inventories.cosmetics_particles.go_back.lore"));
+                .setSkullOwner(AdvancedLobby.GO_BACK_SKULL_TEXTURE).setDisplayName(AdvancedLobby.getString("inventories.cosmetics_particles.go_back.displayname")).setLobbyItemLore(AdvancedLobby.cfg.getStringList("inventories.cosmetics_particles.go_back.lore"));
 
         inventory.setItem(11, redstone);
         inventory.setItem(12, record_10);
@@ -159,18 +159,18 @@ public class Inventories {
         Inventory inventory = Bukkit.createInventory(null, 45,
                 AdvancedLobby.getString("inventories.cosmetics_balloons.title"));
 
-        ItemStack stained_clay_yellow = new ItemBuilder(VMaterial.YELLOW_TERRACOTTA.toItemStack()).setDisplayName(AdvancedLobby.getString("inventories.cosmetics_balloons.yellow_balloon.displayname")).setLore(AdvancedLobby.cfg.getStringList("inventories.cosmetics_balloons.yellow_balloon.lore"));
-        ItemStack stained_clay_red = new ItemBuilder(VMaterial.RED_TERRACOTTA.toItemStack()).setDisplayName(AdvancedLobby.getString("inventories.cosmetics_balloons.red_balloon.displayname")).setLore(AdvancedLobby.cfg.getStringList("inventories.cosmetics_balloons.red_balloon.lore"));
-        ItemStack stained_clay_green = new ItemBuilder(VMaterial.LIME_TERRACOTTA.toItemStack()).setDisplayName(AdvancedLobby.getString("inventories.cosmetics_balloons.green_balloon.displayname")).setLore(AdvancedLobby.cfg.getStringList("inventories.cosmetics_balloons.green_balloon.lore"));
-        ItemStack stained_clay_blue = new ItemBuilder(VMaterial.LIGHT_BLUE_TERRACOTTA.toItemStack()).setDisplayName(AdvancedLobby.getString("inventories.cosmetics_balloons.blue_balloon.displayname")).setLore(AdvancedLobby.cfg.getStringList("inventories.cosmetics_balloons.blue_balloon.lore"));
-        ItemStack hay_block = new ItemBuilder(Material.HAY_BLOCK).setDisplayName(AdvancedLobby.getString("inventories.cosmetics_balloons.hay_block_balloon.displayname")).setLore(AdvancedLobby.cfg.getStringList("inventories.cosmetics_balloons.hay_block_balloon.lore"));
-        ItemStack sea_lantern = new ItemBuilder(Material.SEA_LANTERN).setDisplayName(AdvancedLobby.getString("inventories.cosmetics_balloons.sea_lantern_balloon.displayname")).setLore(AdvancedLobby.cfg.getStringList("inventories.cosmetics_balloons.sea_lantern_balloon.lore"));
-        ItemStack bookshelf = new ItemBuilder(Material.BOOKSHELF).setDisplayName(AdvancedLobby.getString("inventories.cosmetics_balloons.bookshelf_balloon.displayname")).setLore(AdvancedLobby.cfg.getStringList("inventories.cosmetics_balloons.bookshelf_balloon.lore"));
-        ItemStack note_block = new ItemBuilder(Material.NOTE_BLOCK).setDisplayName(AdvancedLobby.getString("inventories.cosmetics_balloons.note_block_balloon.displayname")).setLore(AdvancedLobby.cfg.getStringList("inventories.cosmetics_balloons.note_block_balloon.lore"));
+        ItemStack stained_clay_yellow = new ItemBuilder(VMaterial.YELLOW_TERRACOTTA.toItemStack()).setDisplayName(AdvancedLobby.getString("inventories.cosmetics_balloons.yellow_balloon.displayname")).setLobbyItemLore(AdvancedLobby.cfg.getStringList("inventories.cosmetics_balloons.yellow_balloon.lore"));
+        ItemStack stained_clay_red = new ItemBuilder(VMaterial.RED_TERRACOTTA.toItemStack()).setDisplayName(AdvancedLobby.getString("inventories.cosmetics_balloons.red_balloon.displayname")).setLobbyItemLore(AdvancedLobby.cfg.getStringList("inventories.cosmetics_balloons.red_balloon.lore"));
+        ItemStack stained_clay_green = new ItemBuilder(VMaterial.LIME_TERRACOTTA.toItemStack()).setDisplayName(AdvancedLobby.getString("inventories.cosmetics_balloons.green_balloon.displayname")).setLobbyItemLore(AdvancedLobby.cfg.getStringList("inventories.cosmetics_balloons.green_balloon.lore"));
+        ItemStack stained_clay_blue = new ItemBuilder(VMaterial.LIGHT_BLUE_TERRACOTTA.toItemStack()).setDisplayName(AdvancedLobby.getString("inventories.cosmetics_balloons.blue_balloon.displayname")).setLobbyItemLore(AdvancedLobby.cfg.getStringList("inventories.cosmetics_balloons.blue_balloon.lore"));
+        ItemStack hay_block = new ItemBuilder(Material.HAY_BLOCK).setDisplayName(AdvancedLobby.getString("inventories.cosmetics_balloons.hay_block_balloon.displayname")).setLobbyItemLore(AdvancedLobby.cfg.getStringList("inventories.cosmetics_balloons.hay_block_balloon.lore"));
+        ItemStack sea_lantern = new ItemBuilder(Material.SEA_LANTERN).setDisplayName(AdvancedLobby.getString("inventories.cosmetics_balloons.sea_lantern_balloon.displayname")).setLobbyItemLore(AdvancedLobby.cfg.getStringList("inventories.cosmetics_balloons.sea_lantern_balloon.lore"));
+        ItemStack bookshelf = new ItemBuilder(Material.BOOKSHELF).setDisplayName(AdvancedLobby.getString("inventories.cosmetics_balloons.bookshelf_balloon.displayname")).setLobbyItemLore(AdvancedLobby.cfg.getStringList("inventories.cosmetics_balloons.bookshelf_balloon.lore"));
+        ItemStack note_block = new ItemBuilder(Material.NOTE_BLOCK).setDisplayName(AdvancedLobby.getString("inventories.cosmetics_balloons.note_block_balloon.displayname")).setLobbyItemLore(AdvancedLobby.cfg.getStringList("inventories.cosmetics_balloons.note_block_balloon.lore"));
 
-        ItemStack delete = new ItemBuilder(VMaterial.RED_DYE.toItemStack()).setDisplayName(AdvancedLobby.getString("inventories.cosmetics_balloons.disable.displayname")).setLore(AdvancedLobby.cfg.getStringList("inventories.cosmetics_balloons.disable.lore"));
+        ItemStack delete = new ItemBuilder(VMaterial.RED_DYE.toItemStack()).setDisplayName(AdvancedLobby.getString("inventories.cosmetics_balloons.disable.displayname")).setLobbyItemLore(AdvancedLobby.cfg.getStringList("inventories.cosmetics_balloons.disable.lore"));
         ItemStack back = new ItemBuilder(VMaterial.PLAYER_HEAD.toItemStack())
-                .setSkullOwner(AdvancedLobby.GO_BACK_SKULL_TEXTURE).setDisplayName(AdvancedLobby.getString("inventories.cosmetics_balloons.go_back.displayname")).setLore(AdvancedLobby.cfg.getStringList("inventories.cosmetics_balloons.go_back.lore"));
+                .setSkullOwner(AdvancedLobby.GO_BACK_SKULL_TEXTURE).setDisplayName(AdvancedLobby.getString("inventories.cosmetics_balloons.go_back.displayname")).setLobbyItemLore(AdvancedLobby.cfg.getStringList("inventories.cosmetics_balloons.go_back.lore"));
 
         inventory.setItem(11, stained_clay_yellow);
         inventory.setItem(12, stained_clay_red);
@@ -194,13 +194,13 @@ public class Inventories {
         Inventory inventory = Bukkit.createInventory(null, 45,
                 AdvancedLobby.getString("inventories.cosmetics_gadgets.title"));
 
-        ItemStack fishing_rod = new ItemBuilder(Material.FISHING_ROD).setDisplayName(AdvancedLobby.getString("inventories.cosmetics_gadgets.grappling_hook_gadget.displayname")).setLore(AdvancedLobby.cfg.getStringList("inventories.cosmetics_gadgets.grappling_hook_gadget.lore"));
-        ItemStack feather = new ItemBuilder(Material.FEATHER).setDisplayName(AdvancedLobby.getString("inventories.cosmetics_gadgets.rocket_jump_gadget.displayname")).setLore(AdvancedLobby.cfg.getStringList("inventories.cosmetics_gadgets.rocket_jump_gadget.lore"));
+        ItemStack fishing_rod = new ItemBuilder(Material.FISHING_ROD).setDisplayName(AdvancedLobby.getString("inventories.cosmetics_gadgets.grappling_hook_gadget.displayname")).setLobbyItemLore(AdvancedLobby.cfg.getStringList("inventories.cosmetics_gadgets.grappling_hook_gadget.lore"));
+        ItemStack feather = new ItemBuilder(Material.FEATHER).setDisplayName(AdvancedLobby.getString("inventories.cosmetics_gadgets.rocket_jump_gadget.displayname")).setLobbyItemLore(AdvancedLobby.cfg.getStringList("inventories.cosmetics_gadgets.rocket_jump_gadget.lore"));
 
 
-        ItemStack delete = new ItemBuilder(VMaterial.RED_DYE.toItemStack()).setDisplayName(AdvancedLobby.getString("inventories.cosmetics_gadgets.disable.displayname")).setLore(AdvancedLobby.cfg.getStringList("inventories.cosmetics_gadgets.disable.lore"));
+        ItemStack delete = new ItemBuilder(VMaterial.RED_DYE.toItemStack()).setDisplayName(AdvancedLobby.getString("inventories.cosmetics_gadgets.disable.displayname")).setLobbyItemLore(AdvancedLobby.cfg.getStringList("inventories.cosmetics_gadgets.disable.lore"));
         ItemStack back = new ItemBuilder(VMaterial.PLAYER_HEAD.toItemStack())
-                .setSkullOwner(AdvancedLobby.GO_BACK_SKULL_TEXTURE).setDisplayName(AdvancedLobby.getString("inventories.cosmetics_gadgets.go_back.displayname")).setLore(AdvancedLobby.cfg.getStringList("inventories.cosmetics_gadgets.go_back.lore"));
+                .setSkullOwner(AdvancedLobby.GO_BACK_SKULL_TEXTURE).setDisplayName(AdvancedLobby.getString("inventories.cosmetics_gadgets.go_back.displayname")).setLobbyItemLore(AdvancedLobby.cfg.getStringList("inventories.cosmetics_gadgets.go_back.lore"));
 
         inventory.setItem(11, fishing_rod);
         inventory.setItem(12, feather);

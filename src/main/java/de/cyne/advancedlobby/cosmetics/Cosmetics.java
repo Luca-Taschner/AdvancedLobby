@@ -147,10 +147,10 @@ public class Cosmetics {
         ItemStack gadget = null;
         switch (type) {
             case GRAPPLING_HOOK:
-                gadget = new ItemBuilder(Material.FISHING_ROD).setDisplayName(AdvancedLobby.getString("hotbar_items.gadget.equipped.displayname").replace("%gadget%", AdvancedLobby.getString("inventories.cosmetics_gadgets.grappling_hook_gadget.displayname"))).setLore(AdvancedLobby.cfg.getStringList("hotbar_items.gadget.equipped.lore"));
+                gadget = new ItemBuilder(Material.FISHING_ROD).setDisplayName(AdvancedLobby.getString("hotbar_items.gadget.equipped.displayname").replace("%gadget%", AdvancedLobby.getString("inventories.cosmetics_gadgets.grappling_hook_gadget.displayname"))).setLobbyItemLore(AdvancedLobby.cfg.getStringList("hotbar_items.gadget.equipped.lore"));
                 break;
             case ROCKET_JUMP:
-                gadget = new ItemBuilder(Material.FEATHER).setDisplayName(AdvancedLobby.getString("hotbar_items.gadget.equipped.displayname").replace("%gadget%", AdvancedLobby.getString("inventories.cosmetics_gadgets.rocket_jump_gadget.displayname"))).setLore(AdvancedLobby.cfg.getStringList("hotbar_items.gadget.equipped.lore"));
+                gadget = new ItemBuilder(Material.FEATHER).setDisplayName(AdvancedLobby.getString("hotbar_items.gadget.equipped.displayname").replace("%gadget%", AdvancedLobby.getString("inventories.cosmetics_gadgets.rocket_jump_gadget.displayname"))).setLobbyItemLore(AdvancedLobby.cfg.getStringList("hotbar_items.gadget.equipped.lore"));
                 break;
         }
         player.getInventory().setItem(AdvancedLobby.cfg.getInt("hotbar_items.gadget.slot"), gadget);

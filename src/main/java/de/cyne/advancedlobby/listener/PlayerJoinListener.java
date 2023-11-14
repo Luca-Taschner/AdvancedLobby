@@ -5,7 +5,7 @@ import de.cyne.advancedlobby.itembuilder.ItemBuilder;
 import de.cyne.advancedlobby.locale.Locale;
 import de.cyne.advancedlobby.misc.HiderType;
 import de.cyne.advancedlobby.misc.LocationManager;
-import de.cyne.advancedlobby.titleapi.TitleAPI;
+import gg.ninjagaming.advancedlobby.titleapi.TitleApi;
 import net.md_5.bungee.api.ChatColor;
 import net.md_5.bungee.api.chat.ClickEvent;
 import net.md_5.bungee.api.chat.ComponentBuilder;
@@ -77,9 +77,9 @@ public class PlayerJoinListener implements Listener {
 
         if (AdvancedLobby.cfg.getBoolean("title.enabled")) {
             if (AdvancedLobby.placeholderApi) {
-                TitleAPI.sendTitle(p, 20, 40, 20, AdvancedLobby.getPlaceholderString(p, "title.title").replace("%player%", AdvancedLobby.getName(p)), AdvancedLobby.getPlaceholderString(p, "title.subtitle").replace("%player%", AdvancedLobby.getName(p)));
+                TitleApi.INSTANCE.sendTitle(p, 20, 40, 20, AdvancedLobby.getPlaceholderString(p, "title.title").replace("%player%", AdvancedLobby.getName(p)), AdvancedLobby.getPlaceholderString(p, "title.subtitle").replace("%player%", AdvancedLobby.getName(p)));
             } else {
-                TitleAPI.sendTitle(p, 20, 40, 20, AdvancedLobby.getString("title.title").replace("%player%", AdvancedLobby.getName(p)), AdvancedLobby.getString("title.subtitle").replace("%player%", AdvancedLobby.getName(p)));
+                TitleApi.INSTANCE.sendTitle(p, 20, 40, 20, AdvancedLobby.getString("title.title").replace("%player%", AdvancedLobby.getName(p)), AdvancedLobby.getString("title.subtitle").replace("%player%", AdvancedLobby.getName(p)));
             }
         }
 
@@ -88,19 +88,19 @@ public class PlayerJoinListener implements Listener {
             if (AdvancedLobby.cfg.getBoolean("tablist_header_footer.update_tablist")) {
                 Bukkit.getScheduler().scheduleSyncRepeatingTask(AdvancedLobby.getInstance(), () -> {
                     if (AdvancedLobby.placeholderApi) {
-                        TitleAPI.sendTabTitle(p, AdvancedLobby.getPlaceholderString(p, "tablist_header_footer.header"),
+                        TitleApi.INSTANCE.sendTabTitle(p, AdvancedLobby.getPlaceholderString(p, "tablist_header_footer.header"),
                                 AdvancedLobby.getPlaceholderString(p, "tablist_header_footer.footer"));
                     } else {
-                        TitleAPI.sendTabTitle(p, AdvancedLobby.getString("tablist_header_footer.header"),
+                        TitleApi.INSTANCE.sendTabTitle(p, AdvancedLobby.getString("tablist_header_footer.header"),
                                 AdvancedLobby.getString("tablist_header_footer.footer"));
                     }
                 }, 0L, 20L);
             } else {
                 if (AdvancedLobby.placeholderApi) {
-                    TitleAPI.sendTabTitle(p, AdvancedLobby.getPlaceholderString(p, "tablist_header_footer.header"),
+                    TitleApi.INSTANCE.sendTabTitle(p, AdvancedLobby.getPlaceholderString(p, "tablist_header_footer.header"),
                             AdvancedLobby.getPlaceholderString(p, "tablist_header_footer.footer"));
                 } else {
-                    TitleAPI.sendTabTitle(p, AdvancedLobby.getString("tablist_header_footer.header"),
+                    TitleApi.INSTANCE.sendTabTitle(p, AdvancedLobby.getString("tablist_header_footer.header"),
                             AdvancedLobby.getString("tablist_header_footer.footer"));
                 }
             }
@@ -112,7 +112,7 @@ public class PlayerJoinListener implements Listener {
         ItemBuilder teleporter = new ItemBuilder(AdvancedLobby.getMaterial("hotbar_items.teleporter.material"), 1,
                 (short) AdvancedLobby.cfg.getInt("hotbar_items.teleporter.subid")).setDisplayName(
                 ChatColor.translateAlternateColorCodes('&', AdvancedLobby.cfg.getString("hotbar_items.teleporter.displayname")))
-                .setLore(AdvancedLobby.cfg.getStringList("hotbar_items.teleporter.lore"));
+                .setLobbyItemLore(AdvancedLobby.cfg.getStringList("hotbar_items.teleporter.lore"));
 
         if (AdvancedLobby.cfg.getBoolean("hotbar_items.teleporter.enabled")) {
             p.getInventory().setItem(AdvancedLobby.cfg.getInt("hotbar_items.teleporter.slot"), teleporter);
@@ -122,7 +122,7 @@ public class PlayerJoinListener implements Listener {
                 1, (short) AdvancedLobby.cfg.getInt("hotbar_items.player_hider.show_all.subid"))
                 .setDisplayName(ChatColor.translateAlternateColorCodes('&',
                         AdvancedLobby.cfg.getString("hotbar_items.player_hider.show_all.displayname")))
-                .setLore(AdvancedLobby.cfg.getStringList("hotbar_items.player_hider.show_all.lore"));
+                .setLobbyItemLore(AdvancedLobby.cfg.getStringList("hotbar_items.player_hider.show_all.lore"));
 
         if (AdvancedLobby.cfg.getBoolean("hotbar_items.player_hider.enabled")) {
             p.getInventory().setItem(AdvancedLobby.cfg.getInt("hotbar_items.player_hider.slot"), hider);
@@ -131,7 +131,7 @@ public class PlayerJoinListener implements Listener {
         ItemBuilder cosmetics = new ItemBuilder(AdvancedLobby.getMaterial("hotbar_items.cosmetics.material"), 1,
                 (short) AdvancedLobby.cfg.getInt("hotbar_items.cosmetics.subid")).setDisplayName(
                 ChatColor.translateAlternateColorCodes('&', AdvancedLobby.cfg.getString("hotbar_items.cosmetics.displayname")))
-                .setLore(AdvancedLobby.cfg.getStringList("hotbar_items.cosmetics.lore"));
+                .setLobbyItemLore(AdvancedLobby.cfg.getStringList("hotbar_items.cosmetics.lore"));
 
         if (AdvancedLobby.cfg.getBoolean("hotbar_items.cosmetics.enabled")) {
             p.getInventory().setItem(AdvancedLobby.cfg.getInt("hotbar_items.cosmetics.slot"), cosmetics);
@@ -140,7 +140,7 @@ public class PlayerJoinListener implements Listener {
         ItemBuilder no_gadget = new ItemBuilder(AdvancedLobby.getMaterial("hotbar_items.gadget.unequipped.material"), 1,
                 (short) AdvancedLobby.cfg.getInt("hotbar_items.gadget.unequipped.subid")).setDisplayName(
                 ChatColor.translateAlternateColorCodes('&', AdvancedLobby.cfg.getString("hotbar_items.gadget.unequipped.displayname")))
-                .setLore(AdvancedLobby.cfg.getStringList("hotbar_items.gadget.unequipped.lore"));
+                .setLobbyItemLore(AdvancedLobby.cfg.getStringList("hotbar_items.gadget.unequipped.lore"));
 
         if (AdvancedLobby.cfg.getBoolean("hotbar_items.gadget.enabled")) {
             p.getInventory().setItem(AdvancedLobby.cfg.getInt("hotbar_items.gadget.slot"), no_gadget);
@@ -151,7 +151,7 @@ public class PlayerJoinListener implements Listener {
                 (short) AdvancedLobby.cfg.getInt("hotbar_items.silentlobby.deactivated.subid"))
                 .setDisplayName(ChatColor.translateAlternateColorCodes('&',
                         AdvancedLobby.cfg.getString("hotbar_items.silentlobby.deactivated.displayname")))
-                .setLore(AdvancedLobby.cfg.getStringList("hotbar_items.silentlobby.deactivated.lore"));
+                .setLobbyItemLore(AdvancedLobby.cfg.getStringList("hotbar_items.silentlobby.deactivated.lore"));
 
         if (AdvancedLobby.cfg.getBoolean("hotbar_items.silentlobby.enabled") && p.hasPermission("advancedlobby.silentlobby")) {
             p.getInventory().setItem(AdvancedLobby.cfg.getInt("hotbar_items.silentlobby.slot"), silentlobby);
@@ -162,7 +162,7 @@ public class PlayerJoinListener implements Listener {
                 (short) AdvancedLobby.cfg.getInt("hotbar_items.shield.deactivated.subid"))
                 .setDisplayName(ChatColor.translateAlternateColorCodes('&',
                         AdvancedLobby.cfg.getString("hotbar_items.shield.deactivated.displayname")))
-                .setLore(AdvancedLobby.cfg.getStringList("hotbar_items.shield.deactivated.lore"));
+                .setLobbyItemLore(AdvancedLobby.cfg.getStringList("hotbar_items.shield.deactivated.lore"));
 
         if (AdvancedLobby.cfg.getBoolean("hotbar_items.shield.enabled") && p.hasPermission("advancedlobby.shield")) {
             p.getInventory().setItem(AdvancedLobby.cfg.getInt("hotbar_items.shield.slot"), shield);
@@ -173,7 +173,7 @@ public class PlayerJoinListener implements Listener {
                 (short) AdvancedLobby.cfg.getInt("hotbar_items.custom_item.subid"))
                 .setDisplayName(ChatColor.translateAlternateColorCodes('&',
                         AdvancedLobby.cfg.getString("hotbar_items.custom_item.displayname")))
-                .setLore(AdvancedLobby.cfg.getStringList("hotbar_items.custom_item.lore"));
+                .setLobbyItemLore(AdvancedLobby.cfg.getStringList("hotbar_items.custom_item.lore"));
 
         if (AdvancedLobby.cfg.getBoolean("hotbar_items.custom_item.enabled") && p.hasPermission("advancedlobby.custom_item")) {
             p.getInventory().setItem(AdvancedLobby.cfg.getInt("hotbar_items.custom_item.slot"), custom_item);
