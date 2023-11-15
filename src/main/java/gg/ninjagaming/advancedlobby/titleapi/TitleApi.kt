@@ -12,7 +12,7 @@ object TitleApi {
 
     fun sendActionBar(player: Player, message :String)
     {
-        player.sendActionBar { generateTextComponent(message) }
+        player.sendActionBar { generateBaseComponent(message) }
     }
 
     fun sendTitle(player: Player, fadeIn: Int, stay: Int, fadeOut: Int, title: String, subtitle: String)

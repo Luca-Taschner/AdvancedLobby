@@ -3,6 +3,7 @@ package de.cyne.advancedlobby.commands;
 import de.cyne.advancedlobby.AdvancedLobby;
 import de.cyne.advancedlobby.locale.Locale;
 import de.cyne.advancedlobby.misc.LocationManager;
+import gg.ninjagaming.advancedlobby.runnables.ActionBarRunnable;
 import net.md_5.bungee.api.chat.ClickEvent;
 import net.md_5.bungee.api.chat.ComponentBuilder;
 import net.md_5.bungee.api.chat.HoverEvent;
@@ -187,10 +188,10 @@ public class AdvancedLobbyCommand implements CommandExecutor {
             AdvancedLobby.cfgS.load(AdvancedLobby.fileSounds);
 
             AdvancedLobby.actionbarMessages.clear();
-            if (AdvancedLobby.cfg.getBoolean("actionbar.enabled")) {
-                AdvancedLobby.scheduler.stop();
+            if (AdvancedLobby.cfg.getBoolean("actionbar.enabled") && AdvancedLobby.actionBarRunnable != null) {
+                AdvancedLobby.actionBarRunnable.cancel();
                 AdvancedLobby.actionbarMessages.addAll(AdvancedLobby.cfg.getStringList("actionbar.messages"));
-                AdvancedLobby.scheduler.start();
+                AdvancedLobby.prepareActionBarRunnable();
             }
 
 

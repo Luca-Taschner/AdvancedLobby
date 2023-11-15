@@ -2,7 +2,7 @@ name: AdvancedLobby
 version: 1.2
 author: cyne
 main: de.cyne.advancedlobby.AdvancedLobby
-api-version: 1.13
+api-version: 1.19
 softdepend: [PlaceholderAPI]
 
 commands:

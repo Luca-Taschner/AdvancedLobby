@@ -4,9 +4,9 @@ import de.cyne.advancedlobby.commands.*;
 import de.cyne.advancedlobby.cosmetics.Cosmetics;
 import de.cyne.advancedlobby.listener.*;
 import de.cyne.advancedlobby.metrics.Metrics;
-import de.cyne.advancedlobby.misc.ActionbarScheduler;
 import de.cyne.advancedlobby.misc.HiderType;
 import de.cyne.advancedlobby.misc.Updater;
+import gg.ninjagaming.advancedlobby.runnables.ActionBarRunnable;
 import me.clip.placeholderapi.PlaceholderAPI;
 import org.bukkit.*;
 import org.bukkit.configuration.InvalidConfigurationException;
@@ -15,6 +15,7 @@ import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.bukkit.scheduler.BukkitTask;
 
 import java.io.File;
 import java.io.IOException;
@@ -52,13 +53,13 @@ public class AdvancedLobby extends JavaPlugin {
     public static boolean multiWorld_mode;
 
     public static ArrayList<World> lobbyWorlds = new ArrayList<>();
-
-    public static ActionbarScheduler scheduler;
     public static Updater updater;
 
     public static HashMap<String, ErrorType> errors = new HashMap<>();
 
     public Metrics metrics;
+
+    public static BukkitTask actionBarRunnable;
 
     @Override
     public void onEnable() {
@@ -80,8 +81,7 @@ public class AdvancedLobby extends JavaPlugin {
 
         if (cfg.getBoolean("actionbar.enabled")) {
             actionbarMessages.addAll(AdvancedLobby.cfg.getStringList("actionbar.messages"));
-            scheduler = new ActionbarScheduler(actionbarMessages);
-            scheduler.start();
+            this.prepareActionBarRunnable();
         }
 
         multiWorld_mode = AdvancedLobby.cfg.getBoolean("multiworld_mode.enabled");
@@ -101,6 +101,12 @@ public class AdvancedLobby extends JavaPlugin {
 
         metrics = new Metrics(AdvancedLobby.getInstance(), 7014);
         metrics.addCustomChart(new Metrics.SimplePie("singleworld_mode", () -> multiWorld_mode ? "enabled" : "disabled"));
+    }
+
+    public static void prepareActionBarRunnable()
+    {
+        actionBarRunnable = AdvancedLobby.getInstance().getServer().getScheduler()
+                .runTaskTimer(AdvancedLobby.getInstance(), ActionBarRunnable.INSTANCE.schedulingRunnable(actionbarMessages,cfg.getInt("actionbar.display_time")), 0L, cfg.getInt("actionbar.display_time") * 20L * actionbarMessages.size());
     }
 
     @Override
