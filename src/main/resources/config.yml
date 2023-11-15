@@ -48,7 +48,7 @@ actionbar:
   enabled: true
   display_time: 5
   messages:
-    - '&7Ping &8● &a%player_ping%ms &8┃ &7Time &8● &f%server_time_HH:mm:ss%'
+    - '§7Ping §8● §a%player_ping%ms §8┃ §7Time §8● §f%server_time_HH:mm:ss%'
 
 #Tablist header & footer settings
 #➥ Use \n to start a new line | Placeholders: PlaceholderAPI

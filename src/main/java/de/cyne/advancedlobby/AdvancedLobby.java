@@ -106,7 +106,7 @@ public class AdvancedLobby extends JavaPlugin {
     public static void prepareActionBarRunnable()
     {
         actionBarRunnable = AdvancedLobby.getInstance().getServer().getScheduler()
-                .runTaskTimer(AdvancedLobby.getInstance(), ActionBarRunnable.INSTANCE.schedulingRunnable(actionbarMessages,cfg.getInt("actionbar.display_time")), 0L, cfg.getInt("actionbar.display_time") * 20L * actionbarMessages.size());
+                .runTaskTimer(AdvancedLobby.getInstance(), ActionBarRunnable.INSTANCE.schedulingRunnable(actionbarMessages,cfg.getInt("actionbar.display_time")), 0L, cfg.getInt("actionbar.display_time") * 20L* actionbarMessages.size());
     }
 
     @Override
