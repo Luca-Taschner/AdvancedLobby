@@ -4,8 +4,6 @@ import de.cyne.advancedlobby.AdvancedLobby
 import gg.ninjagaming.advancedlobby.titleapi.TitleApi.sendActionBar
 import me.clip.placeholderapi.PlaceholderAPI
 import org.bukkit.Bukkit
-import org.bukkit.ChatColor.*
-import org.bukkit.entity.Player
 import org.bukkit.scheduler.BukkitRunnable
 
 object ActionBarRunnable {
@@ -16,9 +14,6 @@ object ActionBarRunnable {
         return r
     }
 
-
-
-
     private fun handleMessages(messages: ArrayList<String>, displayTime: Int)
     {
         var delay = 0L
@@ -27,9 +22,7 @@ object ActionBarRunnable {
             SelfCancelingRunnable(it,displayTime).runTaskTimer(AdvancedLobby.getInstance(), delay,0)
             delay += displayTime * 20L
         }
-
     }
-
 }
 
 class SelfCancelingRunnable(private val message: String, displayTime: Int) : BukkitRunnable()
@@ -42,8 +35,6 @@ class SelfCancelingRunnable(private val message: String, displayTime: Int) : Buk
             return
         }
 
-
-
         counter--
 
         for (player in Bukkit.getOnlinePlayers())
@@ -51,16 +42,12 @@ class SelfCancelingRunnable(private val message: String, displayTime: Int) : Buk
             if (!AdvancedLobby.lobbyWorlds.contains(player.world))
                 continue
 
-            var actionbarMessage = translateAlternateColorCodes('&', message.replace("%player_ping%", player.ping.toString()))
+            var actionbarMessage = message.replace("%player_ping%", player.ping.toString())
 
             if (AdvancedLobby.placeholderApi)
                 actionbarMessage =  PlaceholderAPI.setPlaceholders(player, message)
 
-
-
             sendActionBar(player, actionbarMessage)
         }
-
-
     }
 }
