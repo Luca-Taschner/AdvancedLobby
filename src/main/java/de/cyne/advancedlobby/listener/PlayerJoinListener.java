@@ -77,9 +77,9 @@ public class PlayerJoinListener implements Listener {
 
         if (AdvancedLobby.cfg.getBoolean("title.enabled")) {
             if (AdvancedLobby.placeholderApi) {
-                TitleApi.INSTANCE.sendTitle(p, 20, 40, 20, AdvancedLobby.getPlaceholderString(p, "title.title").replace("%player%", AdvancedLobby.getName(p)), AdvancedLobby.getPlaceholderString(p, "title.subtitle").replace("%player%", AdvancedLobby.getName(p)));
+                TitleApi.INSTANCE.sendTitle(p, 2, 6, 2, AdvancedLobby.getPlaceholderString(p, "title.title").replace("%player%", AdvancedLobby.getName(p)), AdvancedLobby.getPlaceholderString(p, "title.subtitle").replace("%player%", AdvancedLobby.getName(p)));
             } else {
-                TitleApi.INSTANCE.sendTitle(p, 20, 40, 20, AdvancedLobby.getString("title.title").replace("%player%", AdvancedLobby.getName(p)), AdvancedLobby.getString("title.subtitle").replace("%player%", AdvancedLobby.getName(p)));
+                TitleApi.INSTANCE.sendTitle(p, 2, 6, 2, AdvancedLobby.getString("title.title").replace("%player%", AdvancedLobby.getName(p)), AdvancedLobby.getString("title.subtitle").replace("%player%", AdvancedLobby.getName(p)));
             }
         }
 
