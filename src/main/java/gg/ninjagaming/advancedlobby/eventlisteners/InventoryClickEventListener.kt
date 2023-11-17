@@ -4,10 +4,10 @@ import de.cyne.advancedlobby.AdvancedLobby
 import de.cyne.advancedlobby.cosmetics.Cosmetics
 import de.cyne.advancedlobby.crossversion.VMaterial
 import de.cyne.advancedlobby.crossversion.VParticle
-import de.cyne.advancedlobby.inventories.Inventories
 import de.cyne.advancedlobby.itembuilder.ItemBuilder
 import de.cyne.advancedlobby.locale.Locale
 import de.cyne.advancedlobby.misc.LocationManager
+import gg.ninjagaming.advancedlobby.inventorybuilder.*
 import org.bukkit.Bukkit
 import org.bukkit.Material
 import org.bukkit.entity.Player
@@ -100,10 +100,10 @@ class InventoryClickEventListener: Listener {
     private fun cosmeticsClick(player: Player, event: InventoryClickEvent) {
 
         when(event.currentItem?.type){
-            Material.PUMPKIN -> Inventories.openCosmetics_hats(player)
-            Material.BLAZE_POWDER -> Inventories.openCosmetics_particles(player)
-            VMaterial.LEAD.type ->  Inventories.openCosmetics_balloons(player)
-            Material.FISHING_ROD -> Inventories.openCosmetics_gadgets(player)
+            Material.PUMPKIN -> CosmeticsHatsInventory.openInventory(player)
+            Material.BLAZE_POWDER -> CosmeticsParticlesInventory.openInventory(player)
+            VMaterial.LEAD.type ->  CosmeticsBalloonsInventory.openInventory(player)
+            Material.FISHING_ROD -> CosmeticsGadgetsInventory.openInventory(player)
 
             else -> {return}
         }
@@ -150,6 +150,7 @@ class InventoryClickEventListener: Listener {
             player.sendMessage(Locale.COSMETICS_PARTICLES_DISABLE_ERROR.getMessage(player))
             return
         }
+
 
         AdvancedLobby.playSound(player, player.location, "cosmetics.equip_cosmetic")
 
@@ -408,7 +409,7 @@ class InventoryClickEventListener: Listener {
 
     private fun validateCosmeticsClick(player: Player,event: InventoryClickEvent): Boolean{
         if (event.currentItem?.type == Material.BARRIER) {
-            Inventories.openCosmetics(player)
+            CosmeticsInventory.openInventory(player)
             AdvancedLobby.playSound(player, player.location, "cosmetics.change_page")
             return false
         }

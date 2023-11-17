@@ -4,10 +4,11 @@ import de.cyne.advancedlobby.AdvancedLobby;
 import de.cyne.advancedlobby.cosmetics.Cosmetics;
 import de.cyne.advancedlobby.crossversion.VMaterial;
 import de.cyne.advancedlobby.crossversion.VParticle;
-import de.cyne.advancedlobby.inventories.Inventories;
 import de.cyne.advancedlobby.itembuilder.ItemBuilder;
 import de.cyne.advancedlobby.locale.Locale;
 import de.cyne.advancedlobby.misc.HiderType;
+import gg.ninjagaming.advancedlobby.inventorybuilder.CompassInventory;
+import gg.ninjagaming.advancedlobby.inventorybuilder.CosmeticsInventory;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Effect;
@@ -57,7 +58,7 @@ public class PlayerInteractListener implements Listener {
                         if (AdvancedLobby.cfg.getBoolean("hotbar_items.teleporter.enabled")) {
                             e.setCancelled(true);
                             AdvancedLobby.playSound(p, p.getLocation(), "teleporter.open_inventory");
-                            Inventories.openCompassInventory(p);
+                            CompassInventory.INSTANCE.openInventory(p);
                             return;
                         }
                     }
@@ -73,7 +74,7 @@ public class PlayerInteractListener implements Listener {
                         if (AdvancedLobby.cfg.getBoolean("hotbar_items.cosmetics.enabled")) {
                             e.setCancelled(true);
                             AdvancedLobby.playSound(p, p.getLocation(), "cosmetics.open_inventory");
-                            Inventories.openCosmetics(p);
+                            CosmeticsInventory.INSTANCE.openInventory(p);
                             return;
                         }
                     }
