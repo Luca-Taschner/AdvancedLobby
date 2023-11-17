@@ -204,7 +204,7 @@ inventories:
       spawn:
         material: MAGMA_CREAM
         slot: 31
-        displayname: '&8● &bSpawn'
+        displayname: '§8● §bSpawn'
         lore:
           - '&8&m---------------'
           - ' &8» &7Click to teleport'
@@ -222,7 +222,7 @@ inventories:
     gadgets:
       displayname: '&bGadgets'
       lore: []
-    ballons:
+    balloons:
       displayname: '&bBalloons'
       lore: []
 
