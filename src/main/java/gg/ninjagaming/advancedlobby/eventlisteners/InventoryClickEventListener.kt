@@ -57,7 +57,7 @@ class InventoryClickEventListener: Listener {
             if (event.currentItem?.type != material)
                 return@forEach
 
-            val location = LocationManager.getLocation("inventories.teleporter.items.$it.location")
+            val location = LocationManager.getLocation(AdvancedLobby.cfg.getString("inventories.teleporter.items.$it.location"))
 
             if (location == null){
                 player.closeInventory()
