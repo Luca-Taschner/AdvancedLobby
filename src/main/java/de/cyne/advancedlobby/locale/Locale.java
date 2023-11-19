@@ -17,6 +17,7 @@ public enum Locale {
 
     COMPASS_LOC_NOT_FOUND("teleporter.location_not_found"),
     COMPASS_LOC_NOT_FOUND_ADMIN("teleporter.location_not_found_admin"),
+    COMPASS_EXEC_NOT_FOUND("teleporter.executions_not_fount_admin"),
 
     HIDER_SHOW_ALL("player_hider.show_all"),
     HIDER_SHOW_VIP("player_hider.show_vip"),

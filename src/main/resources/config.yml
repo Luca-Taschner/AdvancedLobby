@@ -199,7 +199,15 @@ inventories:
     #  - '&8&m---------------'
     #  - ' &8» &7Click to teleport'
     #  slot: 13
-    #  location: 'example'
+    #  execute:
+    #    0:
+    #      message: 'Teleporting you to Freebuild...'
+    #    1:
+    #      delay: 1
+    #    2:
+    #      location: 'freebuild'
+    #Possible Execute types: message <string>, delay <int>, location <string>, command <string>, console_command <string>, server <string>, cloudNet_service <string>
+    #⮟ Placeholders: %player%: Player name; PlaceholderAPI
     items:
       spawn:
         material: MAGMA_CREAM
@@ -209,7 +217,9 @@ inventories:
           - '&8&m---------------'
           - ' &8» &7Click to teleport'
         subid: 0
-        location: 'spawn'
+        execute:
+          0:
+            location: 'spawn'
   #Cosmetics inventory
   cosmetics:
     title: '&dCosmetics'

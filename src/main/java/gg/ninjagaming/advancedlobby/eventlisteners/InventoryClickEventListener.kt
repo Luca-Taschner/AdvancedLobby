@@ -57,43 +57,26 @@ class InventoryClickEventListener: Listener {
             if (event.currentItem?.type != material)
                 return@forEach
 
-            val location = LocationManager.getLocation(AdvancedLobby.cfg.getString("inventories.teleporter.items.$it.location"))
+            val itemExecutionNode = "inventories.teleporter.items.$it.execute"
 
-            if (location == null){
-                player.closeInventory()
+            val itemExecutionKeys = AdvancedLobby.cfg.getConfigurationSection(itemExecutionNode)?.getKeys(false)
 
-                if(player.hasPermission("advancedlobby.admin")) {
-                    player.sendMessage(
-                        Locale.COMPASS_LOC_NOT_FOUND_ADMIN.getMessage(player).replace(
-                            "%location%",
-                            AdvancedLobby.cfg.getString("inventories.teleporter.items.$it.location")!!
-                        ))
-                    return@forEach
-                }
-                player.sendMessage(
-                    Locale.COMPASS_LOC_NOT_FOUND.getMessage(player).replace(
-                        "%location%",
-                        AdvancedLobby.cfg.getString("inventories.teleporter.items.$it.location")!!
-                    )
-                )
+
+            if (itemExecutionKeys == null)
+            {
+                if(player.hasPermission("advancedlobby.admin"))
+                    player.sendMessage(Locale.COMPASS_EXEC_NOT_FOUND.getMessage(player))
+
+                val locationString = AdvancedLobby.cfg.getString("inventories.teleporter.items.$it.location")?: "spawn"
+                locationExecution(player,locationString)
+
                 return@forEach
+
             }
 
-            player.teleport(location)
-            AdvancedLobby.playSound(player, player.location, "teleporter.teleport")
-            VParticle.spawnParticle(player, "SPELL_WITCH", location, 64, 0.0, 0.0, 0.0, 0.1)
+            player.closeInventory()
 
-            val players = Bukkit.getOnlinePlayers()
-
-            players.forEach {itPlayer: Player ->
-                if (itPlayer != player)
-                {
-                    if(!AdvancedLobby.playerHider.containsKey(itPlayer) && !AdvancedLobby.silentLobby.contains(itPlayer) && !AdvancedLobby.silentLobby.contains(player))
-                    {
-                        VParticle.spawnParticle(itPlayer, "SPELL_WITCH", location, 64, 0.0, 0.0, 0.0, 0.1)
-                    }
-                }
-            }
+            handleMessageExecutions(player,event,itemExecutionKeys, itemExecutionNode)
         }
     }
 
@@ -418,6 +401,94 @@ class InventoryClickEventListener: Listener {
         if (event.currentItem?.type == Material.AIR) return false
 
         return true
+    }
+
+    private fun handleMessageExecutions(player: Player, event: InventoryClickEvent, itemExecutions: Set<String>, currentItemExecutionNode: String){
+        itemExecutions.forEach{
+
+            val executionSubNodes = AdvancedLobby.cfg.getConfigurationSection("$currentItemExecutionNode.$it")?.getValues(false)?.toList() ?: return@forEach
+
+            executionSubNodes.forEach{ pairIt: Pair<String, Any> ->
+                when(pairIt.first){
+                    "message" -> messageExecution(player, pairIt.second.toString())
+                    "command" -> commandExecution(player, pairIt.second.toString())
+                    "console_command" -> consoleCommandExecution(player, pairIt.second.toString())
+                    "location" -> locationExecution(player, AdvancedLobby.cfg.getString("inventories.teleporter.items.$it.location")?: "spawn")
+                    "delay" -> delayExecution(pairIt.second as Int)
+                    "server" -> serverExecution(player, pairIt.second.toString())
+                }
+            }
+        }
+    }
+
+    private fun messageExecution(player: Player, message: String){
+        message.replace("%player%", player.name)
+        player.sendMessage(message)
+    }
+
+    private fun commandExecution(player: Player, command: String){
+        command.replace("%player%", player.name)
+        player.performCommand(command)
+    }
+
+    private fun consoleCommandExecution(player: Player, command: String){
+        command.replace("%player%", player.name)
+        AdvancedLobby.getInstance().server.dispatchCommand(Bukkit.getConsoleSender(), command)
+    }
+
+    private fun locationExecution(player: Player, locationString: String){
+        val location= LocationManager.getLocation(locationString)
+
+        if (location == null){
+            if(player.hasPermission("advancedlobby.admin")) {
+                player.sendMessage(
+                    Locale.COMPASS_LOC_NOT_FOUND_ADMIN.getMessage(player).replace(
+                        "%location%",
+                        locationString
+                    ))
+                return
+            }
+            player.sendMessage(
+                Locale.COMPASS_LOC_NOT_FOUND.getMessage(player).replace(
+                    "%location%",
+                    locationString
+                )
+            )
+            return
+        }
+
+        player.teleport(location)
+        AdvancedLobby.playSound(player, player.location, "teleporter.teleport")
+        VParticle.spawnParticle(player, "SPELL_WITCH", location, 64, 0.0, 0.0, 0.0, 0.1)
+
+        val players = Bukkit.getOnlinePlayers()
+
+        players.forEach {itPlayer: Player ->
+            if (itPlayer == player)
+                return@forEach
+
+            if(AdvancedLobby.playerHider.containsKey(itPlayer) || AdvancedLobby.silentLobby.contains(itPlayer) || AdvancedLobby.silentLobby.contains(player))
+                return@forEach
+
+            VParticle.spawnParticle(itPlayer, "SPELL_WITCH", location, 64, 0.0, 0.0, 0.0, 0.1)
+        }
+
+    }
+
+    private fun delayExecution(delay: Int){
+        Thread.sleep(delay.toLong()*500)
+    }
+
+    private fun serverExecution(player: Player, server: String){
+
+
+        Bukkit.getServer().sendPluginMessage(AdvancedLobby.getInstance(), "BungeeCord", "GetServers".toByteArray())
+
+        try {
+            //player.sendPluginMessage(AdvancedLobby.getInstance(), "BungeeCord", "Connect $server".toByteArray())
+            Bukkit.getServer().sendPluginMessage(AdvancedLobby.getInstance(), "BungeeCord", "ConnectOther".toByteArray() + player.name.toByteArray()+  server.toByteArray())
+        }catch (e: Exception){
+            println(e)}
     }
 
 
