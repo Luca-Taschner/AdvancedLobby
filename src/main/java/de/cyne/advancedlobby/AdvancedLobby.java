@@ -98,6 +98,8 @@ public class AdvancedLobby extends JavaPlugin {
         this.registerCommands();
         this.registerListener();
 
+        this.getServer().getMessenger().registerOutgoingPluginChannel(this, "BungeeCord");
+
         Cosmetics.startBalloonTask();
 
         metrics = new Metrics(AdvancedLobby.getInstance(), 7014);

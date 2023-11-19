@@ -1,5 +1,7 @@
 package gg.ninjagaming.advancedlobby.eventlisteners
 
+import com.google.common.io.ByteArrayDataOutput
+import com.google.common.io.ByteStreams
 import de.cyne.advancedlobby.AdvancedLobby
 import de.cyne.advancedlobby.cosmetics.Cosmetics
 import de.cyne.advancedlobby.crossversion.VMaterial
@@ -480,13 +482,12 @@ class InventoryClickEventListener: Listener {
     }
 
     private fun serverExecution(player: Player, server: String){
-
-
-        Bukkit.getServer().sendPluginMessage(AdvancedLobby.getInstance(), "BungeeCord", "GetServers".toByteArray())
-
         try {
-            //player.sendPluginMessage(AdvancedLobby.getInstance(), "BungeeCord", "Connect $server".toByteArray())
-            Bukkit.getServer().sendPluginMessage(AdvancedLobby.getInstance(), "BungeeCord", "ConnectOther".toByteArray() + player.name.toByteArray()+  server.toByteArray())
+            val out: ByteArrayDataOutput = ByteStreams.newDataOutput()
+            out.writeUTF("Connect")
+            out.writeUTF(server)
+
+            player.sendPluginMessage(AdvancedLobby.getInstance(), "BungeeCord", out.toByteArray())
         }catch (e: Exception){
             println(e)}
     }
