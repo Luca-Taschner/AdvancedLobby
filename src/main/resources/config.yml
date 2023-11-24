@@ -336,5 +336,5 @@ inventories:
       displayname: '&bGrappling hook'
       lore: []
     rocket_jump_gadget:
-      displayname: '&bRocket jump'
+      displayname: 'Rocket jump'
       lore: []

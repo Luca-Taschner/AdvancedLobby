@@ -1,8 +1,18 @@
 package gg.ninjagaming.advancedlobby.eventlisteners
 
 import de.cyne.advancedlobby.AdvancedLobby
+import de.cyne.advancedlobby.cosmetics.Cosmetics
+import de.cyne.advancedlobby.crossversion.VParticle
+import de.cyne.advancedlobby.itembuilder.ItemBuilder
+import de.cyne.advancedlobby.locale.Locale
+import de.cyne.advancedlobby.misc.HiderType
 import gg.ninjagaming.advancedlobby.inventorybuilder.CompassInventory
 import gg.ninjagaming.advancedlobby.inventorybuilder.CosmeticsInventory
+import gg.ninjagaming.advancedlobby.misc.CooldownManager
+import gg.ninjagaming.advancedlobby.misc.CooldownType
+import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer
+import org.bukkit.Bukkit
+import org.bukkit.Effect
 import org.bukkit.Material
 import org.bukkit.entity.Player
 import org.bukkit.event.EventHandler
@@ -10,8 +20,53 @@ import org.bukkit.event.Listener
 import org.bukkit.event.block.Action
 import org.bukkit.event.player.PlayerInteractEvent
 import org.bukkit.inventory.ItemStack
-
+import org.bukkit.potion.PotionEffect
+import org.bukkit.potion.PotionEffectType
+import org.bukkit.util.Vector
 class PlayerInteractListener: Listener {
+
+    private val itemStackPlayerHiderShowAll = ItemBuilder(
+        AdvancedLobby.getMaterial("hotbar_items.player_hider.show_all.material"), 1,
+        AdvancedLobby.cfg.getInt("hotbar_items.player_hider.show_all.subid").toShort())
+        .setDisplayName(AdvancedLobby.getString("hotbar_items.player_hider.show_all.displayname"))
+        .setLobbyItemLore(AdvancedLobby.cfg.getStringList("hotbar_items.player_hider.show_all.lore"))
+
+    private val itemStackPlayerHiderShowVIP = ItemBuilder(
+        AdvancedLobby.getMaterial("hotbar_items.player_hider.show_vip.material"), 1,
+        AdvancedLobby.cfg.getInt("hotbar_items.player_hider.show_vip.subid").toShort())
+        .setDisplayName(AdvancedLobby.getString("hotbar_items.player_hider.show_vip.displayname"))
+        .setLobbyItemLore(AdvancedLobby.cfg.getStringList("hotbar_items.player_hider.show_vip.lore"))
+
+    private val itemStackPlayerHiderShowNone = ItemBuilder(
+        AdvancedLobby.getMaterial("hotbar_items.player_hider.show_none.material"), 1,
+        AdvancedLobby.cfg.getInt("hotbar_items.player_hider.show_none.subid").toShort())
+        .setDisplayName(AdvancedLobby.getString("hotbar_items.player_hider.show_none.displayname"))
+        .setLobbyItemLore(AdvancedLobby.cfg.getStringList("hotbar_items.player_hider.show_none.lore"))
+
+    private val itemStackSilentLobbyActivate = ItemBuilder(
+        AdvancedLobby.getMaterial("hotbar_items.silentlobby.activated.material"), 1,
+        AdvancedLobby.cfg.getInt("hotbar_items.silentlobby.activated.subid").toShort())
+        .setDisplayName(AdvancedLobby.getString("hotbar_items.silentlobby.activated.displayname"))
+        .setLobbyItemLore(AdvancedLobby.cfg.getStringList("hotbar_items.silentlobby.activated.lore"))
+
+    private val itemStackSilentLobbyDeactivate = ItemBuilder(
+        AdvancedLobby.getMaterial("hotbar_items.silentlobby.deactivated.material"), 1,
+        AdvancedLobby.cfg.getInt("hotbar_items.silentlobby.deactivated.subid").toShort())
+        .setDisplayName(AdvancedLobby.getString("hotbar_items.silentlobby.deactivated.displayname"))
+        .setLobbyItemLore(AdvancedLobby.cfg.getStringList("hotbar_items.silentlobby.deactivated.lore"))
+
+    private val itemStackShieldActivate = ItemBuilder(
+        AdvancedLobby.getMaterial("hotbar_items.shield.activated.material"), 1,
+        AdvancedLobby.cfg.getInt("hotbar_items.shield.activated.subid").toShort())
+        .setDisplayName(AdvancedLobby.getString("hotbar_items.shield.activated.displayname"))
+        .setLobbyItemLore(AdvancedLobby.cfg.getStringList("hotbar_items.shield.activated.lore"))
+
+    private val itemStackShieldDeactivate = ItemBuilder(
+        AdvancedLobby.getMaterial("hotbar_items.shield.deactivated.material"), 1,
+        AdvancedLobby.cfg.getInt("hotbar_items.shield.deactivated.subid").toShort())
+        .setDisplayName(AdvancedLobby.getString("hotbar_items.shield.deactivated.displayname"))
+        .setLobbyItemLore(AdvancedLobby.cfg.getStringList("hotbar_items.shield.deactivated.lore"))
+
 
     private val blockedMaterials = arrayOf(
         Material.CHEST,
@@ -62,7 +117,7 @@ class PlayerInteractListener: Listener {
     fun onPlayerInteract(event: PlayerInteractEvent) {
         val player = event.player
 
-        if(!AdvancedLobby.multiWorld_mode || !AdvancedLobby.lobbyWorlds.contains(player.world))
+        if(AdvancedLobby.multiWorld_mode && !AdvancedLobby.lobbyWorlds.contains(player.world))
             return
 
         if (event.action == Action.PHYSICAL)
@@ -98,14 +153,14 @@ class PlayerInteractListener: Listener {
             AdvancedLobby.getMaterial("hotbar_items.teleporter.material") -> compassAction(player, event, itemStack)
             AdvancedLobby.getMaterial("hotbar_items.cosmetics.material") -> cosmeticsAction(player, event, itemStack)
             Material.FEATHER -> gadgetsAction(player, event, itemStack)
-            AdvancedLobby.getMaterial("hotbar_items.player_hider.show_all_material") -> hiderAction(player, event)
-            AdvancedLobby.getMaterial("hotbar_items.player_hider.show_vip.material") -> hiderAction(player, event)
-            AdvancedLobby.getMaterial("hotbar_items.player_hider.show_none.material") -> hiderAction(player, event)
-            AdvancedLobby.getMaterial("hotbar_items.silent_lobby.activated.material") -> silentLobbyAction(player, event)
-            AdvancedLobby.getMaterial("hotbar_items.silent_lobby.deactivated.material") -> silentLobbyAction(player, event)
-            AdvancedLobby.getMaterial("hotbar_items.shield.activated.material") -> shieldAction(player, event)
-            AdvancedLobby.getMaterial("hotbar_items.shield.deactivated.material") -> shieldAction(player, event)
-            AdvancedLobby.getMaterial("hotbar_items.custom_item.material") -> customItemAction(player, event)
+            AdvancedLobby.getMaterial("hotbar_items.player_hider.show_all.material") -> hiderAction(player, event, itemStack)
+            Material.getMaterial(AdvancedLobby.cfg.getString("hotbar_items.player_hider.show_vip.material")!!) -> hiderAction(player, event, itemStack)
+            Material.getMaterial(AdvancedLobby.cfg.getString("hotbar_items.player_hider.show_none.material")!!) -> hiderAction(player, event, itemStack)
+            AdvancedLobby.getMaterial("hotbar_items.silentlobby.activated.material") -> silentLobbyAction(player, event, itemStack)
+            AdvancedLobby.getMaterial("hotbar_items.silentlobby.deactivated.material") -> silentLobbyAction(player, event, itemStack)
+            AdvancedLobby.getMaterial("hotbar_items.shield.activated.material") -> shieldAction(player, event, itemStack)
+            AdvancedLobby.getMaterial("hotbar_items.shield.deactivated.material") -> shieldAction(player, event ,itemStack)
+            AdvancedLobby.getMaterial("hotbar_items.custom_item.material") -> customItemAction(player, event, itemStack)
             else -> return
 
         }
@@ -113,7 +168,12 @@ class PlayerInteractListener: Listener {
     }
 
     private fun compassAction(player: Player, event: PlayerInteractEvent, item: ItemStack) {
-        if (!item.hasItemMeta() || item.itemMeta.displayName()?.equals(AdvancedLobby.getString("hotbar_items.teleporter.displayname")) == false)
+
+        val itemDisplayName= item.itemMeta.displayName() ?: return
+
+        val legacyItemName = LegacyComponentSerializer.legacySection().serialize(itemDisplayName)
+
+        if (legacyItemName != AdvancedLobby.getString("hotbar_items.teleporter.displayname"))
             return
 
         event.isCancelled = true
@@ -123,7 +183,11 @@ class PlayerInteractListener: Listener {
     }
 
     private fun cosmeticsAction(player: Player, event: PlayerInteractEvent, item:ItemStack) {
-        if (!item.hasItemMeta() || item.itemMeta.displayName()?.equals(AdvancedLobby.getString("hotbar_items.cosmetics.displayname")) == false)
+        val itemDisplayName= item.itemMeta.displayName() ?: return
+
+        val legacyItemName = LegacyComponentSerializer.legacySection().serialize(itemDisplayName)
+
+        if (legacyItemName != AdvancedLobby.getString("hotbar_items.cosmetics.displayname"))
             return
 
         event.isCancelled = true
@@ -132,22 +196,320 @@ class PlayerInteractListener: Listener {
     }
 
     private fun gadgetsAction(player: Player, event: PlayerInteractEvent, item: ItemStack) {
+        val itemDisplayName= item.itemMeta.displayName() ?: return
+
+        val legacyItemName = LegacyComponentSerializer.legacySection().serialize(itemDisplayName)
+
+
+        val itemName =  AdvancedLobby.getString("hotbar_items.gadget.equipped.displayname").replace("%gadget%", AdvancedLobby.getString("inventories.cosmetics_gadgets.rocket_jump_gadget.displayname"))
+        if (legacyItemName != itemName)
+            return
+
+        if (!AdvancedLobby.cfg.getBoolean("hotbar_items.gadget.enabled"))
+            return
+
+        event.isCancelled = true
+
+        if (Cosmetics.gadgetReloading.contains(player)){
+            AdvancedLobby.playSound(player, player.location, "gadgets.reload_gadget")
+            return
+        }
+
+        AdvancedLobby.playSound(player, player.location, "gadgets.rocket_jump")
+        VParticle.spawnParticle(player, "EXPLOSION_LARGE", player.location, 1)
+
+        val players = Bukkit.getOnlinePlayers()
+        players.forEach{
+            if (AdvancedLobby.silentLobby.contains(it) || AdvancedLobby.silentLobby.contains(player) || AdvancedLobby.playerHider.containsKey(it))
+                return
+
+            AdvancedLobby.playSound(it, player.location, "gadgets.rocket_jump")
+            VParticle.spawnParticle(it, "EXPLOSION_LARGE", player.location, 1)
+        }
+
+        player.velocity.add(Vector(0.0, 1.0, 0.0))
+    }
+
+    private fun hiderAction(player: Player, event: PlayerInteractEvent, item: ItemStack) {
+        if (!item.hasItemMeta())
+            return
+
+        val itemDisplayName= item.itemMeta.displayName() ?: return
+
+        val legacyItemName = LegacyComponentSerializer.legacySection().serialize(itemDisplayName)
+
+        if (legacyItemName != AdvancedLobby.getString("hotbar_items.player_hider.show_vip.displayname") && legacyItemName != AdvancedLobby.getString("hotbar_items.player_hider.show_none.displayname") && legacyItemName != AdvancedLobby.getString("hotbar_items.player_hider.show_all.displayname"))
+            return
+
+
+        if (!AdvancedLobby.cfg.getBoolean("hotbar_items.player_hider.enabled"))
+            return
+
+        event.isCancelled = true
+
+        if (!CooldownManager.tryCooldown(player.uniqueId, CooldownType.HIDER, 1))
+            return
+
+        if (AdvancedLobby.silentLobby.contains(player)){
+            player.sendMessage(Locale.SILENTLOBBY_FUNCTION_BLOCKED.getMessage(player))
+            return
+        }
+
+
+        AdvancedLobby.playSound(player, player.location, "player_hider")
+        player.addPotionEffect(PotionEffect(PotionEffectType.BLINDNESS, 20, 0))
+        if (AdvancedLobby.playerHider.containsKey(player)){
+            when(AdvancedLobby.playerHider[player]){
+                HiderType.NONE-> playerHiderNoneAction(player)
+                HiderType.VIP-> playerHiderVIPAction(player)
+                else -> return
+            }
+            return
+        }
+        playerHiderAllAction(player)
+
 
     }
 
-    private fun hiderAction(player: Player, event: PlayerInteractEvent) {
+    private fun playerHiderNoneAction(player: Player){
+        AdvancedLobby.playerHider.remove(player)
+
+        player.sendMessage(Locale.HIDER_SHOW_ALL.getMessage(player))
+        player.inventory.setItemInMainHand(itemStackPlayerHiderShowAll)
+
+        val players = Bukkit.getOnlinePlayers()
+        players.forEach{
+            if (it == player)
+                return
+
+            it.showPlayer(AdvancedLobby.getInstance(), player)
+        }
+
 
     }
 
-    private fun silentLobbyAction(player: Player, event: PlayerInteractEvent) {
+    private fun playerHiderVIPAction(player: Player){
+        AdvancedLobby.playerHider[player] = HiderType.NONE
+
+        player.sendMessage(Locale.HIDER_SHOW_NONE.getMessage(player))
+        player.inventory.setItemInMainHand(itemStackPlayerHiderShowNone)
+
+        val players = Bukkit.getOnlinePlayers()
+        players.forEach{
+            if (it == player)
+                return
+
+            it.hidePlayer(AdvancedLobby.getInstance(), player)
+        }
+    }
+
+    private fun playerHiderAllAction(player: Player){
+        AdvancedLobby.playerHider[player] = HiderType.VIP
+
+        player.sendMessage(Locale.HIDER_SHOW_VIP.getMessage(player))
+        player.inventory.setItemInMainHand(itemStackPlayerHiderShowVIP)
+
+        val players = Bukkit.getOnlinePlayers()
+        players.forEach{
+            if (it == player)
+                return
+
+            it.hidePlayer(AdvancedLobby.getInstance(), player)
+        }
+    }
+    private fun silentLobbyAction(player: Player, event: PlayerInteractEvent, item: ItemStack) {
+        if (!item.hasItemMeta())
+            return
+
+        val itemDisplayName= item.itemMeta.displayName() ?: return
+
+        val legacyItemName = LegacyComponentSerializer.legacySection().serialize(itemDisplayName)
+
+        if (legacyItemName != AdvancedLobby.getString("hotbar_items.silentlobby.activated.displayname") && legacyItemName != AdvancedLobby.getString("hotbar_items.silentlobby.deactivated.displayname"))
+            return
+
+        if (!AdvancedLobby.cfg.getBoolean("hotbar_items.silentlobby.enabled"))
+            return
+
+        event.isCancelled = true
+
+        if (!CooldownManager.tryCooldown(player.uniqueId, CooldownType.SILENT_LOBBY, 1))
+            return
+
+        if (AdvancedLobby.silentLobby.contains(player)){
+            silentLobbyRemovePlayer(player)
+            return
+        }
+
+        silentLobbyAddPlayer(player)
+    }
+
+    private fun silentLobbyAddPlayer(player: Player){
+        AdvancedLobby.silentLobby.add(player)
+        AdvancedLobby.playerHider[player] = HiderType.NONE
+
+        player.sendMessage(Locale.SILENTLOBBY_JOIN.getMessage(player))
+        AdvancedLobby.playSound(player, player.location, "silentlobby.enable_silentlobby")
+
+        VParticle.spawnParticle(player, "EXPLOSION_HUGE", player.location, 1)
+        player.addPotionEffect(PotionEffect(PotionEffectType.BLINDNESS, 20, 0))
+
+        val players = Bukkit.getOnlinePlayers()
+        players.forEach{
+            if (it == player)
+                return
+
+            it.hidePlayer(AdvancedLobby.getInstance(), player)
+            player.hidePlayer(AdvancedLobby.getInstance(), it)
+        }
+
+        player.inventory.setItemInMainHand(itemStackSilentLobbyActivate)
+        player.inventory.setItem(AdvancedLobby.cfg.getInt("hotbar_items.player_hider.slot"), itemStackPlayerHiderShowNone)
+
+        if (Cosmetics.balloons.containsKey(player)) {
+            Bukkit.getScheduler().scheduleSyncDelayedTask(AdvancedLobby.getInstance(),
+                { Cosmetics.balloons[player]!!.remove() }, 5L
+            )
+        }
+    }
+
+    private fun silentLobbyRemovePlayer(player: Player){
+        AdvancedLobby.silentLobby.remove(player)
+        AdvancedLobby.playerHider.remove(player)
+
+        player.sendMessage(Locale.SILENTLOBBY_LEAVE.getMessage(player))
+        AdvancedLobby.playSound(player, player.location, "silentlobby.disable_silentlobby")
+        player.addPotionEffect(PotionEffect(PotionEffectType.BLINDNESS, 20, 0))
+
+        player.inventory.setItemInMainHand(itemStackSilentLobbyDeactivate)
+        player.inventory.setItem(AdvancedLobby.cfg.getInt("hotbar_items.player_hider.slot"), itemStackPlayerHiderShowAll)
+
+        val players = Bukkit.getOnlinePlayers()
+        players.forEach{
+            if (it == player)
+                return
+
+            it.showPlayer(AdvancedLobby.getInstance(), player)
+            player.showPlayer(AdvancedLobby.getInstance(), it)
+
+            if (!AdvancedLobby.silentLobby.contains(it))
+                return
+
+            if (!AdvancedLobby.playerHider.containsKey(it)){
+                it.showPlayer(AdvancedLobby.getInstance(), player)
+                player.showPlayer(AdvancedLobby.getInstance(), it)
+                return
+            }
+
+            if (AdvancedLobby.playerHider[it] == HiderType.VIP && player.hasPermission("advancedlobby.player_hider.bypass")){
+                it.showPlayer(AdvancedLobby.getInstance(), player)
+            }
+
+            if (AdvancedLobby.playerHider[it] == HiderType.NONE){
+                it.showPlayer(AdvancedLobby.getInstance(), player)
+            }
+
+            player.showPlayer(AdvancedLobby.getInstance(), it)
+        }
+    }
+
+
+    private fun shieldAction(player: Player, event: PlayerInteractEvent, item: ItemStack) {
+        if (!item.hasItemMeta())
+            return
+
+        val itemDisplayName= item.itemMeta.displayName() ?: return
+
+        val legacyItemName = LegacyComponentSerializer.legacySection().serialize(itemDisplayName)
+
+        if (legacyItemName != AdvancedLobby.getString("hotbar_items.shield.activated.displayname") && legacyItemName != AdvancedLobby.getString("hotbar_items.shield.deactivated.displayname"))
+            return
+
+
+        if (!AdvancedLobby.cfg.getBoolean("hotbar_items.shield.enabled"))
+            return
+
+        event.isCancelled = true
+
+        if (!CooldownManager.tryCooldown(player.uniqueId, CooldownType.SHIELD, 1))
+            return
+
+
+        if (!AdvancedLobby.shield.contains(player)){
+            shieldActivate(player)
+            return
+        }
+
+        shieldDeactivate(player)
+    }
+
+    private fun shieldActivate(player: Player) {
+        AdvancedLobby.shield.add(player)
+        AdvancedLobby.playSound(player, player.location, "shield.enable_shield")
+        player.sendMessage(Locale.SHIELD_ACTIVATE.getMessage(player))
+        player.inventory.setItemInMainHand(itemStackShieldActivate)
+
+        val entities = player.getNearbyEntities(2.5, 2.5, 2.5)
+        entities.forEach{ itEntity ->
+            if (itEntity !is Player)
+                return
+
+            if (itEntity.hasMetadata("NPC") || AdvancedLobby.silentLobby.contains(player) || AdvancedLobby.silentLobby.contains(itEntity))
+                return
+
+            if (itEntity.hasPermission("advancedlobby.shield.bypass"))
+                return
+
+            val nearbyPlayerVector: Vector = itEntity.location.toVector()
+            val playerVector: Vector = player.location.toVector()
+            val velocity = nearbyPlayerVector.clone().subtract(playerVector).normalize().multiply(0.5).setY(0.25)
+            itEntity.velocity = velocity
+
+            player.playEffect(player.location, Effect.ENDER_SIGNAL, "")
+
+            val players = Bukkit.getOnlinePlayers()
+            players.forEach{ itPlayer ->
+                if (itPlayer == player)
+                    return
+
+                if (AdvancedLobby.silentLobby.contains(player) || AdvancedLobby.silentLobby.contains(itPlayer))
+                    return
+
+                if (itEntity.hasPermission("advancedlobby.shield.bypass"))
+                    return
+
+                itPlayer.playEffect(player.location, Effect.ENDER_SIGNAL, "")
+            }
+
+        }
+    }
+
+    private fun shieldDeactivate(player: Player) {
+        AdvancedLobby.shield.remove(player)
+        AdvancedLobby.playSound(player, player.location, "shield.disable_shield")
+        player.sendMessage(Locale.SHIELD_DEACTIVATE.getMessage(player))
+        player.inventory.setItemInMainHand(itemStackShieldDeactivate)
+    }
+
+    private fun customItemAction(player: Player, event: PlayerInteractEvent, item: ItemStack) {
+        if (!item.hasItemMeta())
+            return
+
+        val itemDisplayName= item.itemMeta.displayName() ?: return
+
+        val legacyItemName = LegacyComponentSerializer.legacySection().serialize(itemDisplayName)
+
+        if (legacyItemName != AdvancedLobby.getString("hotbar_items.custom_item.displayname"))
+            return
+
+        event.isCancelled = true
+
+        if (AdvancedLobby.cfg.getString("hotbar_items.custom_item.command") == null)
+            return
+
+        val commandString = AdvancedLobby.cfg.getString("hotbar_items.custom_item.command")?: return
+        player.performCommand(commandString)
 
     }
 
-    private fun shieldAction(player: Player, event: PlayerInteractEvent) {
-
-    }
-
-    private fun customItemAction(player: Player, event: PlayerInteractEvent) {
-
-    }
 }

@@ -7,6 +7,7 @@ import de.cyne.advancedlobby.metrics.Metrics;
 import de.cyne.advancedlobby.misc.HiderType;
 import de.cyne.advancedlobby.misc.Updater;
 import gg.ninjagaming.advancedlobby.eventlisteners.InventoryClickEventListener;
+import gg.ninjagaming.advancedlobby.eventlisteners.PlayerInteractListener;
 import gg.ninjagaming.advancedlobby.runnables.ActionBarRunnable;
 import me.clip.placeholderapi.PlaceholderAPI;
 import org.bukkit.*;
@@ -255,12 +256,12 @@ public class AdvancedLobby extends JavaPlugin {
             Material material = Material.getMaterial(AdvancedLobby.cfg.getString(materialString));
             if (material == null) {
                 AdvancedLobby.errors.put(materialString, ErrorType.MATERIAL);
-                return Material.BARRIER;
+                return Material.AIR;
             }
             return material;
         } catch (Exception ex) {
             AdvancedLobby.errors.put(materialString, ErrorType.MATERIAL);
-            return Material.BARRIER;
+            return Material.AIR;
         }
     }
 

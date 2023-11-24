@@ -11,11 +11,11 @@ object CooldownManager {
         return if (expireTime != null) expireTime - System.currentTimeMillis() else Long.MIN_VALUE
     }
 
-    fun getCooldown(uuid: UUID, key: CooldownType?): Long {
+    private fun getCooldown(uuid: UUID, key: CooldownType?): Long {
         return calculateCooldownRemainder(cooldownTable.get(uuid.toString(), key))
     }
 
-    fun setCooldown(uuid: UUID, key: CooldownType?, delay: Long): Long {
+    private fun setCooldown(uuid: UUID, key: CooldownType?, delay: Long): Long {
         return calculateCooldownRemainder(cooldownTable.put(uuid.toString(), key, System.currentTimeMillis() + delay * 1000))
     }
 
