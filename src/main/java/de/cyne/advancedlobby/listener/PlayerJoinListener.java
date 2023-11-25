@@ -153,7 +153,7 @@ public class PlayerJoinListener implements Listener {
                         AdvancedLobby.cfg.getString("hotbar_items.silentlobby.deactivated.displayname")))
                 .setLobbyItemLore(AdvancedLobby.cfg.getStringList("hotbar_items.silentlobby.deactivated.lore"));
 
-        if (AdvancedLobby.cfg.getBoolean("hotbar_items.silentlobby.enabled") && p.hasPermission("advancedlobby.silentlobby")) {
+        if (AdvancedLobby.cfg.getBoolean("hotbar_items.silentlobby.enabled") && p.hasPermission("advancedlobby.silentlobby") && AdvancedLobby.cfg.getBoolean("hotbar_items.silentlobby.inHotbar")) {
             p.getInventory().setItem(AdvancedLobby.cfg.getInt("hotbar_items.silentlobby.slot"), silentlobby);
         }
 

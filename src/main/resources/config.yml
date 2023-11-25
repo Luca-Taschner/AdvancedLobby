@@ -150,6 +150,7 @@ hotbar_items:
       lore: []
   silentlobby:
     enabled: true
+    inHotbar: true
     slot: 3
     activated:
       material: TNT

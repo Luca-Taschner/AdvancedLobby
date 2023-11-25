@@ -2,10 +2,8 @@ package gg.ninjagaming.advancedlobby.inventorybuilder
 
 import de.cyne.advancedlobby.AdvancedLobby
 import de.cyne.advancedlobby.itembuilder.ItemBuilder
+import gg.ninjagaming.advancedlobby.misc.SilentLobby
 import net.kyori.adventure.text.Component
-import net.kyori.adventure.text.minimessage.MiniMessage
-import net.kyori.adventure.text.minimessage.tag.resolver.TagResolver
-import net.kyori.adventure.text.minimessage.tag.standard.StandardTags
 import org.bukkit.Bukkit
 import org.bukkit.Material
 import org.bukkit.entity.Player
@@ -17,7 +15,19 @@ object CompassInventory{
 
     fun openInventory(player: Player)
     {
-        player.openInventory(compassInventory)
+        val inventory = compassInventory
+
+        if (AdvancedLobby.cfg.getBoolean("hotbar_items.silentlobby.enabled") && !AdvancedLobby.cfg.getBoolean("hotbar_items.silentlobby.inHotbar")) {
+            if (AdvancedLobby.silentLobby.contains(player))
+            {
+                inventory.setItem(AdvancedLobby.cfg.getInt("hotbar_items.silentlobby.slot"), SilentLobby.itemStackSilentLobbyActivate)
+            } else {
+                inventory.setItem(AdvancedLobby.cfg.getInt("hotbar_items.silentlobby.slot"), SilentLobby.itemStackSilentLobbyDeactivate)
+            }
+        }
+
+
+        player.openInventory(inventory)
     }
 
     fun updateInventory()
@@ -48,6 +58,10 @@ object CompassInventory{
 
 
         }
+
+
+
+
         return inventory
     }
 }

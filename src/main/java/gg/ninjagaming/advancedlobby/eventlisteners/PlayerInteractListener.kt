@@ -8,8 +8,10 @@ import de.cyne.advancedlobby.locale.Locale
 import de.cyne.advancedlobby.misc.HiderType
 import gg.ninjagaming.advancedlobby.inventorybuilder.CompassInventory
 import gg.ninjagaming.advancedlobby.inventorybuilder.CosmeticsInventory
+import gg.ninjagaming.advancedlobby.itembuilders.PlayerHiderItemBuilder
 import gg.ninjagaming.advancedlobby.misc.CooldownManager
 import gg.ninjagaming.advancedlobby.misc.CooldownType
+import gg.ninjagaming.advancedlobby.misc.SilentLobby
 import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer
 import org.bukkit.Bukkit
 import org.bukkit.Effect
@@ -25,35 +27,7 @@ import org.bukkit.potion.PotionEffectType
 import org.bukkit.util.Vector
 class PlayerInteractListener: Listener {
 
-    private val itemStackPlayerHiderShowAll = ItemBuilder(
-        AdvancedLobby.getMaterial("hotbar_items.player_hider.show_all.material"), 1,
-        AdvancedLobby.cfg.getInt("hotbar_items.player_hider.show_all.subid").toShort())
-        .setDisplayName(AdvancedLobby.getString("hotbar_items.player_hider.show_all.displayname"))
-        .setLobbyItemLore(AdvancedLobby.cfg.getStringList("hotbar_items.player_hider.show_all.lore"))
 
-    private val itemStackPlayerHiderShowVIP = ItemBuilder(
-        AdvancedLobby.getMaterial("hotbar_items.player_hider.show_vip.material"), 1,
-        AdvancedLobby.cfg.getInt("hotbar_items.player_hider.show_vip.subid").toShort())
-        .setDisplayName(AdvancedLobby.getString("hotbar_items.player_hider.show_vip.displayname"))
-        .setLobbyItemLore(AdvancedLobby.cfg.getStringList("hotbar_items.player_hider.show_vip.lore"))
-
-    private val itemStackPlayerHiderShowNone = ItemBuilder(
-        AdvancedLobby.getMaterial("hotbar_items.player_hider.show_none.material"), 1,
-        AdvancedLobby.cfg.getInt("hotbar_items.player_hider.show_none.subid").toShort())
-        .setDisplayName(AdvancedLobby.getString("hotbar_items.player_hider.show_none.displayname"))
-        .setLobbyItemLore(AdvancedLobby.cfg.getStringList("hotbar_items.player_hider.show_none.lore"))
-
-    private val itemStackSilentLobbyActivate = ItemBuilder(
-        AdvancedLobby.getMaterial("hotbar_items.silentlobby.activated.material"), 1,
-        AdvancedLobby.cfg.getInt("hotbar_items.silentlobby.activated.subid").toShort())
-        .setDisplayName(AdvancedLobby.getString("hotbar_items.silentlobby.activated.displayname"))
-        .setLobbyItemLore(AdvancedLobby.cfg.getStringList("hotbar_items.silentlobby.activated.lore"))
-
-    private val itemStackSilentLobbyDeactivate = ItemBuilder(
-        AdvancedLobby.getMaterial("hotbar_items.silentlobby.deactivated.material"), 1,
-        AdvancedLobby.cfg.getInt("hotbar_items.silentlobby.deactivated.subid").toShort())
-        .setDisplayName(AdvancedLobby.getString("hotbar_items.silentlobby.deactivated.displayname"))
-        .setLobbyItemLore(AdvancedLobby.cfg.getStringList("hotbar_items.silentlobby.deactivated.lore"))
 
     private val itemStackShieldActivate = ItemBuilder(
         AdvancedLobby.getMaterial("hotbar_items.shield.activated.material"), 1,
@@ -275,7 +249,7 @@ class PlayerInteractListener: Listener {
         AdvancedLobby.playerHider.remove(player)
 
         player.sendMessage(Locale.HIDER_SHOW_ALL.getMessage(player))
-        player.inventory.setItemInMainHand(itemStackPlayerHiderShowAll)
+        player.inventory.setItemInMainHand(PlayerHiderItemBuilder.itemStackShowAll)
 
         val players = Bukkit.getOnlinePlayers()
         players.forEach{
@@ -292,7 +266,7 @@ class PlayerInteractListener: Listener {
         AdvancedLobby.playerHider[player] = HiderType.NONE
 
         player.sendMessage(Locale.HIDER_SHOW_NONE.getMessage(player))
-        player.inventory.setItemInMainHand(itemStackPlayerHiderShowNone)
+        player.inventory.setItemInMainHand(PlayerHiderItemBuilder.itemStackShowNone)
 
         val players = Bukkit.getOnlinePlayers()
         players.forEach{
@@ -307,7 +281,7 @@ class PlayerInteractListener: Listener {
         AdvancedLobby.playerHider[player] = HiderType.VIP
 
         player.sendMessage(Locale.HIDER_SHOW_VIP.getMessage(player))
-        player.inventory.setItemInMainHand(itemStackPlayerHiderShowVIP)
+        player.inventory.setItemInMainHand(PlayerHiderItemBuilder.itemStackShowVIP)
 
         val players = Bukkit.getOnlinePlayers()
         players.forEach{
@@ -331,86 +305,20 @@ class PlayerInteractListener: Listener {
         if (!AdvancedLobby.cfg.getBoolean("hotbar_items.silentlobby.enabled"))
             return
 
+        if (!AdvancedLobby.cfg.getBoolean("hotbar_items.silentlobby.inHotbar"))
+            return
+
         event.isCancelled = true
 
         if (!CooldownManager.tryCooldown(player.uniqueId, CooldownType.SILENT_LOBBY, 1))
             return
 
         if (AdvancedLobby.silentLobby.contains(player)){
-            silentLobbyRemovePlayer(player)
+            SilentLobby.removePlayer(player)
             return
         }
 
-        silentLobbyAddPlayer(player)
-    }
-
-    private fun silentLobbyAddPlayer(player: Player){
-        AdvancedLobby.silentLobby.add(player)
-        AdvancedLobby.playerHider[player] = HiderType.NONE
-
-        player.sendMessage(Locale.SILENTLOBBY_JOIN.getMessage(player))
-        AdvancedLobby.playSound(player, player.location, "silentlobby.enable_silentlobby")
-
-        VParticle.spawnParticle(player, "EXPLOSION_HUGE", player.location, 1)
-        player.addPotionEffect(PotionEffect(PotionEffectType.BLINDNESS, 20, 0))
-
-        val players = Bukkit.getOnlinePlayers()
-        players.forEach{
-            if (it == player)
-                return
-
-            it.hidePlayer(AdvancedLobby.getInstance(), player)
-            player.hidePlayer(AdvancedLobby.getInstance(), it)
-        }
-
-        player.inventory.setItemInMainHand(itemStackSilentLobbyActivate)
-        player.inventory.setItem(AdvancedLobby.cfg.getInt("hotbar_items.player_hider.slot"), itemStackPlayerHiderShowNone)
-
-        if (Cosmetics.balloons.containsKey(player)) {
-            Bukkit.getScheduler().scheduleSyncDelayedTask(AdvancedLobby.getInstance(),
-                { Cosmetics.balloons[player]!!.remove() }, 5L
-            )
-        }
-    }
-
-    private fun silentLobbyRemovePlayer(player: Player){
-        AdvancedLobby.silentLobby.remove(player)
-        AdvancedLobby.playerHider.remove(player)
-
-        player.sendMessage(Locale.SILENTLOBBY_LEAVE.getMessage(player))
-        AdvancedLobby.playSound(player, player.location, "silentlobby.disable_silentlobby")
-        player.addPotionEffect(PotionEffect(PotionEffectType.BLINDNESS, 20, 0))
-
-        player.inventory.setItemInMainHand(itemStackSilentLobbyDeactivate)
-        player.inventory.setItem(AdvancedLobby.cfg.getInt("hotbar_items.player_hider.slot"), itemStackPlayerHiderShowAll)
-
-        val players = Bukkit.getOnlinePlayers()
-        players.forEach{
-            if (it == player)
-                return
-
-            it.showPlayer(AdvancedLobby.getInstance(), player)
-            player.showPlayer(AdvancedLobby.getInstance(), it)
-
-            if (!AdvancedLobby.silentLobby.contains(it))
-                return
-
-            if (!AdvancedLobby.playerHider.containsKey(it)){
-                it.showPlayer(AdvancedLobby.getInstance(), player)
-                player.showPlayer(AdvancedLobby.getInstance(), it)
-                return
-            }
-
-            if (AdvancedLobby.playerHider[it] == HiderType.VIP && player.hasPermission("advancedlobby.player_hider.bypass")){
-                it.showPlayer(AdvancedLobby.getInstance(), player)
-            }
-
-            if (AdvancedLobby.playerHider[it] == HiderType.NONE){
-                it.showPlayer(AdvancedLobby.getInstance(), player)
-            }
-
-            player.showPlayer(AdvancedLobby.getInstance(), it)
-        }
+        SilentLobby.addPlayer(player)
     }
 
 

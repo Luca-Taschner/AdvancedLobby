@@ -10,6 +10,7 @@ import de.cyne.advancedlobby.itembuilder.ItemBuilder
 import de.cyne.advancedlobby.locale.Locale
 import de.cyne.advancedlobby.misc.LocationManager
 import gg.ninjagaming.advancedlobby.inventorybuilder.*
+import gg.ninjagaming.advancedlobby.misc.SilentLobby
 import org.bukkit.Bukkit
 import org.bukkit.Material
 import org.bukkit.entity.Player
@@ -53,11 +54,24 @@ class InventoryClickEventListener: Listener {
             AdvancedLobby.getInstance().config.getConfigurationSection("inventories.teleporter.items")?.getKeys(false)
                 ?: return
 
+        if (AdvancedLobby.cfg.getBoolean("hotbar_items.silentlobby.enabled") && !AdvancedLobby.cfg.getBoolean("hotbar_items.silentlobby.inHotbar") && player.hasPermission("advancedlobby.silentlobby")){
+            if (AdvancedLobby.cfg.getInt("hotbar_items.silentlobby.slot") == event.slot){
+                if (AdvancedLobby.silentLobby.contains(player)){
+                    SilentLobby.removePlayer(player)
+                    return
+                }
+
+                SilentLobby.addPlayer(player)
+                return
+            }
+        }
+
         configurationSectionKeys.forEach{
             val material = AdvancedLobby.getMaterial("inventories.teleporter.items.$it.material")
 
             if (event.currentItem?.type != material)
                 return@forEach
+
 
             val itemExecutionNode = "inventories.teleporter.items.$it.execute"
 
@@ -78,7 +92,7 @@ class InventoryClickEventListener: Listener {
 
             player.closeInventory()
 
-            handleMessageExecutions(player,event,itemExecutionKeys, itemExecutionNode)
+            handleMessageExecutions(player, itemExecutionKeys, itemExecutionNode)
         }
     }
 
@@ -405,7 +419,7 @@ class InventoryClickEventListener: Listener {
         return true
     }
 
-    private fun handleMessageExecutions(player: Player, event: InventoryClickEvent, itemExecutions: Set<String>, currentItemExecutionNode: String){
+    private fun handleMessageExecutions(player: Player, itemExecutions: Set<String>, currentItemExecutionNode: String){
         itemExecutions.forEach{
 
             val executionSubNodes = AdvancedLobby.cfg.getConfigurationSection("$currentItemExecutionNode.$it")?.getValues(false)?.toList() ?: return@forEach
