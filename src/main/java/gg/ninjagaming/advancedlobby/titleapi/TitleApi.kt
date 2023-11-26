@@ -2,7 +2,6 @@ package gg.ninjagaming.advancedlobby.titleapi
 
 import net.kyori.adventure.text.Component
 import net.kyori.adventure.text.TextComponent
-import net.kyori.adventure.title.Title
 import net.kyori.adventure.title.Title.Times
 import net.kyori.adventure.title.Title.title
 

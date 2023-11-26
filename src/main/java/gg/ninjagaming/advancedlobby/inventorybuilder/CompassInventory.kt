@@ -8,6 +8,7 @@ import org.bukkit.Bukkit
 import org.bukkit.Material
 import org.bukkit.entity.Player
 import org.bukkit.inventory.Inventory
+import org.bukkit.inventory.ItemFlag
 
 
 object CompassInventory{
@@ -53,7 +54,8 @@ object CompassInventory{
             val slot = AdvancedLobby.cfg.getInt("inventories.teleporter.items.$it.slot")
             val lore = AdvancedLobby.cfg.getStringList("inventories.teleporter.items.$it.lore")
 
-            val itemStack = ItemBuilder(material, 1, subId.toShort()).setDisplayName(displayName).setLobbyItemLore(lore)
+            val itemStack = ItemBuilder(material, 1, subId.toShort()).setDisplayName(displayName).setLobbyItemLore(lore).addLobbyItemFlags(
+                ItemFlag.HIDE_ATTRIBUTES)
             inventory.setItem(slot, itemStack)
 
 
