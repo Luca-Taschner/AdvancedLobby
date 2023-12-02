@@ -184,10 +184,13 @@ class PlayerInteractListener: Listener {
 
         event.isCancelled = true
 
-        if (Cosmetics.gadgetReloading.contains(player)){
+
+        if (!CooldownManager.tryCooldown(player.uniqueId, CooldownType.GADGET, 5))
+        {
             AdvancedLobby.playSound(player, player.location, "gadgets.reload_gadget")
             return
         }
+
 
         AdvancedLobby.playSound(player, player.location, "gadgets.rocket_jump")
         VParticle.spawnParticle(player, "EXPLOSION_LARGE", player.location, 1)
@@ -201,7 +204,8 @@ class PlayerInteractListener: Listener {
             VParticle.spawnParticle(it, "EXPLOSION_LARGE", player.location, 1)
         }
 
-        player.velocity.add(Vector(0.0, 1.0, 0.0))
+        Cosmetics.reloadGadget(player)
+        player.velocity = Vector(0.0, 1.0, 0.0)
     }
 
     private fun hiderAction(player: Player, event: PlayerInteractEvent, item: ItemStack) {
@@ -222,7 +226,11 @@ class PlayerInteractListener: Listener {
         event.isCancelled = true
 
         if (!CooldownManager.tryCooldown(player.uniqueId, CooldownType.HIDER, 1))
+        {
+            AdvancedLobby.playSound(player, player.location, "gadgets.reload_gadget")
             return
+        }
+
 
         if (AdvancedLobby.silentLobby.contains(player)){
             player.sendMessage(Locale.SILENTLOBBY_FUNCTION_BLOCKED.getMessage(player))
@@ -310,8 +318,11 @@ class PlayerInteractListener: Listener {
 
         event.isCancelled = true
 
-        if (!CooldownManager.tryCooldown(player.uniqueId, CooldownType.SILENT_LOBBY, 1))
+        if (!CooldownManager.tryCooldown(player.uniqueId, CooldownType.SILENT_LOBBY, 1)) {
+            AdvancedLobby.playSound(player, player.location, "gadgets.reload_gadget")
+
             return
+        }
 
         if (AdvancedLobby.silentLobby.contains(player)){
             SilentLobby.removePlayer(player)
@@ -339,8 +350,10 @@ class PlayerInteractListener: Listener {
 
         event.isCancelled = true
 
-        if (!CooldownManager.tryCooldown(player.uniqueId, CooldownType.SHIELD, 1))
+        if (!CooldownManager.tryCooldown(player.uniqueId, CooldownType.SHIELD, 1)) {
+            AdvancedLobby.playSound(player, player.location, "gadgets.reload_gadget")
             return
+        }
 
 
         if (!AdvancedLobby.shield.contains(player)){
