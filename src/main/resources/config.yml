@@ -164,7 +164,6 @@ hotbar_items:
       lore: []
   shield:
     enabled: true
-    slot: 5
     activated:
       material: ENDER_EYE
       subid: 0
@@ -175,6 +174,11 @@ hotbar_items:
       subid: 0
       displayname: '&cShield &8× &7rightclick'
       lore: []
+    menu_item:
+      material: ENDER_EYE
+      subid: 0
+      displayname: '&5Shield'
+      lore: [ ]
   custom_item:
     enabled: false
     slot: 4

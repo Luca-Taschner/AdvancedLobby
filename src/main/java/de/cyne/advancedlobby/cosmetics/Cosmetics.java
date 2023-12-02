@@ -6,6 +6,7 @@ import de.cyne.advancedlobby.crossversion.VParticle;
 import de.cyne.advancedlobby.itembuilder.ItemBuilder;
 import de.cyne.advancedlobby.locale.Locale;
 import de.cyne.advancedlobby.misc.Balloon;
+import gg.ninjagaming.advancedlobby.itembuilders.ShieldItemBuilder;
 import org.bukkit.*;
 import org.bukkit.entity.Bat;
 import org.bukkit.entity.FallingBlock;
@@ -37,7 +38,7 @@ public class Cosmetics {
     }
 
     public enum GadgetType {
-        GRAPPLING_HOOK, ROCKET_JUMP
+        GRAPPLING_HOOK, ROCKET_JUMP, SHIELD
     }
 
     public static void equipHat(Player player, HatType type) {
@@ -151,6 +152,9 @@ public class Cosmetics {
                 break;
             case ROCKET_JUMP:
                 gadget = new ItemBuilder(Material.FEATHER).setDisplayName(AdvancedLobby.getString("hotbar_items.gadget.equipped.displayname").replace("%gadget%", AdvancedLobby.getString("inventories.cosmetics_gadgets.rocket_jump_gadget.displayname"))).setLobbyItemLore(AdvancedLobby.cfg.getStringList("hotbar_items.gadget.equipped.lore"));
+                break;
+            case SHIELD:
+                gadget = ShieldItemBuilder.INSTANCE.getItemStackShieldActivate();
                 break;
         }
         player.getInventory().setItem(AdvancedLobby.cfg.getInt("hotbar_items.gadget.slot"), gadget);

@@ -157,7 +157,7 @@ public class PlayerJoinListener implements Listener {
             p.getInventory().setItem(AdvancedLobby.cfg.getInt("hotbar_items.silentlobby.slot"), silentlobby);
         }
 
-        ItemBuilder shield = new ItemBuilder(
+        /*ItemBuilder shield = new ItemBuilder(
                 AdvancedLobby.getMaterial("hotbar_items.shield.deactivated.material"), 1,
                 (short) AdvancedLobby.cfg.getInt("hotbar_items.shield.deactivated.subid"))
                 .setDisplayName(ChatColor.translateAlternateColorCodes('&',
@@ -166,7 +166,7 @@ public class PlayerJoinListener implements Listener {
 
         if (AdvancedLobby.cfg.getBoolean("hotbar_items.shield.enabled") && p.hasPermission("advancedlobby.shield")) {
             p.getInventory().setItem(AdvancedLobby.cfg.getInt("hotbar_items.shield.slot"), shield);
-        }
+        }*/
 
         ItemBuilder custom_item = new ItemBuilder(
                 AdvancedLobby.getMaterial("hotbar_items.custom_item.material"), 1,

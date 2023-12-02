@@ -400,6 +400,18 @@ class InventoryClickEventListener: Listener {
                     Locale.COSMETICS_GADGETS_EQUIP.getMessage(player).replace("%gadget%", AdvancedLobby.getString("inventories.cosmetics_gadgets.rocket_jump_gadget.displayname")))
             }
 
+            Material.ENDER_EYE->{
+                if (!player.hasPermission("advancedlobby.cosmetics.gadgets.ender_pearl")) {
+                    player.sendMessage(
+                        Locale.COSMETICS_GADGETS_NO_PERMISSION.getMessage(player).replace("%gadget%", AdvancedLobby.getString("hotbar_items.shield.menu_item.displayname")))
+                    return
+                }
+
+                Cosmetics.equipGadget(player, Cosmetics.GadgetType.SHIELD)
+                player.sendMessage(
+                    Locale.COSMETICS_GADGETS_EQUIP.getMessage(player).replace("%gadget%", AdvancedLobby.getString("hotbar_items.shield.menu_item.displayname")))
+            }
+
             else -> {return}
         }
 

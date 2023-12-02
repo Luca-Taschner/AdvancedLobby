@@ -1,7 +1,9 @@
 package gg.ninjagaming.advancedlobby.inventorybuilder
 
 import de.cyne.advancedlobby.AdvancedLobby
+import de.cyne.advancedlobby.AdvancedLobby.cfg
 import de.cyne.advancedlobby.itembuilder.ItemBuilder
+import gg.ninjagaming.advancedlobby.itembuilders.ShieldItemBuilder
 import net.kyori.adventure.text.Component
 import org.bukkit.Bukkit
 import org.bukkit.Material
@@ -13,6 +15,9 @@ object CosmeticsGadgetsInventory {
 
     fun openInventory(player: Player)
     {
+        if (cfg.getBoolean("hotbar_items.shield.enabled"))
+            compassInventory.setItem(15,ShieldItemBuilder.itemStackShieldMenuItem)
+
         player.openInventory(compassInventory)
     }
 
@@ -50,6 +55,9 @@ object CosmeticsGadgetsInventory {
 
         inventory.setItem(40,deleteItemItemStack)
         inventory.setItem(44,goBackItemStack)
+
+
+
 
         return inventory
     }

@@ -9,6 +9,8 @@ import de.cyne.advancedlobby.misc.HiderType
 import gg.ninjagaming.advancedlobby.inventorybuilder.CompassInventory
 import gg.ninjagaming.advancedlobby.inventorybuilder.CosmeticsInventory
 import gg.ninjagaming.advancedlobby.itembuilders.PlayerHiderItemBuilder
+import gg.ninjagaming.advancedlobby.itembuilders.ShieldItemBuilder.itemStackShieldActivate
+import gg.ninjagaming.advancedlobby.itembuilders.ShieldItemBuilder.itemStackShieldDeactivate
 import gg.ninjagaming.advancedlobby.misc.CooldownManager
 import gg.ninjagaming.advancedlobby.misc.CooldownType
 import gg.ninjagaming.advancedlobby.misc.SilentLobby
@@ -26,21 +28,6 @@ import org.bukkit.potion.PotionEffect
 import org.bukkit.potion.PotionEffectType
 import org.bukkit.util.Vector
 class PlayerInteractListener: Listener {
-
-
-
-    private val itemStackShieldActivate = ItemBuilder(
-        AdvancedLobby.getMaterial("hotbar_items.shield.activated.material"), 1,
-        AdvancedLobby.cfg.getInt("hotbar_items.shield.activated.subid").toShort())
-        .setDisplayName(AdvancedLobby.getString("hotbar_items.shield.activated.displayname"))
-        .setLobbyItemLore(AdvancedLobby.cfg.getStringList("hotbar_items.shield.activated.lore"))
-
-    private val itemStackShieldDeactivate = ItemBuilder(
-        AdvancedLobby.getMaterial("hotbar_items.shield.deactivated.material"), 1,
-        AdvancedLobby.cfg.getInt("hotbar_items.shield.deactivated.subid").toShort())
-        .setDisplayName(AdvancedLobby.getString("hotbar_items.shield.deactivated.displayname"))
-        .setLobbyItemLore(AdvancedLobby.cfg.getStringList("hotbar_items.shield.deactivated.lore"))
-
 
     private val blockedMaterials = arrayOf(
         Material.CHEST,
