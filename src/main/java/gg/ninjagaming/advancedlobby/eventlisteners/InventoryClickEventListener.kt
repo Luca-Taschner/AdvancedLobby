@@ -56,12 +56,15 @@ class InventoryClickEventListener: Listener {
 
         if (AdvancedLobby.cfg.getBoolean("hotbar_items.silentlobby.enabled") && !AdvancedLobby.cfg.getBoolean("hotbar_items.silentlobby.inHotbar") && player.hasPermission("advancedlobby.silentlobby")){
             if (AdvancedLobby.cfg.getInt("hotbar_items.silentlobby.slot") == event.slot){
+                player.closeInventory()
                 if (AdvancedLobby.silentLobby.contains(player)){
                     SilentLobby.removePlayer(player)
+                    CompassInventory.openInventory(player)
                     return
                 }
 
                 SilentLobby.addPlayer(player)
+                CompassInventory.openInventory(player)
                 return
             }
         }
