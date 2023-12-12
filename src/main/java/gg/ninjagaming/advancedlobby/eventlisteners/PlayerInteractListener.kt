@@ -3,20 +3,18 @@ package gg.ninjagaming.advancedlobby.eventlisteners
 import de.cyne.advancedlobby.AdvancedLobby
 import de.cyne.advancedlobby.cosmetics.Cosmetics
 import de.cyne.advancedlobby.crossversion.VParticle
-import de.cyne.advancedlobby.itembuilder.ItemBuilder
 import de.cyne.advancedlobby.locale.Locale
 import de.cyne.advancedlobby.misc.HiderType
 import gg.ninjagaming.advancedlobby.inventorybuilder.CompassInventory
 import gg.ninjagaming.advancedlobby.inventorybuilder.CosmeticsInventory
 import gg.ninjagaming.advancedlobby.itembuilders.PlayerHiderItemBuilder
-import gg.ninjagaming.advancedlobby.itembuilders.ShieldItemBuilder.itemStackShieldActivate
-import gg.ninjagaming.advancedlobby.itembuilders.ShieldItemBuilder.itemStackShieldDeactivate
 import gg.ninjagaming.advancedlobby.misc.CooldownManager
 import gg.ninjagaming.advancedlobby.misc.CooldownType
 import gg.ninjagaming.advancedlobby.misc.SilentLobby
+import gg.ninjagaming.advancedlobby.misc.extras.gadgets.ShieldGadget.shieldActivate
+import gg.ninjagaming.advancedlobby.misc.extras.gadgets.ShieldGadget.shieldDeactivate
 import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer
 import org.bukkit.Bukkit
-import org.bukkit.Effect
 import org.bukkit.Material
 import org.bukkit.entity.Player
 import org.bukkit.event.EventHandler
@@ -349,54 +347,6 @@ class PlayerInteractListener: Listener {
         }
 
         shieldDeactivate(player)
-    }
-
-    private fun shieldActivate(player: Player) {
-        AdvancedLobby.shield.add(player)
-        AdvancedLobby.playSound(player, player.location, "shield.enable_shield")
-        player.sendMessage(Locale.SHIELD_ACTIVATE.getMessage(player))
-        player.inventory.setItemInMainHand(itemStackShieldActivate)
-
-        val entities = player.getNearbyEntities(2.5, 2.5, 2.5)
-        entities.forEach{ itEntity ->
-            if (itEntity !is Player)
-                return
-
-            if (itEntity.hasMetadata("NPC") || AdvancedLobby.silentLobby.contains(player) || AdvancedLobby.silentLobby.contains(itEntity))
-                return
-
-            if (itEntity.hasPermission("advancedlobby.shield.bypass"))
-                return
-
-            val nearbyPlayerVector: Vector = itEntity.location.toVector()
-            val playerVector: Vector = player.location.toVector()
-            val velocity = nearbyPlayerVector.clone().subtract(playerVector).normalize().multiply(0.5).setY(0.25)
-            itEntity.velocity = velocity
-
-            player.playEffect(player.location, Effect.ENDER_SIGNAL, "")
-
-            val players = Bukkit.getOnlinePlayers()
-            players.forEach{ itPlayer ->
-                if (itPlayer == player)
-                    return
-
-                if (AdvancedLobby.silentLobby.contains(player) || AdvancedLobby.silentLobby.contains(itPlayer))
-                    return
-
-                if (itEntity.hasPermission("advancedlobby.shield.bypass"))
-                    return
-
-                itPlayer.playEffect(player.location, Effect.ENDER_SIGNAL, "")
-            }
-
-        }
-    }
-
-    private fun shieldDeactivate(player: Player) {
-        AdvancedLobby.shield.remove(player)
-        AdvancedLobby.playSound(player, player.location, "shield.disable_shield")
-        player.sendMessage(Locale.SHIELD_DEACTIVATE.getMessage(player))
-        player.inventory.setItemInMainHand(itemStackShieldDeactivate)
     }
 
     private fun customItemAction(player: Player, event: PlayerInteractEvent, item: ItemStack) {
