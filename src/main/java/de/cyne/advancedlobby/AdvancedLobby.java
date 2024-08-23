@@ -140,6 +140,9 @@ public class AdvancedLobby extends JavaPlugin {
                     world.setThundering(true);
                     break;
             }
+
+            if (!AdvancedLobby.cfg.getBoolean("weather.enabled"))
+                world.setGameRule(GameRule.DO_WEATHER_CYCLE, false);
         }
     }
 
@@ -186,7 +189,6 @@ public class AdvancedLobby extends JavaPlugin {
         Bukkit.getPluginManager().registerEvents(new PlayerUnleashEntityListener(), AdvancedLobby.getInstance());
         Bukkit.getPluginManager().registerEvents(new ServerListPingListener(), AdvancedLobby.getInstance());
         Bukkit.getPluginManager().registerEvents(new SignChangeListener(), AdvancedLobby.getInstance());
-        Bukkit.getPluginManager().registerEvents(new WeatherChangeListener(), AdvancedLobby.getInstance());
     }
 
     public void createFiles() {
