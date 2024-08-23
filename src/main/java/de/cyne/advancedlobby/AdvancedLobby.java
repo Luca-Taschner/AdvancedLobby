@@ -8,6 +8,7 @@ import de.cyne.advancedlobby.misc.HiderType;
 import de.cyne.advancedlobby.misc.Updater;
 import gg.ninjagaming.advancedlobby.eventlisteners.InventoryClickEventListener;
 import gg.ninjagaming.advancedlobby.eventlisteners.PlayerInteractListener;
+import gg.ninjagaming.advancedlobby.eventlisteners.ServerListPingListener;
 import gg.ninjagaming.advancedlobby.runnables.ActionBarRunnable;
 import me.clip.placeholderapi.PlaceholderAPI;
 import org.bukkit.*;
@@ -163,7 +164,6 @@ public class AdvancedLobby extends JavaPlugin {
         Bukkit.getPluginManager().registerEvents(new EntityExplodeListener(), AdvancedLobby.getInstance());
         Bukkit.getPluginManager().registerEvents(new FoodLevelChangeListener(), AdvancedLobby.getInstance());
         Bukkit.getPluginManager().registerEvents(new HangingBreakByEntityListener(), AdvancedLobby.getInstance());
-        //Bukkit.getPluginManager().registerEvents(new InventoryClickListener(), AdvancedLobby.getInstance());
         Bukkit.getPluginManager().registerEvents(new InventoryClickEventListener(), AdvancedLobby.getInstance());
         Bukkit.getPluginManager().registerEvents(new LeavesDecayListener(), AdvancedLobby.getInstance());
         Bukkit.getPluginManager().registerEvents(new PlayerArmorStandManipulateListener(), AdvancedLobby.getInstance());
