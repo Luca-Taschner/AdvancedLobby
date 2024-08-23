@@ -56,8 +56,8 @@ tablist_header_footer:
   enabled: true
   #⮟ If activated, the tablist updates every second.
   update_tablist: true
-  header: '&r\n&bAdvancedLobby &8× &7Minecraft Network &8➜ &f%server_online%&8/&f%server_max_players%&f\n &8► §7Server &8● &b%player_server% &8◄ \n'
-  footer: '&r\n&7Twitter &8» §f@Unknown &8┃ &7TeamSpeak &8» &fUnknown\n'
+  header: '§r\n§bAdvancedLobby §8× §7Minecraft Network §8➜ §f%server_online%§8/§f%server_max_players%§f\n §8► §7Server §8● §b%player_server% §8◄ \n'
+  footer: '§r\n§7Twitter §8» §f@Unknown §8┃ §7TeamSpeak §8» §fUnknown\n'
 
 #Player join settings
 player_join:
@@ -70,8 +70,8 @@ player_join:
 #➥ Placeholders: %player%: Player name; PlaceholderAPI
 title:
   enabled: true
-  title: '&bWelcome&8, &7%player%'
-  subtitle: '&7on &fAdvancedLobby'
+  title: '§bWelcome&8, §7%player%'
+  subtitle: '§7on §fAdvancedLobby'
 
 #Void teleport settings
 void_teleport:
@@ -93,14 +93,14 @@ jumppads:
 #Motd settings
 motd:
   enabled: true
-  first_line: '  &bAdvancedLobby &8▶ &7Minecraft Network &8┃ &8[&f1.8&8-&f1.12.2&8]'
-  second_line: '          &aNow &a&lONLINE &8● &7Twitter &8» §f@Unknown'
+  first_line: '  §bAdvancedLobby §8▶ §7Minecraft Network §8┃ §8[§f1.8§8-§f1.12.2§8]'
+  second_line: '          §aNow §a§lONLINE §8● §7Twitter §8» §f@Unknown'
 
 #Chat format settings
 #➥ Placeholders: %player%: Player name; %message%: Chat message
 chat_format:
   enabled: true
-  format: '&f%player% &8» &7%message%'
+  format: '§f%player% §8» §7%message%'
 
 #Hotbar items settings
 hotbar_items:
@@ -109,7 +109,7 @@ hotbar_items:
     slot: 0
     material: COMPASS
     subid: 0
-    displayname: '&bTeleporter &8× &7rightclick'
+    displayname: '§bTeleporter §8× §7rightclick'
     lore: []
   player_hider:
     enabled: true
@@ -117,24 +117,24 @@ hotbar_items:
     show_all:
       material: LIME_DYE
       subid: 0
-      displayname: '&aAll players visible &8× &7rightclick'
+      displayname: '§aAll players visible §8× §7rightclick'
       lore: []
     show_vip:
       material: PURPLE_DYE
       subid: 0
-      displayname: '&5Only VIP-Players visible &8× &7rightclick'
+      displayname: '§5Only VIP-Players visible §8× §7rightclick'
       lore: []
     show_none:
       material: RED_DYE
       subid: 0
-      displayname: '&cNo players visible &8× &7rightclick'
+      displayname: '§cNo players visible §8× §7rightclick'
       lore: []
   cosmetics:
     enabled: true
     slot: 8
     material: CHEST
     subid: 0
-    displayname: '&dCosmetics &8× &7rightclick'
+    displayname: '§dCosmetics §8× §7rightclick'
     lore: []
   gadget:
     enabled: true
@@ -142,11 +142,11 @@ hotbar_items:
     unequipped:
       material: FIREWORK_STAR
       subid: 0
-      displayname: '&cNo gadget equipped'
+      displayname: '§cNo gadget equipped'
       lore: []
     equipped:
       #⮟ Placeholders: %gadget%: Gadget name
-      displayname: '&b%gadget% &8× &7rightclick'
+      displayname: '§b%gadget% §8× §7rightclick'
       lore: []
   silentlobby:
     enabled: true
@@ -155,36 +155,36 @@ hotbar_items:
     activated:
       material: TNT
       subid: 0
-      displayname: '&aSilentLobby &8× &7rightclick'
+      displayname: '§aSilentLobby §8× §7rightclick'
       lore: []
     deactivated:
       material: TNT
       subid: 0
-      displayname: '&cSilentLobby &8× &7rightclick'
+      displayname: '§cSilentLobby §8× §7rightclick'
       lore: []
   shield:
     enabled: true
     activated:
       material: ENDER_EYE
       subid: 0
-      displayname: '&aShield &8× &7rightclick'
+      displayname: '§aShield §8× §7rightclick'
       lore: []
     deactivated:
       material: ENDER_EYE
       subid: 0
-      displayname: '&cShield &8× &7rightclick'
+      displayname: '§cShield §8× §7rightclick'
       lore: []
     menu_item:
       material: ENDER_EYE
       subid: 0
-      displayname: '&5Shield'
+      displayname: '§5Shield'
       lore: [ ]
   custom_item:
     enabled: false
     slot: 4
     material: NAME_TAG
     subid: 0
-    displayname: '&e??? &8× &7rightclick'
+    displayname: '§e??? §8× §7rightclick'
     lore: []
     command: ''
 
@@ -192,7 +192,7 @@ hotbar_items:
 inventories:
   #Teleporter inventory
   teleporter:
-    title: '&bTeleporter'
+    title: '§bTeleporter'
     rows: 5
     #To add new items to the teleporter use the following template:
     #
@@ -219,126 +219,126 @@ inventories:
         slot: 31
         displayname: '§8● §bSpawn'
         lore:
-          - '&8&m---------------'
-          - ' &8» &7Click to teleport'
+          - '§8§m---------------'
+          - ' §8» §7Click to teleport'
         subid: 0
         execute:
           0:
             location: 'spawn'
   #Cosmetics inventory
   cosmetics:
-    title: '&dCosmetics'
+    title: '§dCosmetics'
     hats:
-      displayname: '&bHats'
+      displayname: '§bHats'
       lore: []
     particles:
-      displayname: '&bParticles'
+      displayname: '§bParticles'
       lore: []
     gadgets:
-      displayname: '&bGadgets'
+      displayname: '§bGadgets'
       lore: []
     balloons:
-      displayname: '&bBalloons'
+      displayname: '§bBalloons'
       lore: []
 
   #Cosmetics hats inventory
   cosmetics_hats:
-    title: '&dCosmetics &8× &fHats'
+    title: '§dCosmetics §8× §fHats'
     go_back:
-      displayname: '&8◄ &7Go back'
+      displayname: '§8◄ §7Go back'
       lore: []
     disable:
-      displayname: '&8► &cDisable hat'
+      displayname: '§8► §cDisable hat'
       lore: []
     melon_hat:
-      displayname: '&bMelon'
+      displayname: '§bMelon'
       lore: []
     tnt_hat:
-      displayname: '&bTNT'
+      displayname: '§bTNT'
       lore: []
     glass_hat:
-      displayname: '&bGlass'
+      displayname: '§bGlass'
       lore: []
     sponge_hat:
-      displayname: '&bSponge'
+      displayname: '§bSponge'
       lore: []
     pumpkin_hat:
-      displayname: '&bPumpkin'
+      displayname: '§bPumpkin'
       lore: []
     cactus_hat:
-      displayname: '&bCactus'
+      displayname: '§bCactus'
       lore: []
 
   #Cosmetics particles inventory
   cosmetics_particles:
-    title: '&dCosmetics &8× &fParticles'
+    title: '§dCosmetics §8× §fParticles'
     go_back:
-      displayname: '&8◄ &7Go back'
+      displayname: '§8◄ §7Go back'
       lore: []
     disable:
-      displayname: '&8► &cDisable particles'
+      displayname: '§8► §cDisable particles'
       lore: []
     heart_particles:
-      displayname: '&bHearts'
+      displayname: '§bHearts'
       lore: []
     music_particles:
-      displayname: '&bMusic'
+      displayname: '§bMusic'
       lore: []
     flames_particles:
-      displayname: '&bFlames'
+      displayname: '§bFlames'
       lore: []
     villager_particles:
-      displayname: '&bVillager'
+      displayname: '§bVillager'
       lore: []
     rainbow_particles:
-      displayname: '&bRainbow'
+      displayname: '§bRainbow'
       lore: []
 
   #Cosmetics balloons inventory
   cosmetics_balloons:
-    title: '&dCosmetics &8× &fBalloons'
+    title: '§dCosmetics §8× §fBalloons'
     go_back:
-      displayname: '&8◄ &7Go back'
+      displayname: '§8◄ §7Go back'
       lore: []
     disable:
-      displayname: '&8► &cDisable balloon'
+      displayname: '§8► §cDisable balloon'
       lore: []
     yellow_balloon:
-      displayname: '&bYellow balloon'
+      displayname: '§bYellow balloon'
       lore: []
     red_balloon:
-      displayname: '&bRed balloon'
+      displayname: '§bRed balloon'
       lore: []
     green_balloon:
-      displayname: '&bGreen balloon'
+      displayname: '§bGreen balloon'
       lore: []
     blue_balloon:
-      displayname: '&bBlue balloon'
+      displayname: '§bBlue balloon'
       lore: []
     hay_block_balloon:
-      displayname: '&bHay Block balloon'
+      displayname: '§bHay Block balloon'
       lore: []
     sea_lantern_balloon:
-      displayname: '&bSea Lantern balloon'
+      displayname: '§bSea Lantern balloon'
       lore: []
     bookshelf_balloon:
-      displayname: '&bBookshelf balloon'
+      displayname: '§bBookshelf balloon'
       lore: []
     note_block_balloon:
-      displayname: '&bNote Block balloon'
+      displayname: '§bNote Block balloon'
       lore: []
 
   #Cosmetics gadgets inventory
   cosmetics_gadgets:
-    title: '&dCosmetics &8× &fGadgets'
+    title: '§dCosmetics §8× §fGadgets'
     go_back:
-      displayname: '&8◄ &7Go back'
+      displayname: '§8◄ &7Go back'
       lore: []
     disable:
-      displayname: '&8► &cDisable gadget'
+      displayname: '§8► &cDisable gadget'
       lore: []
     grappling_hook_gadget:
-      displayname: '&bGrappling hook'
+      displayname: '§bGrappling hook'
       lore: []
     rocket_jump_gadget:
       displayname: 'Rocket jump'
