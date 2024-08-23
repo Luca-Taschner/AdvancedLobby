@@ -7,8 +7,8 @@ import de.cyne.advancedlobby.metrics.Metrics;
 import de.cyne.advancedlobby.misc.HiderType;
 import de.cyne.advancedlobby.misc.Updater;
 import gg.ninjagaming.advancedlobby.eventlisteners.InventoryClickEventListener;
-import gg.ninjagaming.advancedlobby.eventlisteners.PlayerInteractListener;
-import gg.ninjagaming.advancedlobby.eventlisteners.ServerListPingListener;
+import gg.ninjagaming.advancedlobby.eventlisteners.PlayerInteractEventListener;
+import gg.ninjagaming.advancedlobby.eventlisteners.ServerListPingEventListener;
 import gg.ninjagaming.advancedlobby.runnables.ActionBarRunnable;
 import me.clip.placeholderapi.PlaceholderAPI;
 import org.bukkit.*;
@@ -177,7 +177,7 @@ public class AdvancedLobby extends JavaPlugin {
         Bukkit.getPluginManager().registerEvents(new PlayerDropItemListener(), AdvancedLobby.getInstance());
         Bukkit.getPluginManager().registerEvents(new PlayerFishListener(), AdvancedLobby.getInstance());
         Bukkit.getPluginManager().registerEvents(new PlayerInteractEntityListener(), AdvancedLobby.getInstance());
-        Bukkit.getPluginManager().registerEvents(new PlayerInteractListener(), AdvancedLobby.getInstance());
+        Bukkit.getPluginManager().registerEvents(new PlayerInteractEventListener(), AdvancedLobby.getInstance());
         Bukkit.getPluginManager().registerEvents(new PlayerItemConsumeListener(), AdvancedLobby.getInstance());
         Bukkit.getPluginManager().registerEvents(new PlayerItemDamageListener(), AdvancedLobby.getInstance());
         Bukkit.getPluginManager().registerEvents(new PlayerItemHeldListener(), AdvancedLobby.getInstance());
@@ -187,7 +187,7 @@ public class AdvancedLobby extends JavaPlugin {
         Bukkit.getPluginManager().registerEvents(new PlayerQuitListener(), AdvancedLobby.getInstance());
         Bukkit.getPluginManager().registerEvents(new PlayerTeleportListener(), AdvancedLobby.getInstance());
         Bukkit.getPluginManager().registerEvents(new PlayerUnleashEntityListener(), AdvancedLobby.getInstance());
-        Bukkit.getPluginManager().registerEvents(new ServerListPingListener(), AdvancedLobby.getInstance());
+        Bukkit.getPluginManager().registerEvents(new ServerListPingEventListener(), AdvancedLobby.getInstance());
         Bukkit.getPluginManager().registerEvents(new SignChangeListener(), AdvancedLobby.getInstance());
     }
 

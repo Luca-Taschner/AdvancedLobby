@@ -25,7 +25,7 @@ import org.bukkit.inventory.ItemStack
 import org.bukkit.potion.PotionEffect
 import org.bukkit.potion.PotionEffectType
 import org.bukkit.util.Vector
-class PlayerInteractListener: Listener {
+class PlayerInteractEventListener: Listener {
 
     private val blockedMaterials = arrayOf(
         Material.CHEST,

@@ -5,7 +5,7 @@ import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
 import org.bukkit.event.server.ServerListPingEvent
 
-class ServerListPingListener: Listener {
+class ServerListPingEventListener: Listener {
     @EventHandler
     fun onServerListPing(event: ServerListPingEvent) {
         if (!AdvancedLobby.cfg.getBoolean("motd.enabled"))
