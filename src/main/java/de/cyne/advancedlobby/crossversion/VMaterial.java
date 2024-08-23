@@ -77,24 +77,11 @@ public enum VMaterial {
     }
 
     public Material getType() {
-        if (AdvancedLobby.isLegacyVersion()) {
-            for (int i = this.legacyMaterial.length - 1; i >= 0; i--) {
-                String legacy = this.legacyMaterial[i];
-
-                if (i == 0 && legacy.charAt(1) == '.') return null;
-
-                Material material = Material.getMaterial(legacy);
-
-                if (material != null) return material;
-            }
-            return null;
-        } else {
-            return Material.getMaterial(material);
-        }
+        return Material.getMaterial(material);
     }
 
     public short getSubId() {
-        return AdvancedLobby.isLegacyVersion() ? (short) subId : 0;
+        return 0;
     }
 
     public ItemStack toItemStack(int amount) {

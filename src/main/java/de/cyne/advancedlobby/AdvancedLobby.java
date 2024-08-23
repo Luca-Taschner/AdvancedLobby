@@ -182,9 +182,6 @@ public class AdvancedLobby extends JavaPlugin {
         Bukkit.getPluginManager().registerEvents(new PlayerMoveListener(), AdvancedLobby.getInstance());
         Bukkit.getPluginManager().registerEvents(new PlayerPickupItemListener(), AdvancedLobby.getInstance());
         Bukkit.getPluginManager().registerEvents(new PlayerQuitListener(), AdvancedLobby.getInstance());
-        if (!isOneEightVersion()) {
-            Bukkit.getPluginManager().registerEvents(new PlayerSwapHandItemsListener(), AdvancedLobby.getInstance());
-        }
         Bukkit.getPluginManager().registerEvents(new PlayerTeleportListener(), AdvancedLobby.getInstance());
         Bukkit.getPluginManager().registerEvents(new PlayerUnleashEntityListener(), AdvancedLobby.getInstance());
         Bukkit.getPluginManager().registerEvents(new ServerListPingListener(), AdvancedLobby.getInstance());
@@ -267,10 +264,6 @@ public class AdvancedLobby extends JavaPlugin {
 
     public static String getVersion() {
         return Bukkit.getServer().getClass().getPackage().getName().split("\\.")[3];
-    }
-
-    public static boolean isLegacyVersion() {
-        return Integer.parseInt(getVersion().split("_")[1]) <= 12;
     }
 
     public static boolean isOneEightVersion() {
