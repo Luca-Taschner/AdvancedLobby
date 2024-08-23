@@ -229,7 +229,7 @@ public class AdvancedLobbyCommand implements CommandExecutor {
     private void sendPluginHelp(CommandSender sender) {
         sender.sendMessage("");
         sender.sendMessage("§8┃ §b● §8┃ §bAdvancedLobby §8× §av"
-                + AdvancedLobby.getInstance().getDescription().getVersion() + " §7by cyne");
+                + AdvancedLobby.getInstance().getDescription().getVersion() + " §7by cyne & NinjaGaming");
         sender.sendMessage("§8┃ §b● §8┃ ");
         sender.sendMessage("§8┃ §b● §8┃ §8/§fadvancedlobby reload §8- §7Reload the configuration files");
         sender.sendMessage("§8┃ §b● §8┃ §8/§fadvancedlobby location §8- §7Manage the locations");
