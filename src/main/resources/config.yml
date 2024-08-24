@@ -87,7 +87,7 @@ worldborder:
 #JumpPads settings
 jumppads:
   enabled: true
-  lenght: 2.0
+  length: 2.0
   height: 0.5
 
 #Motd settings
