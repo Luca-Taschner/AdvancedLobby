@@ -9,11 +9,12 @@ import org.bukkit.event.hanging.HangingBreakByEntityEvent
 class HangingBreakByEntityEventListener : Listener {
     @EventHandler
     fun onHangingBreakByEntity(event: HangingBreakByEntityEvent) {
-        if (event.remover is Player) {
-            val player = event.remover as Player
-            if (!AdvancedLobby.multiWorld_mode or AdvancedLobby.lobbyWorlds.contains(player.world)) {
-                event.isCancelled = true
-            }
+        if (event.remover !is Player)
+            return
+
+        val player = event.remover as Player
+        if (!AdvancedLobby.multiWorld_mode or AdvancedLobby.lobbyWorlds.contains(player.world)) {
+            event.isCancelled = true
         }
     }
 }
