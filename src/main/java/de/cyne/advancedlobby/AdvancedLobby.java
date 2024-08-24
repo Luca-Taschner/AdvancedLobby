@@ -158,7 +158,7 @@ public class AdvancedLobby extends JavaPlugin {
     }
 
     private void registerListener() {
-        Bukkit.getPluginManager().registerEvents(new AsyncPlayerChatListener(), AdvancedLobby.getInstance());
+        Bukkit.getPluginManager().registerEvents(new AsyncPlayerChatEventListener(), AdvancedLobby.getInstance());
         Bukkit.getPluginManager().registerEvents(new BlockBreakEventListener(), AdvancedLobby.getInstance());
         Bukkit.getPluginManager().registerEvents(new BlockPlaceEventListener(), AdvancedLobby.getInstance());
         Bukkit.getPluginManager().registerEvents(new EntityDamageEventListener(), AdvancedLobby.getInstance());
