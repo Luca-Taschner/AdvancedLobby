@@ -182,7 +182,7 @@ public class AdvancedLobby extends JavaPlugin {
         Bukkit.getPluginManager().registerEvents(new PlayerJoinEventListener(), AdvancedLobby.getInstance());
         Bukkit.getPluginManager().registerEvents(new PlayerMoveListener(), AdvancedLobby.getInstance());
         Bukkit.getPluginManager().registerEvents(new PlayerPickupItemListener(), AdvancedLobby.getInstance());
-        Bukkit.getPluginManager().registerEvents(new PlayerQuitListener(), AdvancedLobby.getInstance());
+        Bukkit.getPluginManager().registerEvents(new PlayerQuitEventListener(), AdvancedLobby.getInstance());
         Bukkit.getPluginManager().registerEvents(new PlayerSwapHandItemsEventListener(), AdvancedLobby.getInstance());
         Bukkit.getPluginManager().registerEvents(new PlayerTeleportEventListener(), AdvancedLobby.getInstance());
         Bukkit.getPluginManager().registerEvents(new PlayerUnleashEntityEventListener(), AdvancedLobby.getInstance());
