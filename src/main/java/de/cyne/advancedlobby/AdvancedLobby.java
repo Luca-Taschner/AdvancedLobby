@@ -162,7 +162,7 @@ public class AdvancedLobby extends JavaPlugin {
         Bukkit.getPluginManager().registerEvents(new BlockBreakListener(), AdvancedLobby.getInstance());
         Bukkit.getPluginManager().registerEvents(new BlockPlaceListener(), AdvancedLobby.getInstance());
         Bukkit.getPluginManager().registerEvents(new EntityDamageListener(), AdvancedLobby.getInstance());
-        Bukkit.getPluginManager().registerEvents(new EntityExplodeListener(), AdvancedLobby.getInstance());
+        Bukkit.getPluginManager().registerEvents(new EntityExplodeEventListener(), AdvancedLobby.getInstance());
         Bukkit.getPluginManager().registerEvents(new FoodLevelChangeEventListener(), AdvancedLobby.getInstance());
         Bukkit.getPluginManager().registerEvents(new HangingBreakByEntityEventListener(), AdvancedLobby.getInstance());
         Bukkit.getPluginManager().registerEvents(new InventoryClickEventListener(), AdvancedLobby.getInstance());
