@@ -6,10 +6,7 @@ import de.cyne.advancedlobby.listener.*;
 import de.cyne.advancedlobby.metrics.Metrics;
 import de.cyne.advancedlobby.misc.HiderType;
 import de.cyne.advancedlobby.misc.Updater;
-import gg.ninjagaming.advancedlobby.eventlisteners.InventoryClickEventListener;
-import gg.ninjagaming.advancedlobby.eventlisteners.PlayerInteractEventListener;
-import gg.ninjagaming.advancedlobby.eventlisteners.PlayerJoinEventListener;
-import gg.ninjagaming.advancedlobby.eventlisteners.ServerListPingEventListener;
+import gg.ninjagaming.advancedlobby.eventlisteners.*;
 import gg.ninjagaming.advancedlobby.runnables.ActionBarRunnable;
 import me.clip.placeholderapi.PlaceholderAPI;
 import org.bukkit.*;
@@ -190,7 +187,7 @@ public class AdvancedLobby extends JavaPlugin {
         Bukkit.getPluginManager().registerEvents(new PlayerTeleportListener(), AdvancedLobby.getInstance());
         Bukkit.getPluginManager().registerEvents(new PlayerUnleashEntityListener(), AdvancedLobby.getInstance());
         Bukkit.getPluginManager().registerEvents(new ServerListPingEventListener(), AdvancedLobby.getInstance());
-        Bukkit.getPluginManager().registerEvents(new SignChangeListener(), AdvancedLobby.getInstance());
+        Bukkit.getPluginManager().registerEvents(new SignChangeEventListener(), AdvancedLobby.getInstance());
     }
 
     public void createFiles() {
