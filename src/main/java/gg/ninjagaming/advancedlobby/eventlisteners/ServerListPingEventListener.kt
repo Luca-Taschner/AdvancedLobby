@@ -1,6 +1,7 @@
 package gg.ninjagaming.advancedlobby.eventlisteners
 
 import de.cyne.advancedlobby.AdvancedLobby
+import net.kyori.adventure.text.Component
 import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
 import org.bukkit.event.server.ServerListPingEvent
@@ -12,7 +13,7 @@ class ServerListPingEventListener: Listener {
             return
 
         val outputString = AdvancedLobby.cfg.getString("motd.first_line") + "\n" + AdvancedLobby.cfg.getString("motd.second_line")
-        event.motd = outputString
+        event.motd(Component.text(outputString))
 
 
 
