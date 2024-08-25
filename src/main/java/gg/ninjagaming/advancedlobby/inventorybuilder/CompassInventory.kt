@@ -1,7 +1,7 @@
 package gg.ninjagaming.advancedlobby.inventorybuilder
 
 import de.cyne.advancedlobby.AdvancedLobby
-import de.cyne.advancedlobby.itembuilder.ItemBuilder
+import gg.ninjagaming.advancedlobby.misc.ItemBuilder
 import gg.ninjagaming.advancedlobby.misc.SilentLobby
 import net.kyori.adventure.text.Component
 import org.bukkit.Bukkit
@@ -54,7 +54,10 @@ object CompassInventory{
             val slot = AdvancedLobby.cfg.getInt("inventories.teleporter.items.$it.slot")
             val lore = AdvancedLobby.cfg.getStringList("inventories.teleporter.items.$it.lore")
 
-            val itemStack = ItemBuilder(material, 1, subId.toShort()).setDisplayName(displayName).setLobbyItemLore(lore).addLobbyItemFlags(
+            if (material == null)
+                return@forEach
+
+            val itemStack = ItemBuilder(material, 1).setDisplayName(displayName).setLobbyItemLore(lore).addLobbyItemFlags(
                 ItemFlag.HIDE_ATTRIBUTES)
             inventory.setItem(slot, itemStack)
 

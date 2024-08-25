@@ -6,9 +6,9 @@ import de.cyne.advancedlobby.AdvancedLobby
 import de.cyne.advancedlobby.cosmetics.Cosmetics
 import de.cyne.advancedlobby.crossversion.VMaterial
 import de.cyne.advancedlobby.crossversion.VParticle
-import de.cyne.advancedlobby.itembuilder.ItemBuilder
 import de.cyne.advancedlobby.locale.Locale
 import gg.ninjagaming.advancedlobby.inventorybuilder.*
+import gg.ninjagaming.advancedlobby.misc.ItemBuilder
 import gg.ninjagaming.advancedlobby.misc.LocationManager
 import gg.ninjagaming.advancedlobby.misc.SilentLobby
 import org.bukkit.Bukkit
@@ -365,7 +365,7 @@ class InventoryClickEventListener: Listener {
                 Cosmetics.gadgets.remove(player)
 
                 val noGadget = ItemBuilder(
-                    AdvancedLobby.getMaterial("hotbar_items.gadget.unequipped.material"), 1, AdvancedLobby.cfg.getInt("hotbar_items.gadget.unequipped.subside").toShort()).setDisplayName(AdvancedLobby.cfg.getString("hotbar_items.gadget.unequipped.displayname"))
+                    AdvancedLobby.getMaterial("hotbar_items.gadget.unequipped.material"), 1).setDisplayName(AdvancedLobby.cfg.getString("hotbar_items.gadget.unequipped.displayname"))
                     .setLobbyItemLore(AdvancedLobby.cfg.getStringList("hotbar_items.gadget.unequipped.lore"))
                 player.inventory.setItem(AdvancedLobby.cfg.getInt("hotbar_items.gadget.slot"), noGadget)
 

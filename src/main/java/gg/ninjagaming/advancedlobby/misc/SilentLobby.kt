@@ -3,7 +3,6 @@ package gg.ninjagaming.advancedlobby.misc
 import de.cyne.advancedlobby.AdvancedLobby
 import de.cyne.advancedlobby.cosmetics.Cosmetics
 import de.cyne.advancedlobby.crossversion.VParticle
-import de.cyne.advancedlobby.itembuilder.ItemBuilder
 import de.cyne.advancedlobby.locale.Locale
 import gg.ninjagaming.advancedlobby.itembuilders.PlayerHiderItemBuilder
 import org.bukkit.Bukkit
@@ -13,14 +12,12 @@ import org.bukkit.potion.PotionEffectType
 
 object SilentLobby {
     val itemStackSilentLobbyActivate: ItemBuilder = ItemBuilder(
-        AdvancedLobby.getMaterial("hotbar_items.silentlobby.activated.material"), 1,
-        AdvancedLobby.cfg.getInt("hotbar_items.silentlobby.activated.subid").toShort())
+        AdvancedLobby.getMaterial("hotbar_items.silentlobby.activated.material"), 1)
         .setDisplayName(AdvancedLobby.getString("hotbar_items.silentlobby.activated.displayname"))
         .setLobbyItemLore(AdvancedLobby.cfg.getStringList("hotbar_items.silentlobby.activated.lore"))
 
     val itemStackSilentLobbyDeactivate: ItemBuilder = ItemBuilder(
-        AdvancedLobby.getMaterial("hotbar_items.silentlobby.deactivated.material"), 1,
-        AdvancedLobby.cfg.getInt("hotbar_items.silentlobby.deactivated.subid").toShort())
+        AdvancedLobby.getMaterial("hotbar_items.silentlobby.deactivated.material"), 1)
         .setDisplayName(AdvancedLobby.getString("hotbar_items.silentlobby.deactivated.displayname"))
         .setLobbyItemLore(AdvancedLobby.cfg.getStringList("hotbar_items.silentlobby.deactivated.lore"))
 
