@@ -4,12 +4,12 @@ import de.cyne.advancedlobby.AdvancedLobby
 import de.cyne.advancedlobby.cosmetics.Cosmetics
 import de.cyne.advancedlobby.crossversion.VParticle
 import de.cyne.advancedlobby.locale.Locale
-import de.cyne.advancedlobby.misc.HiderType
 import gg.ninjagaming.advancedlobby.inventorybuilder.CompassInventory
 import gg.ninjagaming.advancedlobby.inventorybuilder.CosmeticsInventory
 import gg.ninjagaming.advancedlobby.itembuilders.PlayerHiderItemBuilder
 import gg.ninjagaming.advancedlobby.misc.CooldownManager
 import gg.ninjagaming.advancedlobby.misc.CooldownType
+import gg.ninjagaming.advancedlobby.misc.HiderType
 import gg.ninjagaming.advancedlobby.misc.SilentLobby
 import gg.ninjagaming.advancedlobby.misc.extras.gadgets.ShieldGadget.shieldActivate
 import gg.ninjagaming.advancedlobby.misc.extras.gadgets.ShieldGadget.shieldDeactivate

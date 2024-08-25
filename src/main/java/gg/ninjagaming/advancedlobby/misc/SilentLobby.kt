@@ -5,7 +5,6 @@ import de.cyne.advancedlobby.cosmetics.Cosmetics
 import de.cyne.advancedlobby.crossversion.VParticle
 import de.cyne.advancedlobby.itembuilder.ItemBuilder
 import de.cyne.advancedlobby.locale.Locale
-import de.cyne.advancedlobby.misc.HiderType
 import gg.ninjagaming.advancedlobby.itembuilders.PlayerHiderItemBuilder
 import org.bukkit.Bukkit
 import org.bukkit.entity.Player

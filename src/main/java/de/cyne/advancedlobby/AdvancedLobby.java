@@ -1,9 +1,7 @@
 package de.cyne.advancedlobby;
 
-import de.cyne.advancedlobby.commands.*;
 import de.cyne.advancedlobby.cosmetics.Cosmetics;
 import de.cyne.advancedlobby.metrics.Metrics;
-import de.cyne.advancedlobby.misc.HiderType;
 import de.cyne.advancedlobby.misc.Updater;
 import gg.ninjagaming.advancedlobby.commands.*;
 import gg.ninjagaming.advancedlobby.commands.advancedlobby.AdvancedLobbyCommand;
@@ -18,6 +16,7 @@ import gg.ninjagaming.advancedlobby.eventlisteners.hanging.HangingBreakByEntityE
 import gg.ninjagaming.advancedlobby.eventlisteners.inventory.InventoryClickEventListener;
 import gg.ninjagaming.advancedlobby.eventlisteners.player.*;
 import gg.ninjagaming.advancedlobby.eventlisteners.server.ServerListPingEventListener;
+import gg.ninjagaming.advancedlobby.misc.HiderType;
 import gg.ninjagaming.advancedlobby.runnables.ActionBarRunnable;
 import me.clip.placeholderapi.PlaceholderAPI;
 import org.bukkit.*;
