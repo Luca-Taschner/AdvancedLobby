@@ -2,7 +2,7 @@ package gg.ninjagaming.advancedlobby.commands
 
 import de.cyne.advancedlobby.AdvancedLobby
 import de.cyne.advancedlobby.locale.Locale
-import de.cyne.advancedlobby.misc.LocationManager
+import gg.ninjagaming.advancedlobby.misc.LocationManager
 import org.bukkit.command.Command
 import org.bukkit.command.CommandExecutor
 import org.bukkit.command.CommandSender

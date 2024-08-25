@@ -8,8 +8,8 @@ import de.cyne.advancedlobby.crossversion.VMaterial
 import de.cyne.advancedlobby.crossversion.VParticle
 import de.cyne.advancedlobby.itembuilder.ItemBuilder
 import de.cyne.advancedlobby.locale.Locale
-import de.cyne.advancedlobby.misc.LocationManager
 import gg.ninjagaming.advancedlobby.inventorybuilder.*
+import gg.ninjagaming.advancedlobby.misc.LocationManager
 import gg.ninjagaming.advancedlobby.misc.SilentLobby
 import org.bukkit.Bukkit
 import org.bukkit.Material

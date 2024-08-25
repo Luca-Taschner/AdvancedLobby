@@ -1,7 +1,7 @@
 package gg.ninjagaming.advancedlobby.commands.advancedlobby
 
 import de.cyne.advancedlobby.AdvancedLobby
-import de.cyne.advancedlobby.misc.LocationManager
+import gg.ninjagaming.advancedlobby.misc.LocationManager
 import net.kyori.adventure.text.Component
 import net.kyori.adventure.text.event.HoverEvent
 
@@ -44,8 +44,9 @@ fun handleLocationArgument(player: Player, args: Array<out String>, prefix: Stri
             }
 
             if (args[1].equals("teleport", ignoreCase = true) or args[1].equals("tp", ignoreCase = true)) {
-                if (LocationManager.getLocation(args[2]) != null) {
-                    player.teleport(LocationManager.getLocation(args[2]))
+                val teleportLocation = LocationManager.getLocation(args[2])
+                if (teleportLocation != null) {
+                    player.teleport(teleportLocation)
                     player.sendMessage(prefix + "§7You have been teleported to §b" + args[2] + "§8.")
                     return true
                 }

@@ -5,8 +5,8 @@ import de.cyne.advancedlobby.cosmetics.Cosmetics
 import de.cyne.advancedlobby.cosmetics.Cosmetics.ParticleType
 import de.cyne.advancedlobby.crossversion.VMaterial
 import de.cyne.advancedlobby.crossversion.VParticle
-import de.cyne.advancedlobby.misc.LocationManager
 import gg.ninjagaming.advancedlobby.misc.HiderType
+import gg.ninjagaming.advancedlobby.misc.LocationManager
 import org.bukkit.Bukkit
 import org.bukkit.Effect
 import org.bukkit.Location

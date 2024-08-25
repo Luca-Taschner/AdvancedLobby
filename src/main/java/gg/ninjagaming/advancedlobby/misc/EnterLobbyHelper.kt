@@ -1,7 +1,6 @@
 package gg.ninjagaming.advancedlobby.misc
 
 import de.cyne.advancedlobby.AdvancedLobby
-import de.cyne.advancedlobby.misc.LocationManager
 import gg.ninjagaming.advancedlobby.itembuilders.PlayerHotbarItemBuilder
 import gg.ninjagaming.advancedlobby.titleapi.TitleApi.sendTitle
 import net.kyori.adventure.text.Component
