@@ -4,9 +4,9 @@ import de.cyne.advancedlobby.AdvancedLobby;
 import de.cyne.advancedlobby.crossversion.VMaterial;
 import de.cyne.advancedlobby.crossversion.VParticle;
 import de.cyne.advancedlobby.locale.Locale;
-import de.cyne.advancedlobby.misc.Balloon;
 import gg.ninjagaming.advancedlobby.itembuilders.ShieldItemBuilder;
 import gg.ninjagaming.advancedlobby.misc.ItemBuilder;
+import gg.ninjagaming.advancedlobby.misc.extras.cosmetics.Balloon;
 import org.bukkit.*;
 import org.bukkit.entity.Bat;
 import org.bukkit.entity.FallingBlock;
@@ -193,6 +193,7 @@ public class Cosmetics {
             }
         }, 0L, 3L);
 
+        /*Temporarily disabled
         Bukkit.getScheduler().scheduleSyncRepeatingTask(AdvancedLobby.getInstance(), () -> {
             for (Player players : Bukkit.getOnlinePlayers()) {
                 for (FallingBlock fallingBlocks : Balloon.fallingBlocks.values()) {
@@ -203,7 +204,7 @@ public class Cosmetics {
                     }
                 }
             }
-        }, 90L, 90L);
+        }, 90L, 90L);*/
     }
 
     public static void reloadGadget(Player player) {
