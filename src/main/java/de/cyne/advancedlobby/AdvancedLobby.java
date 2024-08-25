@@ -6,6 +6,7 @@ import de.cyne.advancedlobby.metrics.Metrics;
 import de.cyne.advancedlobby.misc.HiderType;
 import de.cyne.advancedlobby.misc.Updater;
 import gg.ninjagaming.advancedlobby.commands.BuildCommand;
+import gg.ninjagaming.advancedlobby.commands.LobbyCommand;
 import gg.ninjagaming.advancedlobby.commands.TeleportAllCommand;
 import gg.ninjagaming.advancedlobby.commands.advancedlobby.AdvancedLobbyCommand;
 import gg.ninjagaming.advancedlobby.eventlisteners.block.BlockBreakEventListener;
