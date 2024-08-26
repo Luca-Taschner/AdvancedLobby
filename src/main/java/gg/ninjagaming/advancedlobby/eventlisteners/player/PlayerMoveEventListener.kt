@@ -4,9 +4,9 @@ import de.cyne.advancedlobby.AdvancedLobby
 import de.cyne.advancedlobby.cosmetics.Cosmetics
 import de.cyne.advancedlobby.cosmetics.Cosmetics.ParticleType
 import de.cyne.advancedlobby.crossversion.VMaterial
-import de.cyne.advancedlobby.crossversion.VParticle
 import gg.ninjagaming.advancedlobby.misc.HiderType
 import gg.ninjagaming.advancedlobby.misc.LocationManager
+import gg.ninjagaming.advancedlobby.misc.VParticle.getParticleEnum
 import org.bukkit.Bukkit
 import org.bukkit.Effect
 import org.bukkit.Location
@@ -245,7 +245,7 @@ class PlayerMoveEventListener : Listener {
         offsetZ: Double,
         extra: Double
     ) {
-        VParticle.spawnParticle(player, particle, player.location, count, offsetX, offsetY, offsetZ, extra)
+        player.spawnParticle(getParticleEnum(particle), player.location, count, offsetX, offsetY, offsetZ, extra)
         for (otherPlayer in Bukkit.getOnlinePlayers()) {
             if (otherPlayer === player)
                 continue
@@ -257,7 +257,7 @@ class PlayerMoveEventListener : Listener {
                 continue
 
             if (AdvancedLobby.playerHider[otherPlayer] != HiderType.NONE) {
-                VParticle.spawnParticle(otherPlayer, particle, player.location, count, offsetX, offsetY, offsetZ, extra)
+                otherPlayer.spawnParticle(getParticleEnum(particle), player.location, count, offsetX, offsetY, offsetZ, extra)
             }
         }
     }

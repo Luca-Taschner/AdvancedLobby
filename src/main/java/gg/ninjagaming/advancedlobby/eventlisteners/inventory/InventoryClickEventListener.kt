@@ -5,14 +5,15 @@ import com.google.common.io.ByteStreams
 import de.cyne.advancedlobby.AdvancedLobby
 import de.cyne.advancedlobby.cosmetics.Cosmetics
 import de.cyne.advancedlobby.crossversion.VMaterial
-import de.cyne.advancedlobby.crossversion.VParticle
 import de.cyne.advancedlobby.locale.Locale
 import gg.ninjagaming.advancedlobby.inventorybuilder.*
 import gg.ninjagaming.advancedlobby.misc.ItemBuilder
 import gg.ninjagaming.advancedlobby.misc.LocationManager
 import gg.ninjagaming.advancedlobby.misc.SilentLobby
+import gg.ninjagaming.advancedlobby.misc.VParticle.getParticleEnum
 import org.bukkit.Bukkit
 import org.bukkit.Material
+import org.bukkit.Particle
 import org.bukkit.entity.Player
 import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
@@ -490,7 +491,7 @@ class InventoryClickEventListener: Listener {
 
         player.teleport(location)
         AdvancedLobby.playSound(player, player.location, "teleporter.teleport")
-        VParticle.spawnParticle(player, "SPELL_WITCH", location, 64, 0.0, 0.0, 0.0, 0.1)
+        player.spawnParticle(getParticleEnum("SPELL_WITCH"), location, 64, 0.0, 0.0, 0.0, 0.1)
 
         val players = Bukkit.getOnlinePlayers()
 
@@ -501,7 +502,7 @@ class InventoryClickEventListener: Listener {
             if(AdvancedLobby.playerHider.containsKey(itPlayer) || AdvancedLobby.silentLobby.contains(itPlayer) || AdvancedLobby.silentLobby.contains(player))
                 return@forEach
 
-            VParticle.spawnParticle(itPlayer, "SPELL_WITCH", location, 64, 0.0, 0.0, 0.0, 0.1)
+            itPlayer.spawnParticle(getParticleEnum("SPELL_WITCH"), location, 64, 0.0, 0.0, 0.0, 0.1)
         }
 
     }

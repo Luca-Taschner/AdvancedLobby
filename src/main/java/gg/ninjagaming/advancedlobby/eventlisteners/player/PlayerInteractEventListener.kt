@@ -2,15 +2,11 @@ package gg.ninjagaming.advancedlobby.eventlisteners.player
 
 import de.cyne.advancedlobby.AdvancedLobby
 import de.cyne.advancedlobby.cosmetics.Cosmetics
-import de.cyne.advancedlobby.crossversion.VParticle
 import de.cyne.advancedlobby.locale.Locale
 import gg.ninjagaming.advancedlobby.inventorybuilder.CompassInventory
 import gg.ninjagaming.advancedlobby.inventorybuilder.CosmeticsInventory
 import gg.ninjagaming.advancedlobby.itembuilders.PlayerHiderItemBuilder
-import gg.ninjagaming.advancedlobby.misc.CooldownManager
-import gg.ninjagaming.advancedlobby.misc.CooldownType
-import gg.ninjagaming.advancedlobby.misc.HiderType
-import gg.ninjagaming.advancedlobby.misc.SilentLobby
+import gg.ninjagaming.advancedlobby.misc.*
 import gg.ninjagaming.advancedlobby.misc.extras.gadgets.ShieldGadget.shieldActivate
 import gg.ninjagaming.advancedlobby.misc.extras.gadgets.ShieldGadget.shieldDeactivate
 import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer
@@ -178,7 +174,7 @@ class PlayerInteractEventListener: Listener {
 
 
         AdvancedLobby.playSound(player, player.location, "gadgets.rocket_jump")
-        VParticle.spawnParticle(player, "EXPLOSION_LARGE", player.location, 1)
+        player.spawnParticle(VParticle.getParticleEnum("EXPLOSION_LARGE"), player.location,1 )
 
         val players = Bukkit.getOnlinePlayers()
         players.forEach{
@@ -186,7 +182,7 @@ class PlayerInteractEventListener: Listener {
                 return
 
             AdvancedLobby.playSound(it, player.location, "gadgets.rocket_jump")
-            VParticle.spawnParticle(it, "EXPLOSION_LARGE", player.location, 1)
+            it.spawnParticle(VParticle.getParticleEnum("EXPLOSION_LARGE"), player.location, 1)
         }
 
         Cosmetics.reloadGadget(player)

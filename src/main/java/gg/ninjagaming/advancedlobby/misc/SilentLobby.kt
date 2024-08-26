@@ -2,9 +2,9 @@ package gg.ninjagaming.advancedlobby.misc
 
 import de.cyne.advancedlobby.AdvancedLobby
 import de.cyne.advancedlobby.cosmetics.Cosmetics
-import de.cyne.advancedlobby.crossversion.VParticle
 import de.cyne.advancedlobby.locale.Locale
 import gg.ninjagaming.advancedlobby.itembuilders.PlayerHiderItemBuilder
+import gg.ninjagaming.advancedlobby.misc.VParticle.getParticleEnum
 import org.bukkit.Bukkit
 import org.bukkit.entity.Player
 import org.bukkit.potion.PotionEffect
@@ -28,7 +28,7 @@ object SilentLobby {
         player.sendMessage(Locale.SILENTLOBBY_JOIN.getMessage(player))
         AdvancedLobby.playSound(player, player.location, "silentlobby.enable_silentlobby")
 
-        VParticle.spawnParticle(player, "EXPLOSION_HUGE", player.location, 1)
+        player.spawnParticle(getParticleEnum("EXPLOSION_HUGE"), player.location, 1)
         player.addPotionEffect(PotionEffect(PotionEffectType.BLINDNESS, 20, 0))
 
         val players = Bukkit.getOnlinePlayers()
