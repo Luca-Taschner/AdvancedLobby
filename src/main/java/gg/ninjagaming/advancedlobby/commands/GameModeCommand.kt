@@ -1,7 +1,7 @@
 package gg.ninjagaming.advancedlobby.commands
 
 import de.cyne.advancedlobby.AdvancedLobby
-import de.cyne.advancedlobby.locale.Locale
+import gg.ninjagaming.advancedlobby.misc.Locale
 import org.bukkit.Bukkit
 import org.bukkit.GameMode
 import org.bukkit.command.Command

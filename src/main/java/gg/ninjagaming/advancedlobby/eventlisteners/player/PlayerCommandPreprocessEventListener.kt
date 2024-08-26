@@ -1,7 +1,7 @@
 package gg.ninjagaming.advancedlobby.eventlisteners.player
 
 import de.cyne.advancedlobby.AdvancedLobby
-import de.cyne.advancedlobby.locale.Locale
+import gg.ninjagaming.advancedlobby.misc.Locale
 import org.bukkit.Bukkit
 import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener

@@ -2,7 +2,6 @@ package gg.ninjagaming.advancedlobby.misc
 
 import de.cyne.advancedlobby.AdvancedLobby
 import de.cyne.advancedlobby.cosmetics.Cosmetics
-import de.cyne.advancedlobby.locale.Locale
 import gg.ninjagaming.advancedlobby.itembuilders.PlayerHiderItemBuilder
 import gg.ninjagaming.advancedlobby.misc.VParticle.getParticleEnum
 import org.bukkit.Bukkit

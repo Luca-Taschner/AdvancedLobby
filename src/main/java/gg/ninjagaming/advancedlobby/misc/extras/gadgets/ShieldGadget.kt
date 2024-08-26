@@ -1,8 +1,8 @@
 package gg.ninjagaming.advancedlobby.misc.extras.gadgets
 
 import de.cyne.advancedlobby.AdvancedLobby
-import de.cyne.advancedlobby.locale.Locale
 import gg.ninjagaming.advancedlobby.itembuilders.ShieldItemBuilder
+import gg.ninjagaming.advancedlobby.misc.Locale
 import org.bukkit.Bukkit
 import org.bukkit.Effect
 import org.bukkit.entity.Player

@@ -1,12 +1,11 @@
-package de.cyne.advancedlobby.locale;
+package gg.ninjagaming.advancedlobby.misc
 
-import de.cyne.advancedlobby.AdvancedLobby;
-import me.clip.placeholderapi.PlaceholderAPI;
-import net.md_5.bungee.api.ChatColor;
-import org.bukkit.entity.Player;
+import de.cyne.advancedlobby.AdvancedLobby
+import me.clip.placeholderapi.PlaceholderAPI
+import net.md_5.bungee.api.ChatColor
+import org.bukkit.entity.Player
 
-public enum Locale {
-
+enum class Locale(private val path: String) {
     PREFIX("prefix"),
     NO_PERMISSION("no_permission"),
     UNKNOWN_COMMAND("unknown_command"),
@@ -77,22 +76,14 @@ public enum Locale {
     COSMETICS_GADGETS_DISABLE_ERROR("cosmetics.gadgets.disable_error");
 
 
-    private String path;
-
-    private Locale(String path) {
-        this.path = path;
-    }
-
-    public String getMessage(Player player) {
-        String message = AdvancedLobby.cfgM.getString(path).replace("%prefix%", PREFIX.getDefaultMessage());
+    fun getMessage(player: Player?): String {
+        val message = AdvancedLobby.cfgM.getString(path)!!.replace("%prefix%", PREFIX.defaultMessage)
         if (AdvancedLobby.placeholderApi) {
-            return ChatColor.translateAlternateColorCodes('&', PlaceholderAPI.setPlaceholders(player, message));
+            return ChatColor.translateAlternateColorCodes('&', PlaceholderAPI.setPlaceholders(player, message))
         }
-        return ChatColor.translateAlternateColorCodes('&', message);
+        return ChatColor.translateAlternateColorCodes('&', message)
     }
 
-    public String getDefaultMessage() {
-        return ChatColor.translateAlternateColorCodes('&', AdvancedLobby.cfgM.getString(path));
-    }
-
+    private val defaultMessage: String
+        get() = ChatColor.translateAlternateColorCodes('&', AdvancedLobby.cfgM.getString(path))
 }

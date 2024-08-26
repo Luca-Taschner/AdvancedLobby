@@ -1,8 +1,8 @@
 package gg.ninjagaming.advancedlobby.commands.advancedlobby
 
 import de.cyne.advancedlobby.AdvancedLobby
-import de.cyne.advancedlobby.locale.Locale
 import gg.ninjagaming.advancedlobby.inventorybuilder.*
+import gg.ninjagaming.advancedlobby.misc.Locale
 import org.bukkit.command.Command
 import org.bukkit.command.CommandExecutor
 import org.bukkit.command.CommandSender

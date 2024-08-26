@@ -1,8 +1,8 @@
 package gg.ninjagaming.advancedlobby.eventlisteners.player
 
 import de.cyne.advancedlobby.AdvancedLobby
-import de.cyne.advancedlobby.locale.Locale
 import gg.ninjagaming.advancedlobby.misc.EnterLobbyHelper
+import gg.ninjagaming.advancedlobby.misc.Locale
 import gg.ninjagaming.advancedlobby.misc.LocationManager
 import gg.ninjagaming.advancedlobby.runnables.PlayerTabListRunnable
 import gg.ninjagaming.advancedlobby.titleapi.TitleApi.sendTabTitle
