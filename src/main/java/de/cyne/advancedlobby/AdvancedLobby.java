@@ -2,7 +2,7 @@ package de.cyne.advancedlobby;
 
 import gg.ninjagaming.advancedlobby.misc.extras.cosmetics.Cosmetics;
 import de.cyne.advancedlobby.metrics.Metrics;
-import de.cyne.advancedlobby.misc.Updater;
+import gg.ninjagaming.advancedlobby.misc.Updater;
 import gg.ninjagaming.advancedlobby.commands.*;
 import gg.ninjagaming.advancedlobby.commands.advancedlobby.AdvancedLobbyCommand;
 import gg.ninjagaming.advancedlobby.eventlisteners.block.BlockBreakEventListener;
