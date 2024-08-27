@@ -1,7 +1,6 @@
 package de.cyne.advancedlobby.cosmetics;
 
 import de.cyne.advancedlobby.AdvancedLobby;
-import de.cyne.advancedlobby.crossversion.VMaterial;
 import gg.ninjagaming.advancedlobby.itembuilders.ShieldItemBuilder;
 import gg.ninjagaming.advancedlobby.misc.ItemBuilder;
 import gg.ninjagaming.advancedlobby.misc.Locale;
@@ -49,7 +48,7 @@ public class Cosmetics {
             case MELON_BLOCK:
             case MELON:
                 if (player.hasPermission("advancedlobby.cosmetics.hats.melon")) {
-                    hat = new ItemBuilder(VMaterial.MELON.getType()).setDisplayName(AdvancedLobby.getString("inventories.cosmetics_hats.melon_hat.displayname"));
+                    hat = new ItemBuilder(Material.MELON).setDisplayName(AdvancedLobby.getString("inventories.cosmetics_hats.melon_hat.displayname"));
                     hats.put(player, HatType.MELON);
                     message = Locale.COSMETICS_HATS_EQUIP.getMessage(player).replace("%hat%", AdvancedLobby.getString("inventories.cosmetics_hats.melon_hat.displayname"));
                     break;
@@ -110,16 +109,16 @@ public class Cosmetics {
         Balloon balloon = null;
         switch (type) {
             case YELLOW:
-                balloon = new Balloon(player, VMaterial.YELLOW_TERRACOTTA.toItemStack());
+                balloon = new Balloon(player, Material.YELLOW_TERRACOTTA);
                 break;
             case RED:
-                balloon = new Balloon(player, VMaterial.RED_TERRACOTTA.toItemStack());
+                balloon = new Balloon(player, Material.RED_TERRACOTTA);
                 break;
             case GREEN:
-                balloon = new Balloon(player, VMaterial.LIME_TERRACOTTA.toItemStack());
+                balloon = new Balloon(player, Material.LIME_TERRACOTTA);
                 break;
             case BLUE:
-                balloon = new Balloon(player, VMaterial.LIGHT_BLUE_TERRACOTTA.toItemStack());
+                balloon = new Balloon(player, Material.LIGHT_BLUE_TERRACOTTA);
                 break;
             case HAY_BLOCK:
                 balloon = new Balloon(player, Material.HAY_BLOCK);

@@ -4,7 +4,6 @@ import com.google.common.io.ByteArrayDataOutput
 import com.google.common.io.ByteStreams
 import de.cyne.advancedlobby.AdvancedLobby
 import de.cyne.advancedlobby.cosmetics.Cosmetics
-import de.cyne.advancedlobby.crossversion.VMaterial
 import gg.ninjagaming.advancedlobby.inventorybuilder.*
 import gg.ninjagaming.advancedlobby.misc.ItemBuilder
 import gg.ninjagaming.advancedlobby.misc.Locale
@@ -104,7 +103,7 @@ class InventoryClickEventListener: Listener {
         when(event.currentItem?.type){
             Material.PUMPKIN -> CosmeticsHatsInventory.openInventory(player)
             Material.BLAZE_POWDER -> CosmeticsParticlesInventory.openInventory(player)
-            VMaterial.LEAD.type ->  CosmeticsBalloonsInventory.openInventory(player)
+            Material.LEAD ->  CosmeticsBalloonsInventory.openInventory(player)
             Material.FISHING_ROD -> CosmeticsGadgetsInventory.openInventory(player)
 
             else -> {return}
@@ -116,7 +115,7 @@ class InventoryClickEventListener: Listener {
     private fun cosmeticsHatClick(player: Player,event: InventoryClickEvent){
         if (!validateCosmeticsClick(player,event)) return
 
-        if(event.currentItem?.type == VMaterial.RED_DYE.type){
+        if(event.currentItem?.type == Material.RED_DYE){
             AdvancedLobby.playSound(player, player.location, "cosmetics.disable_cosmetic")
             player.closeInventory()
 
@@ -141,7 +140,7 @@ class InventoryClickEventListener: Listener {
     private fun cosmeticsParticlesClick(player: Player, event: InventoryClickEvent){
         if (!validateCosmeticsClick(player,event)) return
 
-        if (event.currentItem?.type == VMaterial.RED_DYE.type) {
+        if (event.currentItem?.type == Material.RED_DYE) {
             player.closeInventory()
             AdvancedLobby.playSound(player, player.location, "cosmetics.disable_cosmetic")
             if (Cosmetics.particles.containsKey(player)) {
@@ -169,7 +168,7 @@ class InventoryClickEventListener: Listener {
                     Locale.COSMETICS_PARTICLES_EQUIP.getMessage(player).replace("%particles%", AdvancedLobby.getString("inventories.cosmetics_particles.heart_particles.displayname")))
             }
 
-            VMaterial.MUSIC_DISC_STRAD.type->{
+            Material.MUSIC_DISC_STRAD->{
                 if (!player.hasPermission("advancedlobby.cosmetics.particles.music")){
                     player.sendMessage(
                         Locale.COSMETICS_PARTICLES_NO_PERMISSION.getMessage(player).replace("%particles%", AdvancedLobby.getString("inventories.cosmetics_particles.music_particles.displayname")))
@@ -181,7 +180,7 @@ class InventoryClickEventListener: Listener {
                     Locale.COSMETICS_PARTICLES_EQUIP.getMessage(player).replace("%particles%", AdvancedLobby.getString("inventories.cosmetics_particles.music_particles.displayname")))
             }
 
-            VMaterial.FIRE_CHARGE.type->{
+            Material.FIRE_CHARGE->{
                 if (!player.hasPermission("advancedlobby.cosmetics.particles.flames")){
                     player.sendMessage(
                         Locale.COSMETICS_PARTICLES_NO_PERMISSION.getMessage(player).replace("%particles%", AdvancedLobby.getString("inventories.cosmetics_particles.flames_particles.displayname")))
@@ -226,7 +225,7 @@ class InventoryClickEventListener: Listener {
     private fun cosmeticsBalloonsClick(player: Player,event: InventoryClickEvent){
         if (!validateCosmeticsClick(player,event)) return
 
-        if (event.currentItem?.type == VMaterial.RED_DYE.type) {
+        if (event.currentItem?.type == Material.RED_DYE) {
             player.closeInventory()
             AdvancedLobby.playSound(player, player.location, "cosmetics.disable_cosmetic")
             if (Cosmetics.particles.containsKey(player)) {
@@ -245,7 +244,7 @@ class InventoryClickEventListener: Listener {
         AdvancedLobby.playSound(player, player.location, "cosmetics.equip_cosmetic")
 
         when(event.currentItem?.type){
-            VMaterial.YELLOW_TERRACOTTA.type ->{
+            Material.YELLOW_TERRACOTTA ->{
                if (!player.hasPermission("advancedlobby.cosmetics.balloons.yellow")) {
                    player.sendMessage(
                        Locale.COSMETICS_BALLOONS_NO_PERMISSION.getMessage(player).replace("%balloon%", AdvancedLobby.getString("inventories.cosmetics_balloons.yellow_balloon.displayname")))
@@ -258,7 +257,7 @@ class InventoryClickEventListener: Listener {
 
             }
 
-            VMaterial.RED_TERRACOTTA.type ->{
+            Material.RED_TERRACOTTA ->{
                 if (!player.hasPermission("advancedlobby.cosmetics.balloons.red")) {
                     player.sendMessage(
                         Locale.COSMETICS_BALLOONS_NO_PERMISSION.getMessage(player).replace("%balloon%", AdvancedLobby.getString("inventories.cosmetics_balloons.red_balloon.displayname")))
@@ -271,7 +270,7 @@ class InventoryClickEventListener: Listener {
 
             }
 
-            VMaterial.LIME_TERRACOTTA.type ->{
+            Material.LIME_TERRACOTTA ->{
                 if (!player.hasPermission("advancedlobby.cosmetics.balloons.green")) {
                     player.sendMessage(
                         Locale.COSMETICS_BALLOONS_NO_PERMISSION.getMessage(player).replace("%balloon%", AdvancedLobby.getString("inventories.cosmetics_balloons.green_balloon.displayname")))
@@ -284,7 +283,7 @@ class InventoryClickEventListener: Listener {
 
             }
 
-            VMaterial.LIGHT_BLUE_TERRACOTTA.type ->{
+            Material.LIGHT_BLUE_TERRACOTTA ->{
                 if (!player.hasPermission("advancedlobby.cosmetics.balloons.blue")) {
                     player.sendMessage(
                         Locale.COSMETICS_BALLOONS_NO_PERMISSION.getMessage(player).replace("%balloon%", AdvancedLobby.getString("inventories.cosmetics_balloons.blue_balloon.displayname")))
@@ -358,7 +357,7 @@ class InventoryClickEventListener: Listener {
     private fun cosmeticsGadgetsClick(player: Player,event: InventoryClickEvent){
         if (!validateCosmeticsClick(player,event)) return
 
-        if (event.currentItem?.type == VMaterial.RED_DYE.type) {
+        if (event.currentItem?.type == Material.RED_DYE) {
             player.closeInventory()
             AdvancedLobby.playSound(player, player.location, "cosmetics.disable_cosmetic")
             if (Cosmetics.gadgets.containsKey(player)) {
@@ -428,7 +427,7 @@ class InventoryClickEventListener: Listener {
             return false
         }
 
-        if (event.currentItem?.type == VMaterial.BLACK_STAINED_GLASS_PANE.type) return false
+        if (event.currentItem?.type == Material.BLACK_STAINED_GLASS_PANE) return false
         if (event.currentItem?.type == Material.AIR) return false
 
         return true

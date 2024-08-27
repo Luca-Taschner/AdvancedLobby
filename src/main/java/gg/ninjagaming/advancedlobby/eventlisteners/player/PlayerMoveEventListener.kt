@@ -3,7 +3,6 @@ package gg.ninjagaming.advancedlobby.eventlisteners.player
 import de.cyne.advancedlobby.AdvancedLobby
 import de.cyne.advancedlobby.cosmetics.Cosmetics
 import de.cyne.advancedlobby.cosmetics.Cosmetics.ParticleType
-import de.cyne.advancedlobby.crossversion.VMaterial
 import gg.ninjagaming.advancedlobby.misc.HiderType
 import gg.ninjagaming.advancedlobby.misc.LocationManager
 import gg.ninjagaming.advancedlobby.misc.VParticle.getParticleEnum
@@ -17,15 +16,15 @@ import org.bukkit.event.Listener
 import org.bukkit.event.player.PlayerMoveEvent
 
 val JumpPadMaterials = arrayOf(
-    VMaterial.HEAVY_WEIGHTED_PRESSURE_PLATE.type, 
-    VMaterial.DARK_OAK_PRESSURE_PLATE.type, 
-    VMaterial.BIRCH_PRESSURE_PLATE.type,
-    VMaterial.ACACIA_PRESSURE_PLATE.type, 
-    VMaterial.JUNGLE_PRESSURE_PLATE.type, 
-    VMaterial.LIGHT_WEIGHTED_PRESSURE_PLATE.type, 
-    VMaterial.OAK_PRESSURE_PLATE.type, 
-    VMaterial.SPRUCE_PRESSURE_PLATE.type, 
-    VMaterial.STONE_PRESSURE_PLATE.type)
+    Material.HEAVY_WEIGHTED_PRESSURE_PLATE,
+    Material.DARK_OAK_PRESSURE_PLATE,
+    Material.BIRCH_PRESSURE_PLATE,
+    Material.ACACIA_PRESSURE_PLATE,
+    Material.JUNGLE_PRESSURE_PLATE,
+    Material.LIGHT_WEIGHTED_PRESSURE_PLATE,
+    Material.OAK_PRESSURE_PLATE,
+    Material.SPRUCE_PRESSURE_PLATE,
+    Material.STONE_PRESSURE_PLATE)
 
 class PlayerMoveEventListener : Listener {
     @EventHandler
