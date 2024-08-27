@@ -3,7 +3,7 @@ package gg.ninjagaming.advancedlobby.eventlisteners.inventory
 import com.google.common.io.ByteArrayDataOutput
 import com.google.common.io.ByteStreams
 import de.cyne.advancedlobby.AdvancedLobby
-import de.cyne.advancedlobby.cosmetics.Cosmetics
+import gg.ninjagaming.advancedlobby.misc.extras.cosmetics.Cosmetics
 import gg.ninjagaming.advancedlobby.inventorybuilder.*
 import gg.ninjagaming.advancedlobby.misc.ItemBuilder
 import gg.ninjagaming.advancedlobby.misc.Locale

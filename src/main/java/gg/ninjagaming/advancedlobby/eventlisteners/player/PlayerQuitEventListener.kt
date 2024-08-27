@@ -1,7 +1,7 @@
 package gg.ninjagaming.advancedlobby.eventlisteners.player
 
 import de.cyne.advancedlobby.AdvancedLobby
-import de.cyne.advancedlobby.cosmetics.Cosmetics
+import gg.ninjagaming.advancedlobby.misc.extras.cosmetics.Cosmetics
 import gg.ninjagaming.advancedlobby.misc.Locale
 import net.kyori.adventure.text.Component
 import org.bukkit.event.EventHandler

@@ -1,9 +1,7 @@
 package gg.ninjagaming.advancedlobby.runnables
 
 
-import de.cyne.advancedlobby.AdvancedLobby
-import de.cyne.advancedlobby.cosmetics.Cosmetics
-import gg.ninjagaming.advancedlobby.titleapi.TitleApi.sendTabTitle
+import gg.ninjagaming.advancedlobby.misc.extras.cosmetics.Cosmetics
 import org.bukkit.entity.Player
 
 object PlayerTeleportBalloonRunnable {

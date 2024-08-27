@@ -1,8 +1,8 @@
 package gg.ninjagaming.advancedlobby.eventlisteners.player
 
 import de.cyne.advancedlobby.AdvancedLobby
-import de.cyne.advancedlobby.cosmetics.Cosmetics
-import de.cyne.advancedlobby.cosmetics.Cosmetics.ParticleType
+import gg.ninjagaming.advancedlobby.misc.extras.cosmetics.Cosmetics
+import gg.ninjagaming.advancedlobby.misc.extras.cosmetics.Cosmetics.ParticleType
 import gg.ninjagaming.advancedlobby.misc.HiderType
 import gg.ninjagaming.advancedlobby.misc.LocationManager
 import gg.ninjagaming.advancedlobby.misc.VParticle.getParticleEnum
@@ -33,7 +33,7 @@ class PlayerMoveEventListener : Listener {
         if (!AdvancedLobby.multiWorld_mode or AdvancedLobby.lobbyWorlds.contains(player.world)) {
 
             //Display Player Particles
-            if (Cosmetics.particles.containsKey(player)) 
+            if (Cosmetics.particles.containsKey(player))
                 showPlayerParticles(player)
             
             //Player Void TP Check

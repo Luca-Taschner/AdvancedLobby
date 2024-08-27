@@ -1,7 +1,7 @@
 package gg.ninjagaming.advancedlobby.eventlisteners.player
 
 import de.cyne.advancedlobby.AdvancedLobby
-import de.cyne.advancedlobby.cosmetics.Cosmetics
+import gg.ninjagaming.advancedlobby.misc.extras.cosmetics.Cosmetics
 import gg.ninjagaming.advancedlobby.inventorybuilder.CompassInventory
 import gg.ninjagaming.advancedlobby.inventorybuilder.CosmeticsInventory
 import gg.ninjagaming.advancedlobby.itembuilders.PlayerHiderItemBuilder

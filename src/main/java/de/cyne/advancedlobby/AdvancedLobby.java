@@ -1,6 +1,6 @@
 package de.cyne.advancedlobby;
 
-import de.cyne.advancedlobby.cosmetics.Cosmetics;
+import gg.ninjagaming.advancedlobby.misc.extras.cosmetics.Cosmetics;
 import de.cyne.advancedlobby.metrics.Metrics;
 import de.cyne.advancedlobby.misc.Updater;
 import gg.ninjagaming.advancedlobby.commands.*;
