@@ -70,7 +70,7 @@ player_join:
 #➥ Placeholders: %player%: Player name; PlaceholderAPI
 title:
   enabled: true
-  title: '§bWelcome&8, §7%player%'
+  title: '§bWelcome§8, §7%player%'
   subtitle: '§7on §fAdvancedLobby'
 
 #Void teleport settings
@@ -199,10 +199,10 @@ inventories:
     #example:
     #  material: GRASS
     #  subid: 0
-    #  displayname: '&8● &bExample'
+    #  displayname: '§8● §bExample'
     #  lore:
-    #  - '&8&m---------------'
-    #  - ' &8» &7Click to teleport'
+    #  - '§8§m---------------'
+    #  - ' §8» §7Click to teleport'
     #  slot: 13
     #  execute:
     #    0:
@@ -332,10 +332,10 @@ inventories:
   cosmetics_gadgets:
     title: '§dCosmetics §8× §fGadgets'
     go_back:
-      displayname: '§8◄ &7Go back'
+      displayname: '§8◄ §7Go back'
       lore: []
     disable:
-      displayname: '§8► &cDisable gadget'
+      displayname: '§8► §cDisable gadget'
       lore: []
     grappling_hook_gadget:
       displayname: '§bGrappling hook'
