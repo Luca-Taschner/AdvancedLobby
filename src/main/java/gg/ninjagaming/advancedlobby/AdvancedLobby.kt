@@ -78,7 +78,7 @@ class AdvancedLobby : JavaPlugin() {
     override fun onDisable() {
         for (players: Player? in Bukkit.getOnlinePlayers()) {
             if (Cosmetics.balloons.containsKey(players)) {
-                Cosmetics.balloons[players]!!.remove()
+                Cosmetics.balloons[players]!!.removeBalloon()
             }
         }
     }

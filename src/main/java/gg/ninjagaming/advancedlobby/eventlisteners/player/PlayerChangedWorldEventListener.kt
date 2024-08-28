@@ -60,7 +60,7 @@ class PlayerChangedWorldEventListener : Listener {
         if (Cosmetics.balloons.containsKey(player)) {
             Bukkit.getScheduler().scheduleSyncDelayedTask(
                 AdvancedLobby.instance!!,
-                { Cosmetics.balloons[player]!!.remove() }, 5L
+                { Cosmetics.balloons[player]!!.removeBalloon() }, 5L
             )
         }
         AdvancedLobby.build.remove(player)

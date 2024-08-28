@@ -228,8 +228,9 @@ class InventoryClickEventListener: Listener {
         if (event.currentItem?.type == Material.RED_DYE) {
             player.closeInventory()
             AdvancedLobby.playSound(player, player.location, "cosmetics.disable_cosmetic")
-            if (Cosmetics.particles.containsKey(player)) {
-                Cosmetics.particles.remove(player)
+            if (Cosmetics.balloons.containsKey(player)) {
+                Cosmetics.balloons[player]?.removeBalloon()
+                Cosmetics.balloons.remove(player)
                 player.sendMessage(Locale.COSMETICS_BALLOONS_DISABLE.getMessage(player))
                 return
             }
@@ -238,8 +239,10 @@ class InventoryClickEventListener: Listener {
         }
 
         if (Cosmetics.balloons.containsKey(player)) {
-            Cosmetics.balloons[player]?.remove()
+            Cosmetics.balloons[player]?.removeBalloon()
             Cosmetics.balloons.remove(player)
+
+
         }
         AdvancedLobby.playSound(player, player.location, "cosmetics.equip_cosmetic")
 

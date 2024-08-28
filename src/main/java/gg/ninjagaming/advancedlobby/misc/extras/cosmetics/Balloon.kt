@@ -5,29 +5,16 @@ import org.bukkit.entity.Bat
 import org.bukkit.entity.EntityType
 import org.bukkit.entity.FallingBlock
 import org.bukkit.entity.Player
-import org.bukkit.inventory.ItemStack
 import org.bukkit.potion.PotionEffect
 import org.bukkit.potion.PotionEffectType
 
-class Balloon {
-    private var player: Player
-    private var material: Material
+class Balloon(private var player: Player, private var material: Material) {
     var fallingBlock: FallingBlock? = null
         private set
     var bat: Bat? = null
         private set
 
-    constructor(player: Player, material: Material) {
-        this.player = player
-        this.material = material
-    }
-
-    constructor(player: Player, itemStack: ItemStack) {
-        this.player = player
-        this.material = itemStack.type
-    }
-
-    fun create() {
+    fun createBalloon() {
         val location = player.location
         location.yaw += 90.0f
         location.pitch = -45.0f
@@ -52,12 +39,14 @@ class Balloon {
         fallingBlocks[player] = fallingBlock!!
     }
 
-    fun remove() {
+    fun removeBalloon() {
         if (fallingBlocks.containsKey(player)) {
             fallingBlocks[player]!!.remove()
             fallingBlocks.remove(player)
         }
         if (bats.containsKey(player)) {
+            bats[player]!!.remove()
+            bats[player]!!.setLeashHolder(null)
             bats[player]!!.remove()
             bats.remove(player)
         }

@@ -126,7 +126,7 @@ object Cosmetics {
 
         if (!AdvancedLobby.silentLobby.contains(player)) {
 
-            balloon.create()
+            balloon.createBalloon()
         }
         balloons[player] = balloon
 
@@ -170,11 +170,11 @@ object Cosmetics {
                         continue
 
                     if (balloons[players]!!.fallingBlock == null) {
-                        balloons[players]!!.create()
+                        balloons[players]!!.createBalloon()
                     }
                     if (balloons[players]!!.fallingBlock!!.isDead or balloons[players]!!.bat!!.isDead) {
-                        balloons[players]!!.remove()
-                        balloons[players]!!.create()
+                        balloons[players]!!.removeBalloon()
+                        balloons[players]!!.createBalloon()
                     }
                     val localBat = balloons[players]!!.bat
 

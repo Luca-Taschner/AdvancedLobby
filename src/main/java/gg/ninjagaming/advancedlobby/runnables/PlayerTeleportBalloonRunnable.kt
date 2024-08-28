@@ -7,8 +7,8 @@ import org.bukkit.entity.Player
 object PlayerTeleportBalloonRunnable {
     fun schedulingRunnable(player:  Player): Runnable {
         val r = Runnable {
-            Cosmetics.balloons[player]!!.remove()
-            Cosmetics.balloons[player]!!.create()
+            Cosmetics.balloons[player]!!.removeBalloon()
+            Cosmetics.balloons[player]!!.createBalloon()
         }
         return r
     }

@@ -18,7 +18,7 @@ class PlayerQuitEventListener : Listener {
 
 
         if (Cosmetics.balloons.containsKey(player)) {
-            Cosmetics.balloons[player]!!.remove()
+            Cosmetics.balloons[player]!!.removeBalloon()
         }
 
         AdvancedLobby.build.remove(player)
