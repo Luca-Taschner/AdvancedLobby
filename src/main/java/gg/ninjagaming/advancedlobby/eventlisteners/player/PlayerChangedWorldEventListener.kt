@@ -1,6 +1,6 @@
 package gg.ninjagaming.advancedlobby.eventlisteners.player
 
-import de.cyne.advancedlobby.AdvancedLobby
+import gg.ninjagaming.advancedlobby.AdvancedLobby
 import gg.ninjagaming.advancedlobby.misc.extras.cosmetics.Cosmetics
 import gg.ninjagaming.advancedlobby.misc.EnterLobbyHelper
 import org.bukkit.Bukkit
@@ -59,7 +59,7 @@ class PlayerChangedWorldEventListener : Listener {
     private fun playerLeaveLobby(player: Player) {
         if (Cosmetics.balloons.containsKey(player)) {
             Bukkit.getScheduler().scheduleSyncDelayedTask(
-                AdvancedLobby.getInstance(),
+                AdvancedLobby.instance!!,
                 { Cosmetics.balloons[player]!!.remove() }, 5L
             )
         }
@@ -75,7 +75,7 @@ class PlayerChangedWorldEventListener : Listener {
 
         for (players in Bukkit.getOnlinePlayers()) {
             if (!AdvancedLobby.silentLobby.contains(players)) {
-                player.showPlayer(AdvancedLobby.getInstance(), players)
+                player.showPlayer(AdvancedLobby.instance!!, players)
             }
         }
 

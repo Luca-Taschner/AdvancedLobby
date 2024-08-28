@@ -1,6 +1,6 @@
 package gg.ninjagaming.advancedlobby.misc.extras.cosmetics
 
-import de.cyne.advancedlobby.AdvancedLobby
+import gg.ninjagaming.advancedlobby.AdvancedLobby
 import gg.ninjagaming.advancedlobby.itembuilders.ShieldItemBuilder.itemStackShieldActivate
 import gg.ninjagaming.advancedlobby.misc.ItemBuilder
 import gg.ninjagaming.advancedlobby.misc.Locale
@@ -157,7 +157,7 @@ object Cosmetics {
     @JvmStatic
     fun startBalloonTask() {
         Bukkit.getScheduler().scheduleSyncRepeatingTask(
-            AdvancedLobby.getInstance(),
+            AdvancedLobby.instance!!,
             {
                 for (players in Bukkit.getOnlinePlayers()) {
                     if (!balloons.containsKey(players))
@@ -197,7 +197,7 @@ object Cosmetics {
 
     fun reloadGadget(player: Player) {
         gadgetReloading.add(player)
-        Bukkit.getScheduler().scheduleSyncDelayedTask(AdvancedLobby.getInstance(), {
+        Bukkit.getScheduler().scheduleSyncDelayedTask(AdvancedLobby.instance!!, {
             if (player.isOnline) {
                 gadgetReloading.remove(player)
             }

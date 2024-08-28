@@ -1,6 +1,6 @@
 package gg.ninjagaming.advancedlobby.misc
 
-import de.cyne.advancedlobby.AdvancedLobby
+import gg.ninjagaming.advancedlobby.AdvancedLobby
 import me.clip.placeholderapi.PlaceholderAPI
 import net.md_5.bungee.api.ChatColor
 import org.bukkit.entity.Player

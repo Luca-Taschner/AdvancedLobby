@@ -1,6 +1,6 @@
 package gg.ninjagaming.advancedlobby.misc
 
-import de.cyne.advancedlobby.AdvancedLobby
+import gg.ninjagaming.advancedlobby.AdvancedLobby
 import gg.ninjagaming.advancedlobby.misc.extras.cosmetics.Cosmetics
 import gg.ninjagaming.advancedlobby.itembuilders.PlayerHiderItemBuilder
 import gg.ninjagaming.advancedlobby.misc.VParticle.getParticleEnum
@@ -35,8 +35,8 @@ object SilentLobby {
             if (it == player)
                 return
 
-            it.hidePlayer(AdvancedLobby.getInstance(), player)
-            player.hidePlayer(AdvancedLobby.getInstance(), it)
+            it.hidePlayer(AdvancedLobby.instance!!, player)
+            player.hidePlayer(AdvancedLobby.instance!!, it)
         }
         if (AdvancedLobby.cfg.getBoolean("hotbar_items.silentlobby.inHotbar"))
             player.inventory.setItemInMainHand(itemStackSilentLobbyActivate)
@@ -44,7 +44,8 @@ object SilentLobby {
         player.inventory.setItem(AdvancedLobby.cfg.getInt("hotbar_items.player_hider.slot"), PlayerHiderItemBuilder.itemStackShowNone)
 
         if (Cosmetics.balloons.containsKey(player)) {
-            Bukkit.getScheduler().scheduleSyncDelayedTask(AdvancedLobby.getInstance(),
+            Bukkit.getScheduler().scheduleSyncDelayedTask(
+                AdvancedLobby.instance!!,
                 { Cosmetics.balloons[player]!!.remove() }, 5L
             )
         }
@@ -68,27 +69,27 @@ object SilentLobby {
             if (it == player)
                 return
 
-            it.showPlayer(AdvancedLobby.getInstance(), player)
-            player.showPlayer(AdvancedLobby.getInstance(), it)
+            it.showPlayer(AdvancedLobby.instance!!, player)
+            player.showPlayer(AdvancedLobby.instance!!, it)
 
             if (!AdvancedLobby.silentLobby.contains(it))
                 return
 
             if (!AdvancedLobby.playerHider.containsKey(it)){
-                it.showPlayer(AdvancedLobby.getInstance(), player)
-                player.showPlayer(AdvancedLobby.getInstance(), it)
+                it.showPlayer(AdvancedLobby.instance!!, player)
+                player.showPlayer(AdvancedLobby.instance!!, it)
                 return
             }
 
             if (AdvancedLobby.playerHider[it] == HiderType.VIP && player.hasPermission("advancedlobby.player_hider.bypass")){
-                it.showPlayer(AdvancedLobby.getInstance(), player)
+                it.showPlayer(AdvancedLobby.instance!!, player)
             }
 
             if (AdvancedLobby.playerHider[it] == HiderType.NONE){
-                it.showPlayer(AdvancedLobby.getInstance(), player)
+                it.showPlayer(AdvancedLobby.instance!!, player)
             }
 
-            player.showPlayer(AdvancedLobby.getInstance(), it)
+            player.showPlayer(AdvancedLobby.instance!!, it)
         }
     }
 }

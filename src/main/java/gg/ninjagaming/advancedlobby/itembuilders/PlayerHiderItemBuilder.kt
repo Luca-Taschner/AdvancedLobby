@@ -1,6 +1,6 @@
 package gg.ninjagaming.advancedlobby.itembuilders
 
-import de.cyne.advancedlobby.AdvancedLobby
+import gg.ninjagaming.advancedlobby.AdvancedLobby
 import gg.ninjagaming.advancedlobby.misc.ItemBuilder
 
 object PlayerHiderItemBuilder {

@@ -1,6 +1,6 @@
 package gg.ninjagaming.advancedlobby.commands.advancedlobby
 
-import de.cyne.advancedlobby.AdvancedLobby
+import gg.ninjagaming.advancedlobby.AdvancedLobby
 import gg.ninjagaming.advancedlobby.misc.LocationManager
 import net.kyori.adventure.text.Component
 import net.kyori.adventure.text.event.HoverEvent

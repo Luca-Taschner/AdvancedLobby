@@ -1,6 +1,6 @@
 package gg.ninjagaming.advancedlobby.commands
 
-import de.cyne.advancedlobby.AdvancedLobby
+import gg.ninjagaming.advancedlobby.AdvancedLobby
 import gg.ninjagaming.advancedlobby.misc.Locale
 import gg.ninjagaming.advancedlobby.misc.LocationManager
 import org.bukkit.command.Command

@@ -1,6 +1,6 @@
 package gg.ninjagaming.advancedlobby.eventlisteners.player
 
-import de.cyne.advancedlobby.AdvancedLobby
+import gg.ninjagaming.advancedlobby.AdvancedLobby
 import gg.ninjagaming.advancedlobby.misc.EnterLobbyHelper
 import gg.ninjagaming.advancedlobby.misc.Locale
 import gg.ninjagaming.advancedlobby.misc.LocationManager
@@ -85,7 +85,7 @@ class PlayerJoinEventListener :Listener{
      * @param player the player for whom to add the tab list scheduler
      */
     private fun addTabListScheduler(player: Player){
-        Bukkit.getScheduler().scheduleSyncRepeatingTask(AdvancedLobby.getInstance(),PlayerTabListRunnable.schedulingRunnable(player),0L,20L)
+        Bukkit.getScheduler().scheduleSyncRepeatingTask(AdvancedLobby.instance!!,PlayerTabListRunnable.schedulingRunnable(player),0L,20L)
     }
 
     private fun fistTimeJoin(player: Player){

@@ -1,6 +1,6 @@
 package gg.ninjagaming.advancedlobby.misc
 
-import de.cyne.advancedlobby.AdvancedLobby
+import gg.ninjagaming.advancedlobby.AdvancedLobby
 import org.bukkit.Bukkit
 import org.bukkit.Location
 import java.io.IOException

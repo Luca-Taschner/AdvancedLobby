@@ -1,12 +1,13 @@
 package gg.ninjagaming.advancedlobby.commands
 
-import de.cyne.advancedlobby.AdvancedLobby
+import gg.ninjagaming.advancedlobby.AdvancedLobby
 import gg.ninjagaming.advancedlobby.misc.Locale
 import org.bukkit.GameMode
 import org.bukkit.command.Command
 import org.bukkit.command.CommandExecutor
 import org.bukkit.command.CommandSender
 import org.bukkit.entity.Player
+import org.bukkit.inventory.ItemStack
 
 class BuildCommand : CommandExecutor {
     override fun onCommand(sender: CommandSender, cmd: Command, label: String, args: Array<String>): Boolean {
@@ -26,7 +27,7 @@ class BuildCommand : CommandExecutor {
 
             sender.gameMode = GameMode.CREATIVE
 
-            AdvancedLobby.buildInventory[sender] = sender.inventory.contents
+            AdvancedLobby.buildInventory[sender] = sender.inventory.contents as Array<ItemStack>
             sender.inventory.clear()
             return true
         }

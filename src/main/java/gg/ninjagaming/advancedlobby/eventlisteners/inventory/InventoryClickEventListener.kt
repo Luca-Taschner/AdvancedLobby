@@ -2,7 +2,7 @@ package gg.ninjagaming.advancedlobby.eventlisteners.inventory
 
 import com.google.common.io.ByteArrayDataOutput
 import com.google.common.io.ByteStreams
-import de.cyne.advancedlobby.AdvancedLobby
+import gg.ninjagaming.advancedlobby.AdvancedLobby
 import gg.ninjagaming.advancedlobby.misc.extras.cosmetics.Cosmetics
 import gg.ninjagaming.advancedlobby.inventorybuilder.*
 import gg.ninjagaming.advancedlobby.misc.ItemBuilder
@@ -50,7 +50,7 @@ class InventoryClickEventListener: Listener {
     private fun compassClick(player: Player, event: InventoryClickEvent){
 
         val configurationSectionKeys =
-            AdvancedLobby.getInstance().config.getConfigurationSection("inventories.teleporter.items")?.getKeys(false)
+            AdvancedLobby.instance!!.config.getConfigurationSection("inventories.teleporter.items")?.getKeys(false)
                 ?: return
 
         if (AdvancedLobby.cfg.getBoolean("hotbar_items.silentlobby.enabled") && !AdvancedLobby.cfg.getBoolean("hotbar_items.silentlobby.inHotbar") && player.hasPermission("advancedlobby.silentlobby")){
@@ -364,7 +364,8 @@ class InventoryClickEventListener: Listener {
                 Cosmetics.gadgets.remove(player)
 
                 val noGadget = ItemBuilder(
-                    AdvancedLobby.getMaterial("hotbar_items.gadget.unequipped.material"), 1).setDisplayName(AdvancedLobby.cfg.getString("hotbar_items.gadget.unequipped.displayname"))
+                    AdvancedLobby.getMaterial("hotbar_items.gadget.unequipped.material"), 1).setDisplayName(
+                    AdvancedLobby.cfg.getString("hotbar_items.gadget.unequipped.displayname"))
                     .setLobbyItemLore(AdvancedLobby.cfg.getStringList("hotbar_items.gadget.unequipped.lore"))
                 player.inventory.setItem(AdvancedLobby.cfg.getInt("hotbar_items.gadget.slot"), noGadget)
 
@@ -463,7 +464,7 @@ class InventoryClickEventListener: Listener {
 
     private fun consoleCommandExecution(player: Player, command: String){
         command.replace("%player%", player.name)
-        AdvancedLobby.getInstance().server.dispatchCommand(Bukkit.getConsoleSender(), command)
+        AdvancedLobby.instance!!.server.dispatchCommand(Bukkit.getConsoleSender(), command)
     }
 
     private fun locationExecution(player: Player, locationString: String){
@@ -515,7 +516,7 @@ class InventoryClickEventListener: Listener {
             out.writeUTF("Connect")
             out.writeUTF(server)
 
-            player.sendPluginMessage(AdvancedLobby.getInstance(), "BungeeCord", out.toByteArray())
+            player.sendPluginMessage(AdvancedLobby.instance!!, "BungeeCord", out.toByteArray())
         }catch (e: Exception){
             println(e)}
     }

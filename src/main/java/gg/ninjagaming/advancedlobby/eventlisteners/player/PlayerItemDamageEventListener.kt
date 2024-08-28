@@ -1,6 +1,6 @@
 package gg.ninjagaming.advancedlobby.eventlisteners.player
 
-import de.cyne.advancedlobby.AdvancedLobby
+import gg.ninjagaming.advancedlobby.AdvancedLobby
 import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer
 import org.bukkit.Material
 import org.bukkit.event.EventHandler

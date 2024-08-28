@@ -1,6 +1,6 @@
 package gg.ninjagaming.advancedlobby.misc
 
-import de.cyne.advancedlobby.AdvancedLobby
+import gg.ninjagaming.advancedlobby.AdvancedLobby
 import gg.ninjagaming.advancedlobby.itembuilders.PlayerHotbarItemBuilder
 import gg.ninjagaming.advancedlobby.titleapi.TitleApi.sendTitle
 import net.kyori.adventure.text.Component
@@ -60,11 +60,11 @@ object EnterLobbyHelper {
         for (players in AdvancedLobby.playerHider.keys) {
             if (AdvancedLobby.playerHider[players] == HiderType.VIP) {
                 if (!player.hasPermission("advancedlobby.player_hider.bypass")) {
-                    players.hidePlayer(AdvancedLobby.getInstance(),player)
+                    players.hidePlayer(AdvancedLobby.instance!!,player)
                 }
             }
             if (AdvancedLobby.playerHider[players] == HiderType.NONE) {
-                players.hidePlayer(AdvancedLobby.getInstance(),player)
+                players.hidePlayer(AdvancedLobby.instance!!,player)
             }
         }
     }
@@ -76,8 +76,8 @@ object EnterLobbyHelper {
      */
     fun hideSilentLobbyPlayers(player: Player){
         for (players in AdvancedLobby.silentLobby) {
-            players.hidePlayer(AdvancedLobby.getInstance(), player)
-            player.hidePlayer(AdvancedLobby.getInstance(), players)
+            players.hidePlayer(AdvancedLobby.instance!!, player)
+            player.hidePlayer(AdvancedLobby.instance!!, players)
         }
     }
 

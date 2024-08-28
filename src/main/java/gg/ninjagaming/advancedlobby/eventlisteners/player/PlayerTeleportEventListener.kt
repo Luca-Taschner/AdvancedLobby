@@ -1,6 +1,6 @@
 package gg.ninjagaming.advancedlobby.eventlisteners.player
 
-import de.cyne.advancedlobby.AdvancedLobby
+import gg.ninjagaming.advancedlobby.AdvancedLobby
 import gg.ninjagaming.advancedlobby.misc.extras.cosmetics.Cosmetics
 import gg.ninjagaming.advancedlobby.runnables.PlayerTeleportBalloonRunnable
 import org.bukkit.Bukkit
@@ -18,6 +18,6 @@ class PlayerTeleportEventListener :Listener {
             return
 
 
-        Bukkit.getScheduler().scheduleSyncDelayedTask(AdvancedLobby.getInstance(), PlayerTeleportBalloonRunnable.schedulingRunnable(player), 2L)
+        Bukkit.getScheduler().scheduleSyncDelayedTask(AdvancedLobby.instance!!, PlayerTeleportBalloonRunnable.schedulingRunnable(player), 2L)
     }
 }

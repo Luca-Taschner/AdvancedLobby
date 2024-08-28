@@ -1,6 +1,6 @@
 package gg.ninjagaming.advancedlobby.eventlisteners.player
 
-import de.cyne.advancedlobby.AdvancedLobby
+import gg.ninjagaming.advancedlobby.AdvancedLobby
 import gg.ninjagaming.advancedlobby.misc.extras.cosmetics.Cosmetics
 import gg.ninjagaming.advancedlobby.misc.extras.cosmetics.Cosmetics.ParticleType
 import gg.ninjagaming.advancedlobby.misc.HiderType
@@ -37,12 +37,12 @@ class PlayerMoveEventListener : Listener {
                 showPlayerParticles(player)
             
             //Player Void TP Check
-            if (AdvancedLobby.cfg.getBoolean("void_teleport.enabled")) 
+            if (AdvancedLobby.cfg.getBoolean("void_teleport.enabled"))
                 voidTeleportCheck(player)
             
             //Check if Jump-Pad was triggered
             if (player.location.block.type in JumpPadMaterials && player.location.subtract(0.0, 2.0, 0.0).block.type == Material.REDSTONE_BLOCK) {
-                if (AdvancedLobby.cfg.getBoolean("jumppads.enabled")) 
+                if (AdvancedLobby.cfg.getBoolean("jumppads.enabled"))
                     activateJumpPad(player)
                 
             }
@@ -95,7 +95,8 @@ class PlayerMoveEventListener : Listener {
             AdvancedLobby.playSound(otherPlayer, player.location, "worldborder_push_back")
         }
 
-        Bukkit.getScheduler().scheduleSyncDelayedTask(AdvancedLobby.getInstance(), {
+        Bukkit.getScheduler().scheduleSyncDelayedTask(
+            AdvancedLobby.instance!!, {
             if (!playerAtWorldBorder(player, centerLocation))
                 return@scheduleSyncDelayedTask
 
@@ -117,10 +118,10 @@ class PlayerMoveEventListener : Listener {
             if (player == otherPlayer) 
                 continue
 
-            if (!AdvancedLobby.shield.contains(otherPlayer)) 
+            if (!AdvancedLobby.shield.contains(otherPlayer))
                 continue
 
-            if (player.hasMetadata("NPC") || AdvancedLobby.silentLobby.contains(player) || AdvancedLobby.silentLobby.contains(otherPlayer)) 
+            if (player.hasMetadata("NPC") || AdvancedLobby.silentLobby.contains(player) || AdvancedLobby.silentLobby.contains(otherPlayer))
                 continue
 
             if (player.hasPermission("advancedlobby.shield.bypass")) 
@@ -156,7 +157,7 @@ class PlayerMoveEventListener : Listener {
             if (entities !is Player) 
                 continue
 
-            if (entities.hasMetadata("NPC") || AdvancedLobby.silentLobby.contains(player) || AdvancedLobby.silentLobby.contains(entities)) 
+            if (entities.hasMetadata("NPC") || AdvancedLobby.silentLobby.contains(player) || AdvancedLobby.silentLobby.contains(entities))
                 continue
 
             if (entities.hasPermission("advancedlobby.shield.bypass")) 
@@ -215,7 +216,7 @@ class PlayerMoveEventListener : Listener {
     }
 
     private fun voidTeleportCheck(p: Player) {
-        if (p.location.y >= AdvancedLobby.cfg.getDouble("void_teleport.height")) 
+        if (p.location.y >= AdvancedLobby.cfg.getDouble("void_teleport.height"))
             return
         
         val location = LocationManager.getLocation(AdvancedLobby.cfg.getString("spawn_location"))

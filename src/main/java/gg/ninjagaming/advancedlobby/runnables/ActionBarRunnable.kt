@@ -1,6 +1,6 @@
 package gg.ninjagaming.advancedlobby.runnables
 
-import de.cyne.advancedlobby.AdvancedLobby
+import gg.ninjagaming.advancedlobby.AdvancedLobby
 import gg.ninjagaming.advancedlobby.titleapi.TitleApi.sendActionBar
 import me.clip.placeholderapi.PlaceholderAPI
 import org.bukkit.Bukkit
@@ -19,7 +19,7 @@ object ActionBarRunnable {
         var delay = 0L
         messages.forEach()
         {
-            SelfCancelingRunnable(it,displayTime).runTaskTimer(AdvancedLobby.getInstance(), delay,0)
+            SelfCancelingRunnable(it,displayTime).runTaskTimer(AdvancedLobby.instance!!, delay,0)
             delay += displayTime * 20L
         }
     }

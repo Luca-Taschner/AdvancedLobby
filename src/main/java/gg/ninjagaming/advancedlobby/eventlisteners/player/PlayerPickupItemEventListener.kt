@@ -1,6 +1,6 @@
 package gg.ninjagaming.advancedlobby.eventlisteners.player
 
-import de.cyne.advancedlobby.AdvancedLobby
+import gg.ninjagaming.advancedlobby.AdvancedLobby
 import io.papermc.paper.event.player.PlayerPickItemEvent
 import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener

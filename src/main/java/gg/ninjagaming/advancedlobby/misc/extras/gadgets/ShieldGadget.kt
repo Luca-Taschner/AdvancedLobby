@@ -1,6 +1,6 @@
 package gg.ninjagaming.advancedlobby.misc.extras.gadgets
 
-import de.cyne.advancedlobby.AdvancedLobby
+import gg.ninjagaming.advancedlobby.AdvancedLobby
 import gg.ninjagaming.advancedlobby.itembuilders.ShieldItemBuilder
 import gg.ninjagaming.advancedlobby.misc.Locale
 import org.bukkit.Bukkit

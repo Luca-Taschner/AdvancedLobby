@@ -1,6 +1,6 @@
 package gg.ninjagaming.advancedlobby.runnables
 
-import de.cyne.advancedlobby.AdvancedLobby
+import gg.ninjagaming.advancedlobby.AdvancedLobby
 import gg.ninjagaming.advancedlobby.titleapi.TitleApi.sendTabTitle
 import org.bukkit.entity.Player
 

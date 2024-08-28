@@ -1,6 +1,6 @@
 package gg.ninjagaming.advancedlobby.commands.advancedlobby
 
-import de.cyne.advancedlobby.AdvancedLobby
+import gg.ninjagaming.advancedlobby.AdvancedLobby
 import gg.ninjagaming.advancedlobby.inventorybuilder.*
 import gg.ninjagaming.advancedlobby.misc.Locale
 import org.bukkit.command.Command
@@ -71,10 +71,10 @@ class AdvancedLobbyCommand : CommandExecutor {
         sender.sendMessage(this.prefix + "§cReloading§8..")
         try {
             if (!AdvancedLobby.file.exists()) {
-                AdvancedLobby.getInstance().saveDefaultConfig()
+                AdvancedLobby.instance!!.saveDefaultConfig()
             }
             if (!AdvancedLobby.fileLocations.exists() or !AdvancedLobby.fileMessages.exists() or !AdvancedLobby.fileSounds.exists()) {
-                AdvancedLobby.getInstance().logger.info("One or more files were not found. Creating..")
+                AdvancedLobby.instance!!.logger.info("One or more files were not found. Creating..")
                 if (!AdvancedLobby.fileLocations.exists()) {
                     AdvancedLobby.fileLocations.parentFile.mkdirs()
                     try {
@@ -85,11 +85,11 @@ class AdvancedLobbyCommand : CommandExecutor {
                 }
                 if (!AdvancedLobby.fileMessages.exists()) {
                     AdvancedLobby.fileMessages.parentFile.mkdirs()
-                    AdvancedLobby.getInstance().saveResource("messages.yml", false)
+                    AdvancedLobby.instance!!.saveResource("messages.yml", false)
                 }
                 if (!AdvancedLobby.fileSounds.exists()) {
                     AdvancedLobby.fileMessages.parentFile.mkdirs()
-                    AdvancedLobby.getInstance().saveResource("sounds.yml", false)
+                    AdvancedLobby.instance!!.saveResource("sounds.yml", false)
                 }
             }
 
@@ -100,8 +100,9 @@ class AdvancedLobbyCommand : CommandExecutor {
 
             AdvancedLobby.actionbarMessages.clear()
             if (AdvancedLobby.cfg.getBoolean("actionbar.enabled") && AdvancedLobby.actionBarRunnable != null) {
-                AdvancedLobby.actionBarRunnable.cancel()
-                AdvancedLobby.actionbarMessages.addAll(AdvancedLobby.cfg.getStringList("actionbar.messages"))
+                AdvancedLobby.actionBarRunnable!!.cancel()
+                AdvancedLobby.actionbarMessages.addAll(
+                    AdvancedLobby.cfg.getStringList("actionbar.messages"))
                 AdvancedLobby.prepareActionBarRunnable()
             }
 
@@ -140,7 +141,7 @@ class AdvancedLobbyCommand : CommandExecutor {
         sender.sendMessage("")
         sender.sendMessage(
             ("§8┃ §b● §8┃ §bAdvancedLobby §8× §av"
-                    + AdvancedLobby.getInstance().description.version + " §7by cyne & NinjaGaming")
+                    + AdvancedLobby.instance!!.description.version + " §7by cyne & NinjaGaming")
         )
         sender.sendMessage("§8┃ §b● §8┃ ")
         sender.sendMessage("§8┃ §b● §8┃ §8/§fadvancedlobby reload §8- §7Reload the configuration files")

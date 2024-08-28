@@ -1,6 +1,6 @@
 package gg.ninjagaming.advancedlobby.eventlisteners.hanging
 
-import de.cyne.advancedlobby.AdvancedLobby
+import gg.ninjagaming.advancedlobby.AdvancedLobby
 import org.bukkit.entity.Player
 import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener

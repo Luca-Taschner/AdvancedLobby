@@ -1,6 +1,6 @@
 package gg.ninjagaming.advancedlobby.inventorybuilder
 
-import de.cyne.advancedlobby.AdvancedLobby
+import gg.ninjagaming.advancedlobby.AdvancedLobby
 import gg.ninjagaming.advancedlobby.misc.ItemBuilder
 import gg.ninjagaming.advancedlobby.misc.SilentLobby
 import net.kyori.adventure.text.Component
@@ -38,7 +38,9 @@ object CompassInventory{
 
 
     private fun buildInventory(): Inventory {
-        val inventory = Bukkit.createInventory(null,AdvancedLobby.getInt("inventories.teleporter.rows")*9, Component.text(AdvancedLobby.getString("inventories.teleporter.title")))
+        val inventory = Bukkit.createInventory(null,
+            AdvancedLobby.getInt("inventories.teleporter.rows")*9, Component.text(
+                AdvancedLobby.getString("inventories.teleporter.title")))
 
         val items = AdvancedLobby.cfg.getConfigurationSection("inventories.teleporter.items")?.getKeys(false)?: return inventory
 

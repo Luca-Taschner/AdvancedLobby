@@ -1,7 +1,7 @@
 package gg.ninjagaming.advancedlobby.inventorybuilder
 
-import de.cyne.advancedlobby.AdvancedLobby
-import de.cyne.advancedlobby.AdvancedLobby.cfg
+import gg.ninjagaming.advancedlobby.AdvancedLobby
+import gg.ninjagaming.advancedlobby.AdvancedLobby.Companion.cfg
 import gg.ninjagaming.advancedlobby.itembuilders.ShieldItemBuilder
 import gg.ninjagaming.advancedlobby.misc.ItemBuilder
 import net.kyori.adventure.text.Component

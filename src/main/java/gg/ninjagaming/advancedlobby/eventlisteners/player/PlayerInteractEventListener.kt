@@ -1,6 +1,6 @@
 package gg.ninjagaming.advancedlobby.eventlisteners.player
 
-import de.cyne.advancedlobby.AdvancedLobby
+import gg.ninjagaming.advancedlobby.AdvancedLobby
 import gg.ninjagaming.advancedlobby.misc.extras.cosmetics.Cosmetics
 import gg.ninjagaming.advancedlobby.inventorybuilder.CompassInventory
 import gg.ninjagaming.advancedlobby.inventorybuilder.CosmeticsInventory
@@ -244,7 +244,7 @@ class PlayerInteractEventListener: Listener {
             if (it == player)
                 return
 
-            it.showPlayer(AdvancedLobby.getInstance(), player)
+            it.showPlayer(AdvancedLobby.instance!!, player)
         }
 
 
@@ -261,7 +261,7 @@ class PlayerInteractEventListener: Listener {
             if (it == player)
                 return
 
-            it.hidePlayer(AdvancedLobby.getInstance(), player)
+            it.hidePlayer(AdvancedLobby.instance!!, player)
         }
     }
 
@@ -276,7 +276,7 @@ class PlayerInteractEventListener: Listener {
             if (it == player)
                 return
 
-            it.hidePlayer(AdvancedLobby.getInstance(), player)
+            it.hidePlayer(AdvancedLobby.instance!!, player)
         }
     }
     private fun silentLobbyAction(player: Player, event: PlayerInteractEvent, item: ItemStack) {

@@ -1,7 +1,7 @@
 name: AdvancedLobby
 version: 1.2
 author: cyne, ninjagaming
-main: de.cyne.advancedlobby.AdvancedLobby
+main: gg.ninjagaming.advancedlobby.AdvancedLobby
 api-version: 1.19
 softdepend: [PlaceholderAPI]
 
