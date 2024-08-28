@@ -78,7 +78,7 @@ class AdvancedLobby : JavaPlugin() {
     override fun onDisable() {
         for (players: Player? in Bukkit.getOnlinePlayers()) {
             if (Cosmetics.balloons.containsKey(players)) {
-                Cosmetics.balloons.get(players)!!.remove()
+                Cosmetics.balloons[players]!!.remove()
             }
         }
     }
@@ -187,7 +187,7 @@ class AdvancedLobby : JavaPlugin() {
         }
     }
 
-    fun loadFiles() {
+    private fun loadFiles() {
         try {
             instance!!.logger.info("Loading files..")
             cfg.load(Companion.file)
@@ -244,8 +244,6 @@ class AdvancedLobby : JavaPlugin() {
 
         var errors: HashMap<String, ErrorType> = HashMap()
 
-        val logger = instance!!.logger
-
         //public Metrics metrics;
         var actionBarRunnable: BukkitTask? = null
 
@@ -257,14 +255,6 @@ class AdvancedLobby : JavaPlugin() {
                     0L,
                     cfg.getInt("actionbar.display_time") * 20L * actionbarMessages.size
                 )
-        }
-
-        fun saveFile(file: File, cfg: FileConfiguration) {
-            try {
-                cfg.save(file)
-            } catch (e: IOException) {
-                e.printStackTrace()
-            }
         }
 
         fun playSound(player: Player, location: Location, path: String) {
@@ -300,16 +290,11 @@ class AdvancedLobby : JavaPlugin() {
 
         val version: String
             get() = Bukkit.getServer().javaClass.getPackage().name.split("\\.".toRegex())
-                .dropLastWhile { it.isEmpty() }.toTypedArray().get(3)
+                .dropLastWhile { it.isEmpty() }.toTypedArray()[3]
 
-        val isOneEightVersion: Boolean
-            get() {
-                return version.split("_".toRegex()).dropLastWhile { it.isEmpty() }
-                    .toTypedArray().get(1).toInt() == 8
-            }
 
         fun getString(path: String): String {
-            return ChatColor.translateAlternateColorCodes('&', cfg.getString(path)!!)
+            return cfg.getString(path)!!
         }
 
         fun getPlaceholderString(player: Player?, path: String): String {

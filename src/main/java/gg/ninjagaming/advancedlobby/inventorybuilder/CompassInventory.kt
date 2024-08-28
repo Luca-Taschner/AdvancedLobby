@@ -52,7 +52,6 @@ object CompassInventory{
 
             val displayName = AdvancedLobby.cfg.getString("inventories.teleporter.items.$it.displayname") ?: return@forEach
 
-            val subId = AdvancedLobby.cfg.getInt("inventories.teleporter.items.$it.subid")
             val slot = AdvancedLobby.cfg.getInt("inventories.teleporter.items.$it.slot")
             val lore = AdvancedLobby.cfg.getStringList("inventories.teleporter.items.$it.lore")
 
