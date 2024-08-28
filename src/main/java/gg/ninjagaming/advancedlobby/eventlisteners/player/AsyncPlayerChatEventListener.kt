@@ -2,10 +2,14 @@ package gg.ninjagaming.advancedlobby.eventlisteners.player
 
 import gg.ninjagaming.advancedlobby.AdvancedLobby
 import gg.ninjagaming.advancedlobby.misc.Locale
+import io.papermc.paper.chat.ChatRenderer
 import io.papermc.paper.event.player.AsyncChatEvent
+import net.kyori.adventure.audience.Audience
 import net.kyori.adventure.text.Component
 import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer
+import org.bukkit.Bukkit
 import org.bukkit.ChatColor
+import org.bukkit.entity.Player
 import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
 
@@ -33,15 +37,32 @@ class AsyncPlayerChatEventListener : Listener {
         var message = LegacyComponentSerializer.legacySection().serialize(event.message()).replace("%", "%%")
 
 
-        if (AdvancedLobby.cfg.getBoolean("chat_format.enabled")) {
-            if (player.hasPermission("advancedlobby.chatcolor")) {
-                message = ChatColor.translateAlternateColorCodes('&', message)
-            }
+        if (!AdvancedLobby.cfg.getBoolean("chat_format.enabled"))
+            return
 
-            val format = AdvancedLobby.getString("chat_format.format").replace("%player%", AdvancedLobby.getName(event.player))
-
-            message = String.format(format, message)
-            event.message(Component.text(message))
+        if (player.hasPermission("advancedlobby.chatcolor")) {
+            message = ChatColor.translateAlternateColorCodes('&', message)
         }
+
+        val format = AdvancedLobby.getString("chat_format.format").replace("%player%", AdvancedLobby.getName(event.player))
+
+        message = format.replace("%message%", message)
+        val messageComponent = Component.text(message).asComponent()
+        val audience = Audience.audience(event.viewers())
+        val customRenderer = CustomRenderer()
+        val renderedMessage = customRenderer.render(player, Component.text(""), messageComponent, audience)
+        Bukkit.broadcast(renderedMessage)
+        event.isCancelled = true
+    }
+}
+
+class CustomRenderer : ChatRenderer {
+    override fun render(
+        player: Player,
+        header: Component,
+        footer: Component,
+        audience: Audience
+    ): Component {
+        return footer
     }
 }
