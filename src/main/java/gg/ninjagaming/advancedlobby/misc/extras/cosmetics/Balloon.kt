@@ -5,6 +5,7 @@ import org.bukkit.entity.Bat
 import org.bukkit.entity.EntityType
 import org.bukkit.entity.FallingBlock
 import org.bukkit.entity.Player
+import org.bukkit.event.entity.CreatureSpawnEvent.SpawnReason
 import org.bukkit.potion.PotionEffect
 import org.bukkit.potion.PotionEffectType
 
@@ -21,7 +22,7 @@ class Balloon(private var player: Player, private var material: Material) {
         val direction = location.direction.normalize()
         location.add(direction.x * 1.5, direction.y * 1.5 + 0.5, direction.z * 1.5)
 
-        this.bat = player.world.spawnEntity(location, EntityType.BAT) as Bat
+        this.bat = player.world.spawnEntity(location, EntityType.BAT, SpawnReason.CUSTOM) as Bat
 
         this.fallingBlock = player.world.spawn(location, FallingBlock::class.java){
             it.blockData = material.createBlockData()

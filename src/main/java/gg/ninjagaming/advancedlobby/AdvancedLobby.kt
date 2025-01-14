@@ -8,6 +8,7 @@ import gg.ninjagaming.advancedlobby.eventlisteners.block.LeavesDecayEventListene
 import gg.ninjagaming.advancedlobby.eventlisteners.block.SignChangeEventListener
 import gg.ninjagaming.advancedlobby.eventlisteners.entity.EntityDamageEventListener
 import gg.ninjagaming.advancedlobby.eventlisteners.entity.EntityExplodeEventListener
+import gg.ninjagaming.advancedlobby.eventlisteners.entity.EntitySpawnEventListener
 import gg.ninjagaming.advancedlobby.eventlisteners.entity.FoodLevelChangeEventListener
 import gg.ninjagaming.advancedlobby.eventlisteners.hanging.HangingBreakByEntityEventListener
 import gg.ninjagaming.advancedlobby.eventlisteners.inventory.InventoryClickEventListener
@@ -163,6 +164,7 @@ class AdvancedLobby : JavaPlugin() {
         Bukkit.getPluginManager().registerEvents(PlayerUnleashEntityEventListener(), instance!!)
         Bukkit.getPluginManager().registerEvents(ServerListPingEventListener(), instance!!)
         Bukkit.getPluginManager().registerEvents(SignChangeEventListener(), instance!!)
+        Bukkit.getPluginManager().registerEvents(EntitySpawnEventListener, this)
     }
 
     fun createFiles() {
