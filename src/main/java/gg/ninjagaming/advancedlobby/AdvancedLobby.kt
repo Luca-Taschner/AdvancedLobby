@@ -45,7 +45,7 @@ class AdvancedLobby : JavaPlugin() {
             placeholderApi = true
         }
 
-        updater = Updater(35799)
+        updater = Updater()
         Bukkit.getScheduler().scheduleSyncRepeatingTask(instance!!, {
             updater!!.run()
         }, 0L, (20 * 60 * 60 * 24).toLong()) //once a day

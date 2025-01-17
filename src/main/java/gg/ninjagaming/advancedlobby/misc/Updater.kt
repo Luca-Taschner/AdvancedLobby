@@ -1,16 +1,16 @@
 package gg.ninjagaming.advancedlobby.misc
 
 import gg.ninjagaming.advancedlobby.AdvancedLobby
-import java.io.BufferedReader
+import com.google.gson.JsonParser
 import java.io.IOException
-import java.io.InputStreamReader
-import java.net.HttpURLConnection
 import java.net.URI
-import java.net.URL
+import java.net.http.HttpClient
+import java.net.http.HttpRequest
+import java.net.http.HttpResponse
 
-class Updater(private val resourceId: Long) {
+class Updater() {
     private var latestVersion: String? = null
-    private val currentVersion = AdvancedLobby.instance!!.description.version
+    private val currentVersion = AdvancedLobby.instance!!.pluginMeta.version
     private var updateResult: UpdateResult? = null
 
     enum class UpdateResult {
@@ -19,9 +19,26 @@ class Updater(private val resourceId: Long) {
 
     private fun checkLatestVersion() {
         try {
-            val httpConnection = URL.of(URI.create("https://api.spigotmc.org/legacy/update.php?resource=" + this.resourceId),null)
-                .openConnection() as HttpURLConnection
-            this.latestVersion = BufferedReader(InputStreamReader(httpConnection.inputStream)).readLine()
+            val client = HttpClient.newHttpClient()
+            val request = HttpRequest.newBuilder()
+                .uri(URI.create("https://api.github.com/repos/Luca-Taschner/AdvancedLobby/releases/latest"))
+                .header("Accept", "application/vnd.github.v3+json")
+                .GET()
+                .build()
+
+            val response = client.send(request, HttpResponse.BodyHandlers.ofString())
+
+            if (response.statusCode() != 200){
+                this.setUpdateResult(UpdateResult.CONNECTION_ERROR)
+                return
+            }
+
+            val body = response.body()
+
+            val jsonObject = JsonParser.parseString(body).asJsonObject
+            val latestTag = jsonObject.get("tag_name").asString
+            this.latestVersion = latestTag
+
         } catch (e: IOException) {
             this.setUpdateResult(UpdateResult.CONNECTION_ERROR)
         }
@@ -29,7 +46,7 @@ class Updater(private val resourceId: Long) {
 
     private fun compareVersions() {
         val currentVersionCompact = currentVersion.replace(".", "").toLong()
-        val latestVersionCompact = latestVersion!!.replace(".", "").toLong()
+        val latestVersionCompact = latestVersion!!.replace(".", "").replace("v","").toLong()
 
         if (currentVersionCompact == latestVersionCompact) {
             this.setUpdateResult(UpdateResult.NO_UPDATE)
@@ -39,14 +56,14 @@ class Updater(private val resourceId: Long) {
     }
 
     fun run() {
-        AdvancedLobby.instance!!.logger.info("Searching for an update on 'spigotmc.org'..")
+        AdvancedLobby.instance!!.logger.info("Searching for an update on 'Github API'..")
 
         this.checkLatestVersion()
         this.compareVersions()
 
         when (this.updateResult) {
             UpdateResult.UPDATE_AVAILABLE -> {
-                AdvancedLobby.instance!!.logger.info("There was a new version found. It is recommended to update. (Visit spigotmc.org)")
+                AdvancedLobby.instance!!.logger.info("There was a new version found. It is recommended to update. (Visit the Github Page for more Information)")
                 AdvancedLobby.updateAvailable = true
             }
 
@@ -56,12 +73,12 @@ class Updater(private val resourceId: Long) {
             }
 
             UpdateResult.CONNECTION_ERROR -> {
-                AdvancedLobby.instance!!.logger.warning("Could not connect to spigotmc.org. Retrying soon.")
+                AdvancedLobby.instance!!.logger.warning("Could not connect to Github API. Retrying soon.")
                 AdvancedLobby.updateAvailable = false
             }
 
             else -> {
-                AdvancedLobby.instance!!.logger.warning("Could not connect to spigotmc.org. Retrying soon.")
+                AdvancedLobby.instance!!.logger.warning("Could not connect to Github API. Retrying soon.")
                 AdvancedLobby.updateAvailable = false
             }
         }
