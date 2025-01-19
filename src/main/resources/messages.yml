@@ -19,6 +19,7 @@ quit_message: ''
 teleporter:
   location_not_found: '%prefix% §cThis game is not available yet.'
   location_not_found_admin: '%prefix% §cLocation not found§8. §7Use §8/§7advancedlobby location set §b%location%§8.' #Placeholders: %location%: Location name
+  executions_not_fount_admin: '%prefix% §cExecution not found§8. §7Please check your config.'
 player_hider:
   show_all: '%prefix% §aAll players §7are visible now.'
   show_vip: '%prefix% §7Only §5VIP-Players §7are visible now.'
