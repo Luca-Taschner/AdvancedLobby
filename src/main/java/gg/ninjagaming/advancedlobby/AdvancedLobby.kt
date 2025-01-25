@@ -30,6 +30,7 @@ import org.bukkit.plugin.java.JavaPlugin
 import org.bukkit.scheduler.BukkitTask
 import java.io.File
 import java.io.IOException
+import java.time.Duration
 import java.util.*
 
 class AdvancedLobby : JavaPlugin() {
@@ -45,10 +46,15 @@ class AdvancedLobby : JavaPlugin() {
             placeholderApi = true
         }
 
-        updater = Updater()
-        Bukkit.getScheduler().scheduleSyncRepeatingTask(instance!!, {
-            updater!!.run()
-        }, 0L, (20 * 60 * 60 * 24).toLong()) //once a day
+        if(cfg.getBoolean("updater.enabled") == true){
+            updater = Updater()
+            val interval = cfg.getLong("updater.interval")
+            Bukkit.getScheduler().scheduleSyncRepeatingTask(instance!!, {
+                updater!!.run()
+            }, 0L, Duration.ofHours(interval).seconds) //once a day
+        }
+
+
 
         if (cfg.getBoolean("actionbar.enabled")) {
             actionbarMessages.addAll(cfg.getStringList("actionbar.messages"))

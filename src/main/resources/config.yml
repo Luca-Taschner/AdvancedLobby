@@ -14,6 +14,12 @@ multiworld_mode:
   #⮟ Set to true if you want the inventory to be cleared on every world change.
   clear_inventory: true
 
+#Updater Settings
+updater:
+  enabled: true
+  #Updater Interval in Hours
+  interval: 24
+
 lobby_worlds:
   - world
   - lobby
