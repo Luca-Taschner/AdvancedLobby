@@ -51,7 +51,7 @@ class AdvancedLobby : JavaPlugin() {
             val interval = cfg.getLong("updater.interval")
             Bukkit.getScheduler().scheduleSyncRepeatingTask(instance!!, {
                 updater!!.run()
-            }, 0L, Duration.ofHours(interval).seconds) //once a day
+            }, 0L, Duration.ofHours(interval).seconds)
         }
 
 
