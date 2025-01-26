@@ -29,7 +29,10 @@ class Updater(private val currentVersion: String) {
                 .GET()
                 .build()
 
-            val response = client.send(request, HttpResponse.BodyHandlers.ofString())
+            val responseFuture = client.sendAsync(request, HttpResponse.BodyHandlers.ofString())
+
+
+            val response = responseFuture.join()
 
             if (response.statusCode() != 200){
                 return UpdateResult.CONNECTION_ERROR
@@ -44,6 +47,9 @@ class Updater(private val currentVersion: String) {
 
         } catch (_: IOException) {
             return UpdateResult.CONNECTION_ERROR
+        }catch (_: InterruptedException) {
+            Thread.currentThread().interrupt()
+            return UpdateResult.CONNECTION_TIMEOUT
         }catch (_: InterruptedException) {
             Thread.currentThread().interrupt()
             return UpdateResult.CONNECTION_TIMEOUT
