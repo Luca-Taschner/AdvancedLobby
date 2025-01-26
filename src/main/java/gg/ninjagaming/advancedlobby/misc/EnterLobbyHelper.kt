@@ -189,11 +189,11 @@ object EnterLobbyHelper {
                     HoverEvent.showText(
                         Component.text("» ", NamedTextColor.DARK_GRAY)
                             .append(Component.text("Redirect to ", NamedTextColor.GRAY))
-                            .append(Component.text("https://spigotmc.org/", NamedTextColor.AQUA))
+                            .append(Component.text("https://github.com/", NamedTextColor.AQUA))
                     )
                 )
                 .clickEvent(
-                    ClickEvent.openUrl("https://spigotmc.org/resources/35799/")
+                    ClickEvent.openUrl("https://github.com/Luca-Taschner/AdvancedLobby/releases")
                 )
                 .build()
 
