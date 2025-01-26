@@ -61,7 +61,7 @@ class Updater(private val currentVersion: String) {
         val currentVersionCompact = currentVersion.replace(".", "").toLong()
         val latestVersionCompact = latestVersion.replace(".", "").replace("v","").toLong()
 
-        if (currentVersionCompact == latestVersionCompact)
+        if (currentVersionCompact >= latestVersionCompact)
             return UpdateResult.NO_UPDATE
 
         return UpdateResult.UPDATE_AVAILABLE
