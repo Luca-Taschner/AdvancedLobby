@@ -47,7 +47,7 @@ class AdvancedLobby : JavaPlugin() {
         }
 
         if(cfg.getBoolean("updater.enabled") == true){
-            updater = Updater()
+            updater = Updater(pluginMeta.version)
             val interval = cfg.getLong("updater.interval")
             Bukkit.getScheduler().scheduleSyncRepeatingTask(instance!!, {
                 updater!!.run()
