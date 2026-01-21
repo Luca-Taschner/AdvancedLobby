@@ -137,7 +137,7 @@ object EnterLobbyHelper {
     fun clearPlayerInventory(player: Player){
         val inventory = player.inventory
         inventory.clear()
-        inventory.setArmorContents(null)
+        inventory.armorContents = arrayOfNulls(4)
     }
 
     /**
