@@ -53,4 +53,9 @@ class ItemBuilder @JvmOverloads constructor(material: Material, amount: Int = 1)
         this.setItemMeta(this.meta)
         return this
     }
+
+    fun setHideTooltip(hide: Boolean): ItemBuilder {
+        this.meta.isHideTooltip = hide
+        return this.build()
+    }
 }

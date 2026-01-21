@@ -7,7 +7,6 @@ import org.bukkit.Bukkit
 import org.bukkit.Material
 import org.bukkit.entity.Player
 import org.bukkit.inventory.Inventory
-import org.bukkit.inventory.ItemFlag
 
 object CosmeticsParticlesInventory {
     private var inventoryInstance: Inventory = buildInventory()
@@ -29,7 +28,7 @@ object CosmeticsParticlesInventory {
             .setLobbyItemLore(AdvancedLobby.cfg.getStringList("inventories.cosmetics_particles.heart_particles.lore"))
 
         val recordPlateItemStack = ItemBuilder(Material.MUSIC_DISC_STRAD)
-            .addLobbyItemFlags(ItemFlag.HIDE_ITEM_SPECIFICS)
+            .setHideTooltip(true)
             .setDisplayName(AdvancedLobby.getString("inventories.cosmetics_particles.music_particles.displayname"))
             .setLobbyItemLore(AdvancedLobby.cfg.getStringList("inventories.cosmetics_particles.music_particles.lore"))
 
