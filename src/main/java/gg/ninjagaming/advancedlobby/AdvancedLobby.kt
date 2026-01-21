@@ -46,7 +46,7 @@ class AdvancedLobby : JavaPlugin() {
             placeholderApi = true
         }
 
-        if(cfg.getBoolean("updater.enabled") == true){
+        if(cfg.getBoolean("updater.enabled")){
             updater = Updater(pluginMeta.version)
             val interval = cfg.getLong("updater.interval")
             Bukkit.getScheduler().scheduleSyncRepeatingTask(instance!!, {
@@ -110,7 +110,7 @@ class AdvancedLobby : JavaPlugin() {
                 }
             }
 
-            if (!cfg.getBoolean("weather.enabled")) world.setGameRule(GameRule.DO_WEATHER_CYCLE, false)
+            if (!cfg.getBoolean("weather.enabled")) world.setGameRule(GameRules.ADVANCE_WEATHER, false)
         }
     }
 
@@ -267,14 +267,30 @@ class AdvancedLobby : JavaPlugin() {
 
         fun playSound(player: Player, location: Location, path: String) {
             try {
-                if (cfgS.getBoolean("$path.enabled")) {
-                    player.playSound(
-                        location,
-                        Sound.valueOf(cfgS.getString("$path.sound")!!),
-                        cfgS.getInt("$path.volume").toFloat(),
-                        cfgS.getInt("$path.pitch").toFloat()
-                    )
+                if (!cfgS.getBoolean("$path.enabled"))
+                    return
+
+                val soundString = cfgS.getString("$path.sound")
+                if (soundString == null)
+                {
+                    errors[path] = ErrorType.SOUND
+                    return
                 }
+
+                val key = NamespacedKey.minecraft(soundString.replace(" ", "_"))
+                val sound = Registry.SOUNDS.get(key)
+                if (sound == null) {
+                    errors[path] = ErrorType.SOUND
+                    return
+                }
+
+                player.playSound(
+                    location,
+                    sound,
+                    cfgS.getInt("$path.volume").toFloat(),
+                    cfgS.getInt("$path.pitch").toFloat()
+                    )
+
             } catch (ex: Exception) {
                 errors[path] = ErrorType.SOUND
             }
