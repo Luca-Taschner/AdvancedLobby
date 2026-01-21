@@ -9,7 +9,7 @@
     <version>2.0.6</version>
 
     <properties>
-        <kotlin.version>1.9.20</kotlin.version>
+        <kotlin.version>2.3.0</kotlin.version>
     </properties>
 
     <repositories>
@@ -31,7 +31,7 @@
         <dependency>
             <groupId>io.papermc.paper</groupId>
             <artifactId>paper-api</artifactId>
-            <version>1.21.1-R0.1-SNAPSHOT</version>
+            <version>1.21.11-R0.1-SNAPSHOT</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
