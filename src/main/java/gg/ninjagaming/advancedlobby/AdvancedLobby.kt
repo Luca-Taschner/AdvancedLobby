@@ -291,7 +291,7 @@ class AdvancedLobby : JavaPlugin() {
                     cfgS.getInt("$path.pitch").toFloat()
                     )
 
-            } catch (ex: Exception) {
+            } catch (_: Exception) {
                 errors[path] = ErrorType.SOUND
             }
         }
@@ -305,17 +305,12 @@ class AdvancedLobby : JavaPlugin() {
                     return Material.AIR
                 }
                 return material
-            } catch (ex: Exception) {
+            } catch (_: Exception) {
                 errors[materialString] =
                     ErrorType.MATERIAL
                 return Material.AIR
             }
         }
-
-        val version: String
-            get() = Bukkit.getServer().javaClass.getPackage().name.split("\\.".toRegex())
-                .dropLastWhile { it.isEmpty() }.toTypedArray()[3]
-
 
         fun getString(path: String): String {
             return cfg.getString(path)!!
