@@ -24,6 +24,6 @@ jobs:
     - name: Upload JAR to Release
       uses: softprops/action-gh-release@v1
       with:
-        files: target/advandedlobby-*.jar
+        files: target/advancedlobby-*.jar
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
