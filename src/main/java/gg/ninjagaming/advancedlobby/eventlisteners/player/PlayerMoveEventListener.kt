@@ -60,8 +60,27 @@ class PlayerMoveEventListener : Listener {
             if (AdvancedLobby.cfg.getBoolean("worldborder.enabled"))
                 pushPlayerBackFromWorldBorder(player)
 
+            //Water TP Check
+            if (AdvancedLobby.cfg.getBoolean("water_teleport.enabled")) {
+                waterTeleportCheck(player)
+            }
+
+
 
         }
+    }
+
+    private fun waterTeleportCheck(p: Player) {
+        val feet = p.location.block.type
+        val head = p.location.clone().add(0.0, 1.0, 0.0).block.type
+
+
+        if (feet == Material.WATER || head == Material.WATER
+            || feet == Material.BUBBLE_COLUMN || head == Material.BUBBLE_COLUMN)
+            return
+
+        val spawn = LocationManager.getLocation(AdvancedLobby.cfg.getString("spawn_location")) ?: return
+        p.teleport(spawn)
     }
 
     private fun pushPlayerBackFromWorldBorder(player: Player) {
